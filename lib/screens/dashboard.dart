@@ -27,7 +27,7 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       backgroundColor: AppColors.cardBg,
       appBar: AppTopBar(),
-      drawer: AppDrawer(selectedIndex: 0, onItemTap: (i) {}),
+
       body: Container(
         height: screenHeight,
         width: screenWidth,

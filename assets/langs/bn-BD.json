@@ -53,7 +53,23 @@
 "AVG_TRANSACTIONS": "গড় লেনদেন",
 "VIEW_FULL_REPORT": "সম্পূর্ণ রিপোর্ট দেখুন",
 "RECENT_TRANSACTIONS": "সাম্প্রতিক লেনদেন",
-"HIGH_DUE": "উচ্চ বকেয়া"
+"HIGH_DUE": "উচ্চ বকেয়া",
+"TOTAL_BASE": "মোট বেস",
+"TOTAL_PAID": "মোট পরিশোধ",
+"TOTAL_BONUS": "মোট বোনাস",
+"FILTERS": "ফিল্টার",
+"SEARCH_TRANSACTION": "লেনদেন খুঁজুন",
+"START_DATE": "শুরুর তারিখ",
+"END_DATE": "শেষ তারিখ",
+"MIN_AMOUNT": "সর্বনিম্ন পরিমাণ",
+"MAX_AMOUNT": "সর্বোচ্চ পরিমাণ",
+"ALL": "সব",
+"PARTY_NAME": "পার্টির নাম",
+"TRANSACTION_TYPE": "লেনদেনের ধরন",
+"BASE_AMOUNT": "বেস পরিমাণ",
+"PAID_AMOUNT": "পরিশোধিত পরিমাণ",
+"DUE_AMOUNT": "বকেয়া পরিমাণ",
+"PARTIAL": "আংশিক"
 
 
 

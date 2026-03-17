@@ -53,7 +53,22 @@
 "AVG_TRANSACTIONS": "Avg Transactions",
 "VIEW_FULL_REPORT": "View Full Report",
 "RECENT_TRANSACTIONS": "Recent Transactions",
-"HIGH_DUE": "High Due"
+"HIGH_DUE": "High Due","TOTAL_BASE": "Total Base",
+"TOTAL_PAID": "Total Paid",
+"TOTAL_BONUS": "Total Bonus",
+"FILTERS": "Filters",
+"SEARCH_TRANSACTION": "Search Transaction",
+"START_DATE": "Start Date",
+"END_DATE": "End Date",
+"MIN_AMOUNT": "Min Amount",
+"MAX_AMOUNT": "Max Amount",
+"ALL": "All",
+"PARTY_NAME": "Party Name",
+"TRANSACTION_TYPE": "Transaction Type",
+"BASE_AMOUNT": "Base Amount",
+"PAID_AMOUNT": "Paid Amount",
+"DUE_AMOUNT": "Due Amount",
+"PARTIAL": "Partial"
 
 
 

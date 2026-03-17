@@ -53,7 +53,23 @@
 "AVG_TRANSACTIONS": "میانگین تراکنش‌ها",
 "VIEW_FULL_REPORT": "مشاهده گزارش کامل",
 "RECENT_TRANSACTIONS": "تراکنش‌های اخیر",
-"HIGH_DUE": "بدهی بالا"
+"HIGH_DUE": "بدهی بالا",
+"TOTAL_BASE": "مجموع پایه",
+"TOTAL_PAID": "مجموع پرداختی",
+"TOTAL_BONUS": "مجموع پاداش",
+"FILTERS": "فیلترها",
+"SEARCH_TRANSACTION": "جستجوی تراکنش",
+"START_DATE": "تاریخ شروع",
+"END_DATE": "تاریخ پایان",
+"MIN_AMOUNT": "حداقل مبلغ",
+"MAX_AMOUNT": "حداکثر مبلغ",
+"ALL": "همه",
+"PARTY_NAME": "نام طرف",
+"TRANSACTION_TYPE": "نوع تراکنش",
+"BASE_AMOUNT": "مبلغ پایه",
+"PAID_AMOUNT": "مبلغ پرداختی",
+"DUE_AMOUNT": "مبلغ بدهی",
+"PARTIAL": "جزئی"
 
 
 

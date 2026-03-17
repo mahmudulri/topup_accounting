@@ -53,7 +53,23 @@
 "AVG_TRANSACTIONS": "اوسط تراکنشونه",
 "VIEW_FULL_REPORT": "بشپړ راپور وګورئ",
 "RECENT_TRANSACTIONS": "وروستي تراکنشونه",
-"HIGH_DUE": "لوړ پاتې"
+"HIGH_DUE": "لوړ پاتې",
+"TOTAL_BASE": "ټول بنسټ",
+"TOTAL_PAID": "ټول تادیه شوی",
+"TOTAL_BONUS": "ټول بونس",
+"FILTERS": "فلټرونه",
+"SEARCH_TRANSACTION": "تراکنش ولټوئ",
+"START_DATE": "د پیل نېټه",
+"END_DATE": "د پای نېټه",
+"MIN_AMOUNT": "لږ تر لږه اندازه",
+"MAX_AMOUNT": "زیاته اندازه",
+"ALL": "ټول",
+"PARTY_NAME": "د اړخ نوم",
+"TRANSACTION_TYPE": "د تراکنش ډول",
+"BASE_AMOUNT": "بنسټیزه اندازه",
+"PAID_AMOUNT": "تادیه شوې اندازه",
+"DUE_AMOUNT": "پاتې اندازه",
+"PARTIAL": "جزوي"
 
 
 

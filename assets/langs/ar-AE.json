@@ -53,7 +53,23 @@
 "AVG_TRANSACTIONS": "متوسط المعاملات",
 "VIEW_FULL_REPORT": "عرض التقرير الكامل",
 "RECENT_TRANSACTIONS": "المعاملات الأخيرة",
-"HIGH_DUE": "مستحقات عالية"
+"HIGH_DUE": "مستحقات عالية",
+"TOTAL_BASE": "إجمالي الأساس",
+"TOTAL_PAID": "إجمالي المدفوع",
+"TOTAL_BONUS": "إجمالي المكافأة",
+"FILTERS": "الفلاتر",
+"SEARCH_TRANSACTION": "بحث عن معاملة",
+"START_DATE": "تاريخ البدء",
+"END_DATE": "تاريخ الانتهاء",
+"MIN_AMOUNT": "الحد الأدنى للمبلغ",
+"MAX_AMOUNT": "الحد الأقصى للمبلغ",
+"ALL": "الكل",
+"PARTY_NAME": "اسم الطرف",
+"TRANSACTION_TYPE": "نوع المعاملة",
+"BASE_AMOUNT": "المبلغ الأساسي",
+"PAID_AMOUNT": "المبلغ المدفوع",
+"DUE_AMOUNT": "المبلغ المستحق",
+"PARTIAL": "جزئي"
 
 
 

@@ -53,7 +53,23 @@
 "AVG_TRANSACTIONS": "Ort. İşlem",
 "VIEW_FULL_REPORT": "Tam Raporu Gör",
 "RECENT_TRANSACTIONS": "Son İşlemler",
-"HIGH_DUE": "Yüksek Borç"
+"HIGH_DUE": "Yüksek Borç",
+"TOTAL_BASE": "Toplam Tutar",
+"TOTAL_PAID": "Toplam Ödenen",
+"TOTAL_BONUS": "Toplam Bonus",
+"FILTERS": "Filtreler",
+"SEARCH_TRANSACTION": "İşlem Ara",
+"START_DATE": "Başlangıç Tarihi",
+"END_DATE": "Bitiş Tarihi",
+"MIN_AMOUNT": "Min Tutar",
+"MAX_AMOUNT": "Maks Tutar",
+"ALL": "Tümü",
+"PARTY_NAME": "Taraf Adı",
+"TRANSACTION_TYPE": "İşlem Türü",
+"BASE_AMOUNT": "Ana Tutar",
+"PAID_AMOUNT": "Ödenen Tutar",
+"DUE_AMOUNT": "Borç Tutarı",
+"PARTIAL": "Kısmi"
 
 
 }

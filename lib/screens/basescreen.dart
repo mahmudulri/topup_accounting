@@ -19,19 +19,28 @@ class _BasescreenState extends State<Basescreen> {
   final lang = Get.find<LanguagesController>();
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [
-    Dashboard(),
-    TransactionsScreen(),
-    SuppliersScreen(),
-    ResellersScreen(),
-    ReportsScreen(),
-  ];
+  Widget _getScreen(int index) {
+    switch (index) {
+      case 0:
+        return Dashboard();
+      case 1:
+        return TransactionsScreen();
+      case 2:
+        return SuppliersScreen();
+      case 3:
+        return ResellersScreen();
+      case 4:
+        return ReportsScreen();
+      default:
+        return Dashboard();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.scaffoldBg,
-      body: IndexedStack(index: _currentIndex, children: _screens),
+      body: _getScreen(_currentIndex),
       bottomNavigationBar: _BottomNav(
         currentIndex: _currentIndex,
         onTap: (i) => setState(() => _currentIndex = i),

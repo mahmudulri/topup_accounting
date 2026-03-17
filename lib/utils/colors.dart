@@ -6,6 +6,7 @@ class AppColors {
   static const primaryLight = Color(0xFF3DD6B0); // gradient start
   static const primaryDark = Color(0xFF1BAF8C); // gradient end
   static const fontColor = Color.fromARGB(255, 24, 32, 31); // gradient end
+  static const borderColor = Color.fromRGBO(224, 224, 224, 1);
 
   // ── Background ────────────────────────────────────
   static const scaffoldBg = Color(0xFFEEF2F5); // screen background
