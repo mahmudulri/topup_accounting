@@ -1,0 +1,75 @@
+{
+"WELCOME_BACK": "Welcome Back",
+"MANAGE_YOUR_WHOLESALE_TOP_UP_BUSINESS": "Manage Your Wholesale Top-Up Business",
+"PHONE_OR_EMAIL": "Phone or Email",
+"PASSWORD": "Password",
+"VIEW_PACKAGES": "View Packages",
+"FORGOT_PASSWORD": "Forgot Password",
+"SIGN_IN": "Sign In",
+"CHANGE_LANGUAGE": "Change Language",
+"PLEASE_WAIT": "Please Wait",
+"DASHBOARD": "Dashboard",
+"TOP_UP_HUB": "Top-Up Hub",
+"HOME": "Home",
+"TRANSACTIONS": "Transactions",
+"SUPPLIERS": "Suppliers",
+"RESELLERS": "Resellers",
+"BUY_TOP_UP": "Buy Top-Up",
+"SELL_TOP_UP": "Sell Top-Up",
+"REPORTS": "Reports",
+"TODAY": "Today",
+"WEEK": "Week",
+"MONTH": "Month",
+"PERFORMANCE_OVERVIEW": "Performance Overview",
+"TOTAL_STOCK": "Total Stock",
+"SUPPLIER_DUE": "Supplier Due",
+"RESELLER_DUE": "Reseller Due",
+"TODAY'S_PROFIT": "Today's Profit",
+"PENDING": "Pending",
+"PROFIT": "Profit",
+"REVENUE": "Revenue",
+"COST": "Cost",
+"PROFIT_MARGIN": "Profit Margin",
+"NET_BONUS": "Net Bonus",
+"QUICK_ACTIONS": "Quick Actions",
+"SHOW_ALL": "Show All",
+"STOCK_UTILIZATION": "Stock Utilization",
+"COLLECTION_RATE": "Collection Rate",
+"SUPPLIER_PAYMENT": "Supplier Payment",
+"RESELLER_PAYMENT": "Reseller Payment",
+"ADD_SUPPLIER": "Add Supplier",
+"ADD_RESELLER": "Add Reseller",
+"TODAY'S_ACTIVITY": "Today's Activity",
+"PURCHASES": "Purchases",
+"SALES": "Sales",
+"DAILY_TARGET": "Daily Target",
+"ALERT": "Alert",
+"HIGH_SUPPLIER_DUE": "High Supplier Due",
+"PAY_NOW": "Pay Now",
+"QUICK_STATS": "Quick Stats",
+"ACTIVE_SUPPLIERS": "Active Suppliers",
+"ACTIVE_RESELLERS": "Active Resellers",
+"TOTAL_TRANSACTIONS": "Total Transactions",
+"AVG_TRANSACTIONS": "Avg Transactions",
+"VIEW_FULL_REPORT": "View Full Report",
+"RECENT_TRANSACTIONS": "Recent Transactions",
+"HIGH_DUE": "High Due"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
