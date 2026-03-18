@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:topup_accounting/utils/colors.dart';
 
 import '../routes/routes.dart';
 import '../utils/api_endpoints.dart';
@@ -72,7 +73,7 @@ class SignInController extends GetxController {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
-            backgroundColor: Colors.green,
+            backgroundColor: AppColors.primaryColor,
             textColor: Colors.white,
             fontSize: 16.0,
           );

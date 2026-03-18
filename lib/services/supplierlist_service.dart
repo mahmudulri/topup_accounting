@@ -1,17 +1,14 @@
 import 'dart:convert';
-
-import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-
-import '../models/transactions_model.dart';
+import '../models/supplierlist_model.dart';
 import '../utils/api_endpoints.dart';
 
 final box = GetStorage();
 
-class TransactionsApi {
-  Future<TransactionsModel> fetchtransaction() async {
-    final url = Uri.parse("${ApiEndPoints.baseUrl}topup");
+class SupplierlistApi {
+  Future<SuppliersListModel> fetchsupplier() async {
+    final url = Uri.parse("${ApiEndPoints.baseUrl}suppliers");
 
     var response = await http.get(
       url,
@@ -20,11 +17,11 @@ class TransactionsApi {
 
     if (response.statusCode == 200) {
       // print(response.body.toString());
-      final transactionModel = TransactionsModel.fromJson(
+      final supplierlistModel = SuppliersListModel.fromJson(
         json.decode(response.body),
       );
 
-      return transactionModel;
+      return supplierlistModel;
     } else {
       throw Exception('Failed to fetch gateway');
     }
