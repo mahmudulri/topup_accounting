@@ -5,6 +5,7 @@ import '../controllers/supplierlist_controller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../utils/colors.dart';
 import '../widgets/custom_text.dart';
+import '../widgets/suppliercard.dart';
 
 class SuppliersScreen extends StatefulWidget {
   SuppliersScreen({super.key});
@@ -66,19 +67,118 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
         height: screenHeight,
         width: screenWidth,
 
-        child: ListView.builder(
-          itemCount:
-              supplierlistController.allsupplierlist.value.suppliers?.length ??
-              0,
-          itemBuilder: (context, index) {
-            return Container(
-              height: 250,
-              width: screenWidth,
-              decoration: BoxDecoration(
-                border: Border.all(width: 1, color: AppColors.borderColor),
-              ),
-            );
-          },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Obx(
+            () => supplierlistController.isLoading.value == false
+                ? ListView.builder(
+                    itemCount:
+                        supplierlistController
+                            .allsupplierlist
+                            .value
+                            .suppliers
+                            ?.length ??
+                        0,
+                    itemBuilder: (context, index) {
+                      final data = supplierlistController
+                          .allsupplierlist
+                          .value
+                          .suppliers?[index];
+
+                      return SupplierCard(
+                        data: SupplierCardData(
+                          name: data!.name.toString(),
+                          company: data.company.toString(),
+                          phone: '01777777777',
+                          lastContact: 'Mar 12, 2026',
+                          bonusPercentage: 5,
+                          totalBuyAmount: '5.0L',
+                          totalBuyTopupWithBonus: '5.3L',
+                          currentStock: '4.3L',
+                          totalDueAmount: '120K',
+                          totalDueFormatted: 'AFG 120,000',
+                        ),
+                        actions: SupplierCardActions(
+                          onBuy: () {},
+                          onView: () {},
+                          onEdit: () {},
+                          onUpdatePercent: () {},
+                          onPay: () {},
+                          onDisable: () {},
+                          onDelete: () {},
+                        ),
+                      );
+                      // return Container(
+                      //   height: 250,
+                      //   width: screenWidth,
+                      //   decoration: BoxDecoration(
+                      //     border: Border.all(width: 1, color: AppColors.borderColor),
+                      //   ),
+                      //   child: Padding(
+                      //     padding: EdgeInsets.all(12.0),
+                      //     child: Column(
+                      //       children: [
+                      //         Row(
+                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //           children: [
+                      //             Text("Reseller Name"),
+                      //             Text(data!.name.toString()),
+                      //           ],
+                      //         ),
+                      //         Row(
+                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //           children: [
+                      //             Text("Address"),
+                      //             Text(data.company.toString()),
+                      //           ],
+                      //         ),
+                      //         Row(
+                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //           children: [Text("Contact"), Text(data.phone.toString())],
+                      //         ),
+                      //         Row(
+                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //           children: [
+                      //             Text("Bonus"),
+                      //             Text(data.bonusPercentage.toString()),
+                      //           ],
+                      //         ),
+                      //         Row(
+                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //           children: [
+                      //             Text("Purchase"),
+                      //             Text(data.totalBuyAmount.toString()),
+                      //           ],
+                      //         ),
+                      //         Row(
+                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //           children: [
+                      //             Text("Purchase With bonus"),
+                      //             Text(data.totalBuyTopupWithBonus.toString()),
+                      //           ],
+                      //         ),
+                      //         Row(
+                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //           children: [
+                      //             Text("Stock"),
+                      //             Text(data.currentStock.toString()),
+                      //           ],
+                      //         ),
+                      //         Row(
+                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //           children: [
+                      //             Text("Due"),
+                      //             Text(data.totalDueAmount.toString()),
+                      //           ],
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // );
+                    },
+                  )
+                : Center(child: CircularProgressIndicator()),
+          ),
         ),
       ),
     );
