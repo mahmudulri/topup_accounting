@@ -69,7 +69,22 @@
 "BASE_AMOUNT": "Ana Tutar",
 "PAID_AMOUNT": "Ödenen Tutar",
 "DUE_AMOUNT": "Borç Tutarı",
-"PARTIAL": "Kısmi"
+"PARTIAL": "Kısmi",
+"PURCHASE_TOPUP_FROM_SUPPLIER": "Tedarikçiden Yükleme Satın Al",
+"CHOOSE_A_SUPPLIER": "Tedarikçi Seçin",
+"THIS_IS_THE_PAYMENT_YOU_PAY_TO_SUPPLIER": "Bu, tedarikçiye yaptığınız ödemedir",
+"AMOUNT_PAID_NOW": "Şimdi Ödenen Tutar",
+"REFERENCE_NUMBER": "Referans Numarası",
+"ENTER_REFERENCE_NUMBER": "Referans Numarası Girin",
+"NOTES": "Notlar",
+"ENTER_NOTES": "Not Girin",
+"OPTIONAL": "İsteğe Bağlı",
+"CONFIRM_PURCHASE": "Satın Almayı Onayla",
+"SELECT_SUPPLIER": "Tedarikçi Seç",
+"CHOOSE_A_RESELLER": "Bayi Seçin",
+"SELL_TOPUP_TO_RESELLER": "Bayiye Yükleme Sat",
+"CONFIRM_SALE": "Satışı Onayla",
+"SELECT_RESELLER": "Bayi Seç"
 
 
 }

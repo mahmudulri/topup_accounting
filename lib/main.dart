@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'global_controllers/languages_controller.dart';
+import 'global_controllers/scaffold_controller.dart';
 import 'global_controllers/time_zone_controller.dart';
 import 'helpers/network_checker.dart';
 import 'routes/routes.dart';
@@ -13,6 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await GetStorage.init();
+  Get.put(ScaffoldController(), permanent: true);
   Get.put(LanguagesController(), permanent: true);
 
   DependencyInjection.init();

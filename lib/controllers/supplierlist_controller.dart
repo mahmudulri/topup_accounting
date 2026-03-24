@@ -1,9 +1,7 @@
 import 'package:get/get.dart';
 
 import '../models/supplierlist_model.dart';
-import '../models/transactions_model.dart';
 import '../services/supplierlist_service.dart';
-import '../services/transactions_service.dart';
 
 class SupplierlistController extends GetxController {
   var isLoading = false.obs;

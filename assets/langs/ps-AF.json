@@ -69,7 +69,22 @@
 "BASE_AMOUNT": "بنسټیزه اندازه",
 "PAID_AMOUNT": "تادیه شوې اندازه",
 "DUE_AMOUNT": "پاتې اندازه",
-"PARTIAL": "جزوي"
+"PARTIAL": "جزوي",
+"PURCHASE_TOPUP_FROM_SUPPLIER": "له عرضه کوونکي څخه ټاپ اپ واخلئ",
+"CHOOSE_A_SUPPLIER": "یو عرضه کوونکی وټاکئ",
+"THIS_IS_THE_PAYMENT_YOU_PAY_TO_SUPPLIER": "دا هغه تادیه ده چې تاسو یې عرضه کوونکي ته ورکوئ",
+"AMOUNT_PAID_NOW": "اوس ورکړل شوې اندازه",
+"REFERENCE_NUMBER": "د حوالې شمېره",
+"ENTER_REFERENCE_NUMBER": "د حوالې شمېره دننه کړئ",
+"NOTES": "یادښتونه",
+"ENTER_NOTES": "یادښتونه دننه کړئ",
+"OPTIONAL": "اختیاري",
+"CONFIRM_PURCHASE": "پېرود تایید کړئ",
+"SELECT_SUPPLIER": "عرضه کوونکی وټاکئ",
+"CHOOSE_A_RESELLER": "یو ریسیلر وټاکئ",
+"SELL_TOPUP_TO_RESELLER": "ریسیلر ته ټاپ اپ وپلورئ",
+"CONFIRM_SALE": "پلور تایید کړئ",
+"SELECT_RESELLER": "ریسیلر وټاکئ"
 
 
 

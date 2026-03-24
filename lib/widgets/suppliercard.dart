@@ -4,12 +4,13 @@
 // ═══════════════════════════════════════════════════════════════
 
 import 'package:flutter/material.dart';
+import 'package:topup_accounting/utils/colors.dart';
 
 // ───────────────────────────────────────────────────────────────
 // PALETTE
 // ───────────────────────────────────────────────────────────────
 const _kBandDark = Color(0xFF0C447C);
-const _kBandMid = Color(0xFF185FA5);
+const _kBandMid = AppColors.primaryColor;
 const _kBandAccent = Color(0xFF378ADD);
 const _kBandText = Color(0xFFE6F1FB);
 const _kBandSub = Color(0xFF85B7EB);
@@ -127,32 +128,11 @@ class _TopBand extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: _kBandDark,
-      padding: const EdgeInsets.fromLTRB(18, 18, 18, 14),
+      color: AppColors.primaryColor,
+      padding: EdgeInsets.fromLTRB(18, 18, 18, 14),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Avatar
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              color: _kBandMid,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: _kBandAccent, width: 1.5),
-            ),
-            alignment: Alignment.center,
-            child: Text(
-              _initials(data.name),
-              style: const TextStyle(
-                color: _kBandPill,
-                fontSize: 17,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          const SizedBox(width: 12),
-
           // Name + subtitle
           Expanded(
             child: Column(
@@ -170,7 +150,7 @@ class _TopBand extends StatelessWidget {
                 const SizedBox(height: 3),
                 Text(
                   '${data.company} · ${data.lastContact}',
-                  style: const TextStyle(color: _kBandSub, fontSize: 12),
+                  style: const TextStyle(color: Colors.white, fontSize: 12),
                 ),
               ],
             ),
@@ -198,7 +178,7 @@ class _TopBand extends StatelessWidget {
                 const SizedBox(width: 6),
                 Text(
                   data.phone,
-                  style: const TextStyle(color: _kBandPill, fontSize: 12),
+                  style: const TextStyle(color: Colors.white, fontSize: 12),
                 ),
               ],
             ),

@@ -65,9 +65,8 @@ class _SplashScreenState extends State<SplashScreen> {
     if (box.read('userToken') == null) {
       Get.offAllNamed(signinscreen);
     } else {
-      // dashboardController.fetchDashboardData();
-      // Get.offAllNamed(basescreen);
-      Get.offAllNamed(signinscreen);
+      Get.offAllNamed(basescreen);
+      // Get.offAllNamed(signinscreen);
       print("object");
     }
   }

@@ -69,7 +69,22 @@
 "BASE_AMOUNT": "المبلغ الأساسي",
 "PAID_AMOUNT": "المبلغ المدفوع",
 "DUE_AMOUNT": "المبلغ المستحق",
-"PARTIAL": "جزئي"
+"PARTIAL": "جزئي",
+"PURCHASE_TOPUP_FROM_SUPPLIER": "شراء شحن من المورد",
+"CHOOSE_A_SUPPLIER": "اختر موردًا",
+"THIS_IS_THE_PAYMENT_YOU_PAY_TO_SUPPLIER": "هذه هي الدفعة التي تدفعها للمورد",
+"AMOUNT_PAID_NOW": "المبلغ المدفوع الآن",
+"REFERENCE_NUMBER": "رقم المرجع",
+"ENTER_REFERENCE_NUMBER": "أدخل رقم المرجع",
+"NOTES": "ملاحظات",
+"ENTER_NOTES": "أدخل ملاحظات",
+"OPTIONAL": "اختياري",
+"CONFIRM_PURCHASE": "تأكيد الشراء",
+"SELECT_SUPPLIER": "اختر المورد",
+"CHOOSE_A_RESELLER": "اختر موزعًا",
+"SELL_TOPUP_TO_RESELLER": "بيع شحن للموزع",
+"CONFIRM_SALE": "تأكيد البيع",
+"SELECT_RESELLER": "اختر الموزع"
 
 
 

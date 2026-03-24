@@ -69,7 +69,22 @@
 "BASE_AMOUNT": "বেস পরিমাণ",
 "PAID_AMOUNT": "পরিশোধিত পরিমাণ",
 "DUE_AMOUNT": "বকেয়া পরিমাণ",
-"PARTIAL": "আংশিক"
+"PARTIAL": "আংশিক",
+"PURCHASE_TOPUP_FROM_SUPPLIER": "সরবরাহকারী থেকে টপ-আপ ক্রয় করুন",
+"CHOOSE_A_SUPPLIER": "একজন সরবরাহকারী নির্বাচন করুন",
+"THIS_IS_THE_PAYMENT_YOU_PAY_TO_SUPPLIER": "এটি সেই পেমেন্ট যা আপনি সরবরাহকারীকে প্রদান করেন",
+"AMOUNT_PAID_NOW": "এখন পরিশোধিত পরিমাণ",
+"REFERENCE_NUMBER": "রেফারেন্স নম্বর",
+"ENTER_REFERENCE_NUMBER": "রেফারেন্স নম্বর লিখুন",
+"NOTES": "নোট",
+"ENTER_NOTES": "নোট লিখুন",
+"OPTIONAL": "ঐচ্ছিক",
+"CONFIRM_PURCHASE": "ক্রয় নিশ্চিত করুন",
+"SELECT_SUPPLIER": "সরবরাহকারী নির্বাচন করুন",
+"CHOOSE_A_RESELLER": "একজন রিসেলার নির্বাচন করুন",
+"SELL_TOPUP_TO_RESELLER": "রিসেলারকে টপ-আপ বিক্রি করুন",
+"CONFIRM_SALE": "বিক্রয় নিশ্চিত করুন",
+"SELECT_RESELLER": "রিসেলার নির্বাচন করুন"
 
 
 

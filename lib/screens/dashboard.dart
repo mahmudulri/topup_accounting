@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
+import 'package:topup_accounting/screens/buytopup_screen.dart';
 import 'package:topup_accounting/widgets/drawer.dart';
 
 import '../global_controllers/languages_controller.dart';
+import '../global_controllers/scaffold_controller.dart';
 import '../utils/colors.dart';
 import '../widgets/balance_widget.dart';
 import '../widgets/custom_appbar.dart';
+import 'sell_topup_screen.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({super.key});
@@ -18,6 +22,8 @@ class _DashboardState extends State<Dashboard> {
   final languagesController = Get.find<LanguagesController>();
   String _period = 'TODAY';
 
+  final scaffoldController = Get.find<ScaffoldController>();
+
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
@@ -25,6 +31,28 @@ class _DashboardState extends State<Dashboard> {
     final periods = ['TODAY', 'WEEK', 'MONTH'];
 
     return Scaffold(
+      floatingActionButton: SpeedDial(
+        icon: Icons.add,
+        iconTheme: IconThemeData(color: Colors.white),
+        activeIcon: Icons.close,
+        backgroundColor: AppColors.primaryColor,
+        children: [
+          SpeedDialChild(
+            child: Icon(Icons.sell),
+            label: languagesController.tr("SELL_TOP_UP"),
+            onTap: () {
+              Get.to(() => SellTopupScreen());
+            },
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.shopping_cart),
+            label: languagesController.tr("BUY_TOP_UP"),
+            onTap: () {
+              Get.to(() => BuytopupScreen());
+            },
+          ),
+        ],
+      ),
       backgroundColor: AppColors.cardBg,
       appBar: AppTopBar(),
 

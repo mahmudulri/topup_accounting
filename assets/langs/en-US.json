@@ -68,7 +68,22 @@
 "BASE_AMOUNT": "Base Amount",
 "PAID_AMOUNT": "Paid Amount",
 "DUE_AMOUNT": "Due Amount",
-"PARTIAL": "Partial"
+"PARTIAL": "Partial",
+"PURCHASE_TOPUP_FROM_SUPPLIER": "Purchase Top-Up from Supplier",
+"CHOOSE_A_SUPPLIER": "Choose a Supplier",
+"THIS_IS_THE_PAYMENT_YOU_PAY_TO_SUPPLIER": "This is the payment you pay to supplier",
+"AMOUNT_PAID_NOW": "Amount Paid Now",
+"REFERENCE_NUMBER": "Reference Number",
+"ENTER_REFERENCE_NUMBER": "Enter Reference Number",
+"NOTES": "Notes",
+"ENTER_NOTES": "Enter Notes",
+"OPTIONAL": "Optional",
+"CONFIRM_PURCHASE": "Confirm Purchase",
+"SELECT_SUPPLIER": "Select Supplier",
+"CHOOSE_A_RESELLER": "Choose a Reseller",
+"SELL_TOPUP_TO_RESELLER": "Sell Top-Up to Reseller",
+"CONFIRM_SALE": "Confirm Sale",
+"SELECT_RESELLER": "Select Reseller"
 
 
 

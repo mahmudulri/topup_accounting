@@ -69,7 +69,22 @@
 "BASE_AMOUNT": "مبلغ پایه",
 "PAID_AMOUNT": "مبلغ پرداختی",
 "DUE_AMOUNT": "مبلغ بدهی",
-"PARTIAL": "جزئی"
+"PARTIAL": "جزئی",
+"PURCHASE_TOPUP_FROM_SUPPLIER": "خرید شارژ از تأمین‌کننده",
+"CHOOSE_A_SUPPLIER": "یک تأمین‌کننده انتخاب کنید",
+"THIS_IS_THE_PAYMENT_YOU_PAY_TO_SUPPLIER": "این پرداختی است که به تأمین‌کننده می‌پردازید",
+"AMOUNT_PAID_NOW": "مبلغ پرداختی اکنون",
+"REFERENCE_NUMBER": "شماره مرجع",
+"ENTER_REFERENCE_NUMBER": "شماره مرجع را وارد کنید",
+"NOTES": "یادداشت‌ها",
+"ENTER_NOTES": "یادداشت‌ها را وارد کنید",
+"OPTIONAL": "اختیاری",
+"CONFIRM_PURCHASE": "تأیید خرید",
+"SELECT_SUPPLIER": "انتخاب تأمین‌کننده",
+"CHOOSE_A_RESELLER": "یک نماینده انتخاب کنید",
+"SELL_TOPUP_TO_RESELLER": "فروش شارژ به نماینده",
+"CONFIRM_SALE": "تأیید فروش",
+"SELECT_RESELLER": "انتخاب نماینده"
 
 
 
