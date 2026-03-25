@@ -84,7 +84,17 @@
 "CHOOSE_A_RESELLER": "یو ریسیلر وټاکئ",
 "SELL_TOPUP_TO_RESELLER": "ریسیلر ته ټاپ اپ وپلورئ",
 "CONFIRM_SALE": "پلور تایید کړئ",
-"SELECT_RESELLER": "ریسیلر وټاکئ"
+"SELECT_RESELLER": "ریسیلر وټاکئ",
+"LIVE_CALCULATION": "ژوندی حساب",
+"BONUS": "بونس",
+"TOTAL_TOPUP": "ټول ټاپ اپ",
+"PAID_NOW": "اوس ورکړل",
+"DUE_TO_SUPPLIER": "عرضه کوونکي ته پاتې",
+"PAID_AMOUNT_CAN'T_EXCEED_TOTAL_TOPUP": "ورکړل شوې اندازه د ټول ټاپ اپ څخه زیاته نشي کېدای",
+"ENTER_REQUIRED_DATA": "اړین معلومات دننه کړئ",
+"FILL_DATA_CORRECTLY": "معلومات سم ډک کړئ",
+"TOP_UP_PURCHASED_SUCCESSFULLY": "ټاپ اپ په بریالیتوب سره واخیستل شو",
+"SUCCESS": "بریالیتوب"
 
 
 

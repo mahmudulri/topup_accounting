@@ -84,7 +84,17 @@
 "CHOOSE_A_RESELLER": "Bayi Seçin",
 "SELL_TOPUP_TO_RESELLER": "Bayiye Yükleme Sat",
 "CONFIRM_SALE": "Satışı Onayla",
-"SELECT_RESELLER": "Bayi Seç"
+"SELECT_RESELLER": "Bayi Seç",
+"LIVE_CALCULATION": "Canlı Hesaplama",
+"BONUS": "Bonus",
+"TOTAL_TOPUP": "Toplam Yükleme",
+"PAID_NOW": "Şimdi Ödenen",
+"DUE_TO_SUPPLIER": "Tedarikçiye Borç",
+"PAID_AMOUNT_CAN'T_EXCEED_TOTAL_TOPUP": "Ödenen tutar toplam yüklemeyi aşamaz",
+"ENTER_REQUIRED_DATA": "Gerekli verileri girin",
+"FILL_DATA_CORRECTLY": "Verileri doğru girin",
+"TOP_UP_PURCHASED_SUCCESSFULLY": "Yükleme Başarıyla Satın Alındı",
+"SUCCESS": "Başarılı"
 
 
 }

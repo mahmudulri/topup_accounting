@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 TransactionsModel transactionsModelFromJson(String str) =>
     TransactionsModel.fromJson(json.decode(str));
@@ -66,16 +67,16 @@ class Pagination {
 }
 
 class Summary {
-  final int? totalBaseAmount;
-  final int? totalPaidAmount;
-  final int? totalBonusAmount;
+  final double? totalBaseAmount;
+  final double? totalPaidAmount;
+  final double? totalBonusAmount;
 
   Summary({this.totalBaseAmount, this.totalPaidAmount, this.totalBonusAmount});
 
   factory Summary.fromJson(Map<String, dynamic> json) => Summary(
-    totalBaseAmount: json["total_base_amount"],
-    totalPaidAmount: json["total_paid_amount"],
-    totalBonusAmount: json["total_bonus_amount"],
+    totalBaseAmount: (json["total_base_amount"] as num?)?.toDouble(),
+    totalPaidAmount: (json["total_paid_amount"] as num?)?.toDouble(),
+    totalBonusAmount: (json["total_bonus_amount"] as num?)?.toDouble(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -91,13 +92,13 @@ class Transaction {
   final int? supplierId;
   final int? resellerId;
   final String? transactionType;
-  final int? baseAmount;
-  final int? bonusPercentage;
-  final int? bonusAmount;
-  final int? totalAmount;
-  final int? paidAmount;
-  final int? dueAmount;
-  final int? previousDue;
+  final double? baseAmount;
+  final double? bonusPercentage;
+  final double? bonusAmount;
+  final double? totalAmount;
+  final double? paidAmount;
+  final double? dueAmount;
+  final double? previousDue;
   final String? referenceNo;
   final String? notes;
   final DateTime? transactionDate;
@@ -138,15 +139,15 @@ class Transaction {
     transactionType: json["transaction_type"] == null
         ? null
         : json["transaction_type"],
-    baseAmount: json["base_amount"] == null ? null : json["base_amount"],
-    bonusPercentage: json["bonus_percentage"] == null
-        ? null
-        : json["bonus_percentage"],
-    bonusAmount: json["bonus_amount"] == null ? null : json["bonus_amount"],
-    totalAmount: json["total_amount"] == null ? null : json["total_amount"],
-    paidAmount: json["paid_amount"] == null ? null : json["paid_amount"],
-    dueAmount: json["due_amount"] == null ? null : json["due_amount"],
-    previousDue: json["previous_due"] == null ? null : json["previous_due"],
+
+    baseAmount: (json["base_amount"] as num?)?.toDouble(),
+    bonusPercentage: (json["bonus_percentage"] as num?)?.toDouble(),
+    bonusAmount: (json["bonus_amount"] as num?)?.toDouble(),
+    totalAmount: (json["total_amount"] as num?)?.toDouble(),
+    paidAmount: (json["paid_amount"] as num?)?.toDouble(),
+    dueAmount: (json["due_amount"] as num?)?.toDouble(),
+    previousDue: (json["previous_due"] as num?)?.toDouble(),
+
     referenceNo: json["reference_no"] == null ? null : json["reference_no"],
     notes: json["notes"] == null ? null : json["notes"],
     transactionDate: json["transaction_date"] == null

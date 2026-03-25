@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:topup_accounting/widgets/default_button.dart';
@@ -31,6 +32,12 @@ class _BuytopupScreenState extends State<BuytopupScreen> {
   @override
   void initState() {
     super.initState();
+    buytopUpController.baseAmount.value == 0.0;
+    buytopUpController.paidAmount.value == 0.0;
+    buytopUpController.baseAmountController.clear();
+    buytopUpController.paidAmountController.clear();
+    buytopUpController.referenceController.clear();
+    buytopUpController.notesController.clear();
 
     if (supplierlistController.allsupplierlist.value.suppliers == null) {
       supplierlistController.fetchsupplierlist();
@@ -159,6 +166,8 @@ class _BuytopupScreenState extends State<BuytopupScreen> {
 
                         buytopUpController.bonus.value = value.bonusPercentage!
                             .toDouble();
+                        buytopUpController.supplierID.value = value.id
+                            .toString();
 
                         buytopUpController.calculate();
                       },
@@ -273,6 +282,7 @@ class _BuytopupScreenState extends State<BuytopupScreen> {
                     children: [
                       Expanded(
                         child: TextField(
+                          controller: buytopUpController.referenceController,
                           decoration: InputDecoration(
                             hintText:
                                 languagesController.tr(
@@ -312,6 +322,7 @@ class _BuytopupScreenState extends State<BuytopupScreen> {
                     children: [
                       Expanded(
                         child: TextField(
+                          controller: buytopUpController.notesController,
                           maxLines: 10,
                           decoration: InputDecoration(
                             hintText:
@@ -347,7 +358,7 @@ class _BuytopupScreenState extends State<BuytopupScreen> {
                       children: [
                         Center(
                           child: KText(
-                            text: "Live Calculation",
+                            text: languagesController.tr("LIVE_CALCULATION"),
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
@@ -356,25 +367,25 @@ class _BuytopupScreenState extends State<BuytopupScreen> {
                         SizedBox(height: 8),
 
                         _row(
-                          "Base Amount",
+                          languagesController.tr("BASE_AMOUNT"),
                           buytopUpController.baseAmount.value,
                         ),
                         _row(
-                          "Bonus (${buytopUpController.bonus.value}%)",
+                          "${languagesController.tr("BASE_AMOUNT")} (${buytopUpController.bonus.value}%)",
                           buytopUpController.bonusAmount.value,
                           isPlus: true,
                         ),
                         _row(
-                          "Total Topup",
+                          languagesController.tr("TOTAL_TOPUP"),
                           buytopUpController.totalTopup.value,
                         ),
                         _row(
-                          "Paid Now",
+                          languagesController.tr("PAID_NOW"),
                           buytopUpController.paidAmount.value,
                           isMinus: true,
                         ),
                         _row(
-                          "Due to Supplier",
+                          languagesController.tr("DUE_TO_SUPPLIER"),
                           buytopUpController.dueAmount.value,
                         ),
                       ],
@@ -384,11 +395,65 @@ class _BuytopupScreenState extends State<BuytopupScreen> {
 
                 SizedBox(height: 30),
 
-                DefaultButton(
-                  buttonName: languagesController.tr("CONFIRM_PURCHASE"),
-                  mycolor: AppColors.primaryColor.withValues(alpha: 0.70),
-                  textColor: Colors.white,
-                  fontsize: 15,
+                Obx(
+                  () => DefaultButton(
+                    buttonName: buytopUpController.isLoading.value == false
+                        ? languagesController.tr("CONFIRM_PURCHASE")
+                        : languagesController.tr("PLEASE_WAIT"),
+                    mycolor: AppColors.primaryColor,
+                    textColor: Colors.white,
+                    fontsize: 15,
+                    onpressed: () {
+                      /// ❌ Supplier not selected
+                      if (selectedSupplier.value == null) {
+                        Fluttertoast.showToast(
+                          msg: languagesController.tr("SELECT_SUPPLIER"),
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                        );
+                        return;
+                      }
+
+                      /// ❌ Base amount validation (must be valid number > 0)
+                      final baseText = buytopUpController
+                          .baseAmountController
+                          .text
+                          .trim();
+
+                      final base = double.tryParse(baseText);
+
+                      if (baseText.isEmpty || base == null || base <= 0) {
+                        Fluttertoast.showToast(
+                          msg: "Enter valid base amount",
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                        );
+                        return;
+                      }
+
+                      /// 🔶 Paid amount (optional but must be valid if entered)
+                      final paidText = buytopUpController
+                          .paidAmountController
+                          .text
+                          .trim();
+
+                      if (paidText.isNotEmpty) {
+                        final paid = double.tryParse(paidText);
+
+                        if (paid == null || paid < 0) {
+                          Fluttertoast.showToast(
+                            msg: "Invalid paid amount",
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                          );
+                          return;
+                        }
+                      }
+
+                      /// ✅ All good → controller handles remaining rules
+                      buytopUpController.buynow();
+                    },
+                  ),
                 ),
               ],
             ),

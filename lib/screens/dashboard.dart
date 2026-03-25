@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:topup_accounting/screens/buytopup_screen.dart';
 import 'package:topup_accounting/widgets/drawer.dart';
 
+import '../controllers/dashboard_controller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../global_controllers/scaffold_controller.dart';
 import '../utils/colors.dart';
@@ -23,6 +24,8 @@ class _DashboardState extends State<Dashboard> {
   String _period = 'TODAY';
 
   final scaffoldController = Get.find<ScaffoldController>();
+
+  DashboardController dashboardController = Get.put(DashboardController());
 
   @override
   Widget build(BuildContext context) {
@@ -166,8 +169,17 @@ class _DashboardState extends State<Dashboard> {
                     icon: Icons.inventory_2_outlined,
                     iconColor: const Color(0xFF5B8DEF),
                     iconBgColor: const Color(0xFFEEF4FF),
-                    value: '4.2L',
-                    sub: 'AFG 400,000',
+                    value: formatToLakh(
+                      dashboardController
+                          .alldashboaddata
+                          .value
+                          .summary!
+                          .suppliers!
+                          .totalStock!
+                          .toDouble(),
+                    ),
+                    sub:
+                        'AFG ${dashboardController.alldashboaddata.value.summary!.suppliers!.totalStock.toString()}',
                     label: languagesController.tr("TOTAL_STOCK"),
                     bottomRight: '80.0%',
                     bottomRightColor: AppColors.primaryColor,
@@ -213,4 +225,9 @@ class _DashboardState extends State<Dashboard> {
       ),
     );
   }
+}
+
+String formatToLakh(double amount) {
+  double lakh = amount / 100000;
+  return "${lakh.toStringAsFixed(1)}L";
 }

@@ -84,7 +84,17 @@
 "CHOOSE_A_RESELLER": "اختر موزعًا",
 "SELL_TOPUP_TO_RESELLER": "بيع شحن للموزع",
 "CONFIRM_SALE": "تأكيد البيع",
-"SELECT_RESELLER": "اختر الموزع"
+"SELECT_RESELLER": "اختر الموزع",
+"LIVE_CALCULATION": "الحساب المباشر",
+"BONUS": "المكافأة",
+"TOTAL_TOPUP": "إجمالي الشحن",
+"PAID_NOW": "المدفوع الآن",
+"DUE_TO_SUPPLIER": "المستحق للمورد",
+"PAID_AMOUNT_CAN'T_EXCEED_TOTAL_TOPUP": "لا يمكن أن يتجاوز المبلغ المدفوع إجمالي الشحن",
+"ENTER_REQUIRED_DATA": "أدخل البيانات المطلوبة",
+"FILL_DATA_CORRECTLY": "املأ البيانات بشكل صحيح",
+"TOP_UP_PURCHASED_SUCCESSFULLY": "تم شراء الشحن بنجاح",
+"SUCCESS": "نجاح"
 
 
 

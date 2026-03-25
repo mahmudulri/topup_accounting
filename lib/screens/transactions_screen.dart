@@ -320,7 +320,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(width: 10),
+                                    SizedBox(width: 10),
                                     // End date
                                     Obx(
                                       () => Expanded(
@@ -495,7 +495,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                 ),
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(
+                                padding: EdgeInsets.symmetric(
                                   horizontal: 13,
                                   vertical: 7,
                                 ),
@@ -544,31 +544,29 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
                                     switch (data.transactionType.toString()) {
                                       case "purchase":
-                                        txType = "Purchase";
-                                        txColor = const Color(
-                                          0xFF6366F1,
-                                        ); // indigo
+                                        txType = languagesController.tr(
+                                          "PURCHASE",
+                                        );
+                                        txColor = Color(0xFF6366F1); // indigo
                                         txIcon = Icons.shopping_bag_outlined;
                                         break;
                                       case "reseller_payment":
-                                        txType = "Reseller Payment";
-                                        txColor = const Color(
-                                          0xFF0EA5E9,
-                                        ); // sky-blue
+                                        txType = languagesController.tr(
+                                          "RESELLER_PAYMENT",
+                                        );
+                                        txColor = Color(0xFF0EA5E9); // sky-blue
                                         txIcon = Icons.swap_horiz_rounded;
                                         break;
                                       case "sale":
-                                        txType = "Sale";
-                                        txColor = const Color(
-                                          0xFF10B981,
-                                        ); // emerald
+                                        txType = languagesController.tr("SALE");
+                                        txColor = Color(0xFF10B981); // emerald
                                         txIcon = Icons.point_of_sale_rounded;
                                         break;
                                       default:
-                                        txType = "Supplier Payment";
-                                        txColor = const Color(
-                                          0xFFF59E0B,
-                                        ); // amber
+                                        txType = languagesController.tr(
+                                          "SUPPLIER_PAYMENT",
+                                        );
+                                        txColor = Color(0xFFF59E0B); // amber
                                         txIcon = Icons
                                             .account_balance_wallet_outlined;
                                     }
@@ -582,12 +580,17 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                     final double dueAmount =
                                         (data.dueAmount as num?)?.toDouble() ??
                                         0;
+                                    final double previousdeu =
+                                        (data.previousDue as num?)
+                                            ?.toDouble() ??
+                                        0;
+
+                                    final double partialamount =
+                                        dueAmount - previousdeu;
 
                                     // ── card ─────────────────────────────────────────────────
                                     return Container(
-                                      margin: const EdgeInsets.symmetric(
-                                        vertical: 6,
-                                      ),
+                                      margin: EdgeInsets.symmetric(vertical: 6),
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(16),
@@ -595,7 +598,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                           BoxShadow(
                                             color: txColor.withOpacity(0.08),
                                             blurRadius: 16,
-                                            offset: const Offset(0, 4),
+                                            offset: Offset(0, 4),
                                           ),
                                         ],
                                         border: Border.all(
@@ -606,23 +609,21 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                         children: [
                                           // ── header strip ──────────────────────────────────
                                           Container(
-                                            padding: const EdgeInsets.symmetric(
+                                            padding: EdgeInsets.symmetric(
                                               horizontal: 16,
                                               vertical: 10,
                                             ),
                                             decoration: BoxDecoration(
                                               color: txColor.withOpacity(0.06),
                                               borderRadius:
-                                                  const BorderRadius.vertical(
+                                                  BorderRadius.vertical(
                                                     top: Radius.circular(16),
                                                   ),
                                             ),
                                             child: Row(
                                               children: [
                                                 Container(
-                                                  padding: const EdgeInsets.all(
-                                                    7,
-                                                  ),
+                                                  padding: EdgeInsets.all(7),
                                                   decoration: BoxDecoration(
                                                     color: txColor.withOpacity(
                                                       0.12,
@@ -638,7 +639,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                                     color: txColor,
                                                   ),
                                                 ),
-                                                const SizedBox(width: 10),
+                                                SizedBox(width: 10),
                                                 Expanded(
                                                   child: Column(
                                                     crossAxisAlignment:
@@ -647,7 +648,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                                     children: [
                                                       Text(
                                                         partyName,
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                           fontSize: 14,
                                                           fontWeight:
                                                               FontWeight.w700,
@@ -658,7 +659,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                                         overflow: TextOverflow
                                                             .ellipsis,
                                                       ),
-                                                      const SizedBox(height: 1),
+                                                      SizedBox(height: 1),
                                                       Text(
                                                         txType,
                                                         style: TextStyle(
@@ -676,27 +677,25 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                                 if (dueAmount > 0)
                                                   Container(
                                                     padding:
-                                                        const EdgeInsets.symmetric(
+                                                        EdgeInsets.symmetric(
                                                           horizontal: 10,
                                                           vertical: 4,
                                                         ),
                                                     decoration: BoxDecoration(
-                                                      color: const Color(
-                                                        0xFFFEF2F2,
-                                                      ),
+                                                      color: Color(0xFFFEF2F2),
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                             20,
                                                           ),
                                                       border: Border.all(
-                                                        color: const Color(
+                                                        color: Color(
                                                           0xFFFCA5A5,
                                                         ),
                                                       ),
                                                     ),
                                                     child: Text(
-                                                      "Due ${dueAmount.toStringAsFixed(2)}",
-                                                      style: const TextStyle(
+                                                      "${languagesController.tr("DUE")} ${dueAmount.toStringAsFixed(2)}",
+                                                      style: TextStyle(
                                                         fontSize: 11,
                                                         fontWeight:
                                                             FontWeight.w600,
@@ -712,34 +711,36 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
                                           // ── amounts row ───────────────────────────────────
                                           Padding(
-                                            padding: const EdgeInsets.symmetric(
+                                            padding: EdgeInsets.symmetric(
                                               horizontal: 16,
                                               vertical: 12,
                                             ),
                                             child: Row(
                                               children: [
                                                 _AmountTile(
-                                                  label: "Base Amount",
+                                                  label: languagesController.tr(
+                                                    "BASE_AMOUNT",
+                                                  ),
                                                   value: baseAmount,
-                                                  color: const Color(
-                                                    0xFF64748B,
-                                                  ),
+                                                  color: Color(0xFF64748B),
                                                 ),
                                                 _divider(),
                                                 _AmountTile(
-                                                  label: "Paid Amount",
+                                                  label: languagesController.tr(
+                                                    "PAID_AMOUNT",
+                                                  ),
                                                   value: paidAmount,
-                                                  color: const Color(
-                                                    0xFF10B981,
-                                                  ),
+                                                  color: Color(0xFF10B981),
                                                 ),
                                                 _divider(),
                                                 _AmountTile(
-                                                  label: "Due Amount",
-                                                  value: dueAmount,
-                                                  color: dueAmount > 0
-                                                      ? const Color(0xFFDC2626)
-                                                      : const Color(0xFF64748B),
+                                                  label: languagesController.tr(
+                                                    "PARTIAL",
+                                                  ),
+                                                  value: partialamount,
+                                                  color: partialamount > 0
+                                                      ? Color(0xFFDC2626)
+                                                      : Color(0xFF64748B),
                                                 ),
                                               ],
                                             ),
@@ -766,11 +767,11 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     return Container(
       height: 46,
       decoration: BoxDecoration(
-        color: const Color(0xFFF5F6FA),
+        color: Color(0xFFF5F6FA),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade200, width: 0.5),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: EdgeInsets.symmetric(horizontal: 12),
       child: Row(
         children: [
           Expanded(
@@ -796,16 +797,12 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 Widget _divider() => Container(
   width: 1,
   height: 36,
-  margin: const EdgeInsets.symmetric(horizontal: 8),
-  color: const Color(0xFFE2E8F0),
+  margin: EdgeInsets.symmetric(horizontal: 8),
+  color: Color(0xFFE2E8F0),
 );
 
 class _AmountTile extends StatelessWidget {
-  const _AmountTile({
-    required this.label,
-    required this.value,
-    required this.color,
-  });
+  _AmountTile({required this.label, required this.value, required this.color});
 
   final String label;
   final double value;
@@ -825,10 +822,10 @@ class _AmountTile extends StatelessWidget {
               color: color,
             ),
           ),
-          const SizedBox(height: 2),
+          SizedBox(height: 2),
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 10,
               fontWeight: FontWeight.w500,
               color: Color(0xFF94A3B8),

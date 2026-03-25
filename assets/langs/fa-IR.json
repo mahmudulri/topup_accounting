@@ -84,7 +84,17 @@
 "CHOOSE_A_RESELLER": "یک نماینده انتخاب کنید",
 "SELL_TOPUP_TO_RESELLER": "فروش شارژ به نماینده",
 "CONFIRM_SALE": "تأیید فروش",
-"SELECT_RESELLER": "انتخاب نماینده"
+"SELECT_RESELLER": "انتخاب نماینده",
+"LIVE_CALCULATION": "محاسبه زنده",
+"BONUS": "پاداش",
+"TOTAL_TOPUP": "مجموع شارژ",
+"PAID_NOW": "پرداخت اکنون",
+"DUE_TO_SUPPLIER": "بدهی به تأمین‌کننده",
+"PAID_AMOUNT_CAN'T_EXCEED_TOTAL_TOPUP": "مبلغ پرداختی نمی‌تواند از مجموع شارژ بیشتر باشد",
+"ENTER_REQUIRED_DATA": "اطلاعات لازم را وارد کنید",
+"FILL_DATA_CORRECTLY": "اطلاعات را درست وارد کنید",
+"TOP_UP_PURCHASED_SUCCESSFULLY": "شارژ با موفقیت خریداری شد",
+"SUCCESS": "موفق"
 
 
 

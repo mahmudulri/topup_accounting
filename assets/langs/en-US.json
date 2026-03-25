@@ -83,7 +83,17 @@
 "CHOOSE_A_RESELLER": "Choose a Reseller",
 "SELL_TOPUP_TO_RESELLER": "Sell Top-Up to Reseller",
 "CONFIRM_SALE": "Confirm Sale",
-"SELECT_RESELLER": "Select Reseller"
+"SELECT_RESELLER": "Select Reseller",
+"LIVE_CALCULATION": "Live Calculation",
+"BONUS": "Bonus",
+"TOTAL_TOPUP": "Total Top-Up",
+"PAID_NOW": "Paid Now",
+"DUE_TO_SUPPLIER": "Due to Supplier",
+"PAID_AMOUNT_CAN'T_EXCEED_TOTAL_TOPUP": "Paid amount can't exceed total top-up",
+"ENTER_REQUIRED_DATA": "Enter required data",
+"FILL_DATA_CORRECTLY": "Fill data correctly",
+"TOP_UP_PURCHASED_SUCCESSFULLY": "Top-Up Purchased Successfully",
+"SUCCESS": "Success"
 
 
 

@@ -84,7 +84,17 @@
 "CHOOSE_A_RESELLER": "একজন রিসেলার নির্বাচন করুন",
 "SELL_TOPUP_TO_RESELLER": "রিসেলারকে টপ-আপ বিক্রি করুন",
 "CONFIRM_SALE": "বিক্রয় নিশ্চিত করুন",
-"SELECT_RESELLER": "রিসেলার নির্বাচন করুন"
+"SELECT_RESELLER": "রিসেলার নির্বাচন করুন",
+"LIVE_CALCULATION": "লাইভ হিসাব",
+"BONUS": "বোনাস",
+"TOTAL_TOPUP": "মোট টপ-আপ",
+"PAID_NOW": "এখন পরিশোধ",
+"DUE_TO_SUPPLIER": "সরবরাহকারীর বকেয়া",
+"PAID_AMOUNT_CAN'T_EXCEED_TOTAL_TOPUP": "পরিশোধের পরিমাণ মোট টপ-আপের বেশি হতে পারবে না",
+"ENTER_REQUIRED_DATA": "প্রয়োজনীয় তথ্য দিন",
+"FILL_DATA_CORRECTLY": "সঠিকভাবে তথ্য পূরণ করুন",
+"TOP_UP_PURCHASED_SUCCESSFULLY": "টপ-আপ সফলভাবে ক্রয় করা হয়েছে",
+"SUCCESS": "সফল"
 
 
 

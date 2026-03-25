@@ -20,19 +20,22 @@ class DefaultButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
-    return Container(
-      height: 50,
-      width: screenWidth,
-      decoration: BoxDecoration(
-        color: mycolor,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Center(
-        child: KText(
-          text: buttonName.toString(),
-          color: textColor,
-          fontWeight: FontWeight.w600,
-          fontSize: fontsize ?? 14,
+    return GestureDetector(
+      onTap: onpressed,
+      child: Container(
+        height: 50,
+        width: screenWidth,
+        decoration: BoxDecoration(
+          color: mycolor,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Center(
+          child: KText(
+            text: buttonName.toString(),
+            color: textColor,
+            fontWeight: FontWeight.w600,
+            fontSize: fontsize ?? 14,
+          ),
         ),
       ),
     );
