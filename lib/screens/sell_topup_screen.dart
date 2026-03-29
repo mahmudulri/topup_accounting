@@ -5,6 +5,7 @@ import 'package:topup_accounting/models/resellerlist_model.dart';
 import 'package:topup_accounting/widgets/default_button.dart';
 
 import '../controllers/reseller_list_controller.dart';
+import '../controllers/selltop_up_controller.dart';
 import '../controllers/supplierlist_controller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../models/supplierlist_model.dart';
@@ -29,6 +30,8 @@ class _SellTopupScreenState extends State<SellTopupScreen> {
     ResellerListController(),
   );
 
+  SellTopUpController sellTopUpController = Get.put(SellTopUpController());
+
   final Rxn<Reseller> selectedReseller = Rxn<Reseller>();
 
   final Rxn<Supplier> selectedSupplier = Rxn<Supplier>();
@@ -39,6 +42,9 @@ class _SellTopupScreenState extends State<SellTopupScreen> {
 
     if (supplierlistController.allsupplierlist.value.suppliers == null) {
       supplierlistController.fetchsupplierlist();
+    }
+    if (resellerListController.allresellers.value.resellers == null) {
+      resellerListController.fetchReseller();
     }
   }
 
@@ -147,8 +153,13 @@ class _SellTopupScreenState extends State<SellTopupScreen> {
                         return DropdownMenuItem(
                           value: reseller,
                           child: Text(
-                            reseller.name.toString(),
-                            style: TextStyle(color: AppColors.subtitleText),
+                            reseller.name.toString() +
+                                reseller.city.toString() +
+                                "-( ${languagesController.tr("BONUS")} ${reseller.bonusPercentage} %)",
+                            style: TextStyle(
+                              color: AppColors.subtitleText,
+                              fontSize: 14,
+                            ),
                           ),
                         );
                       }).toList(),
@@ -157,6 +168,8 @@ class _SellTopupScreenState extends State<SellTopupScreen> {
                       onChanged: (value) {
                         selectedReseller.value = value;
                         print(value!.name);
+                        sellTopUpController.resellerID.value = value.id
+                            .toString();
                       },
                     ),
                   ),
@@ -196,8 +209,12 @@ class _SellTopupScreenState extends State<SellTopupScreen> {
                         return DropdownMenuItem(
                           value: supplier,
                           child: Text(
-                            supplier.name.toString(),
-                            style: TextStyle(color: AppColors.subtitleText),
+                            supplier.name.toString() +
+                                "( ${languagesController.tr("BONUS")} ${supplier.bonusPercentage.toString()} % )- ${languagesController.tr("STOCK")}- ${supplier.currentStock}",
+                            style: TextStyle(
+                              color: AppColors.subtitleText,
+                              fontSize: 13,
+                            ),
                           ),
                         );
                       }).toList(),
@@ -206,6 +223,8 @@ class _SellTopupScreenState extends State<SellTopupScreen> {
                       onChanged: (value) {
                         selectedSupplier.value = value;
                         print(value!.name);
+                        sellTopUpController.supplierID.value = value.id
+                            .toString();
                       },
                     ),
                   ),
@@ -231,6 +250,7 @@ class _SellTopupScreenState extends State<SellTopupScreen> {
                     children: [
                       Expanded(
                         child: TextField(
+                          controller: sellTopUpController.baseAmountController,
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                             hintText: "0.00",
@@ -270,6 +290,7 @@ class _SellTopupScreenState extends State<SellTopupScreen> {
                     children: [
                       Expanded(
                         child: TextField(
+                          controller: sellTopUpController.paidAmountController,
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                             hintText: "0.00",
@@ -310,6 +331,7 @@ class _SellTopupScreenState extends State<SellTopupScreen> {
                     children: [
                       Expanded(
                         child: TextField(
+                          controller: sellTopUpController.referenceController,
                           decoration: InputDecoration(
                             hintText:
                                 languagesController.tr(
@@ -349,6 +371,7 @@ class _SellTopupScreenState extends State<SellTopupScreen> {
                     children: [
                       Expanded(
                         child: TextField(
+                          controller: sellTopUpController.notesController,
                           maxLines: 10,
                           decoration: InputDecoration(
                             hintText:
@@ -369,11 +392,34 @@ class _SellTopupScreenState extends State<SellTopupScreen> {
 
                 SizedBox(height: 30),
 
-                DefaultButton(
-                  buttonName: languagesController.tr("CONFIRM_PURCHASE"),
-                  mycolor: AppColors.primaryColor.withValues(alpha: 0.70),
-                  textColor: Colors.white,
-                  fontsize: 15,
+                Obx(
+                  () => DefaultButton(
+                    buttonName: sellTopUpController.isLoading.value == false
+                        ? languagesController.tr("CONFIRM_PURCHASE")
+                        : languagesController.tr("PLEASE_WAIT"),
+                    mycolor: AppColors.primaryColor.withValues(alpha: 0.70),
+                    textColor: Colors.white,
+                    fontsize: 15,
+                    onpressed: () {
+                      print(sellTopUpController.resellerID.value);
+                      print(sellTopUpController.supplierID.value);
+                      print(
+                        sellTopUpController.baseAmountController.text
+                            .toString(),
+                      );
+                      print(
+                        sellTopUpController.paidAmountController.text
+                            .toString(),
+                      );
+                      print(
+                        sellTopUpController.referenceController.text.toString(),
+                      );
+                      print(
+                        sellTopUpController.notesController.text.toString(),
+                      );
+                      sellTopUpController.sellNow();
+                    },
+                  ),
                 ),
               ],
             ),
