@@ -64,11 +64,11 @@ class Reseller {
   final String? phone;
   final String? city;
   final double? bonusPercentage;
-  final int? totalSellAmount;
-  final int? totalSellTopup;
-  final int? totalSellTopupWithBonus;
-  final int? totalReceivedAmount;
-  final int? totalDueAmount;
+  final double? totalSellAmount;
+  final double? totalSellTopup;
+  final double? totalSellTopupWithBonus;
+  final double? totalReceivedAmount;
+  final double? totalDueAmount;
   final int? status;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -101,12 +101,12 @@ class Reseller {
     bonusPercentage: (json["bonus_percentage"] as num?)?.toDouble(),
 
     // int safe (even if API gives double)
-    totalSellAmount: (json["total_sell_amount"] as num?)?.toInt(),
-    totalSellTopup: (json["total_sell_topup"] as num?)?.toInt(),
+    totalSellAmount: (json["total_sell_amount"] as num?)?.toDouble(),
+    totalSellTopup: (json["total_sell_topup"] as num?)?.toDouble(),
     totalSellTopupWithBonus: (json["total_sell_topup_with_bonus"] as num?)
-        ?.toInt(),
-    totalReceivedAmount: (json["total_received_amount"] as num?)?.toInt(),
-    totalDueAmount: (json["total_due_amount"] as num?)?.toInt(),
+        ?.toDouble(),
+    totalReceivedAmount: (json["total_received_amount"] as num?)?.toDouble(),
+    totalDueAmount: (json["total_due_amount"] as num?)?.toDouble(),
 
     status: (json["status"] as num?)?.toInt(),
 

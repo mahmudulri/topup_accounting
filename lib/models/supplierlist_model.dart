@@ -65,11 +65,11 @@ class Supplier {
   final String? company;
   final double? bonusPercentage;
   final double? totalBuyAmount;
-  final int? totalBuyTopup;
-  final int? totalBuyTopupWithBonus;
+  final double? totalBuyTopup;
+  final double? totalBuyTopupWithBonus;
   final double? totalPaidAmount;
-  final int? totalDueAmount;
-  final int? currentStock;
+  final double? totalDueAmount;
+  final double? currentStock;
   final int? status;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -105,11 +105,11 @@ class Supplier {
     totalPaidAmount: (json["total_paid_amount"] as num?)?.toDouble(),
 
     // int safe
-    totalBuyTopup: (json["total_buy_topup"] as num?)?.toInt(),
+    totalBuyTopup: (json["total_buy_topup"] as num?)?.toDouble(),
     totalBuyTopupWithBonus: (json["total_buy_topup_with_bonus"] as num?)
-        ?.toInt(),
-    totalDueAmount: (json["total_due_amount"] as num?)?.toInt(),
-    currentStock: (json["current_stock"] as num?)?.toInt(),
+        ?.toDouble(),
+    totalDueAmount: (json["total_due_amount"] as num?)?.toDouble(),
+    currentStock: (json["current_stock"] as num?)?.toDouble(),
     status: (json["status"] as num?)?.toInt(),
 
     createdAt: json["createdAt"] != null

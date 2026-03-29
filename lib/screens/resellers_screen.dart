@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../controllers/reseller_list_controller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../global_controllers/scaffold_controller.dart';
 import '../utils/colors.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/resellercard.dart';
+import 'reseller_view_screen.dart';
 
 class ResellersScreen extends StatefulWidget {
   ResellersScreen({super.key});
@@ -103,7 +103,9 @@ class _ResellersScreenState extends State<ResellersScreen> {
                         ),
                         actions: ResellerCardActions(
                           onBuy: () {},
-                          onView: () {},
+                          onView: () {
+                            Get.to(() => ResellerViewScreen());
+                          },
                           onEdit: () {},
                           onUpdatePercent: () {},
                           onPay: () {},

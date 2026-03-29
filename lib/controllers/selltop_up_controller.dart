@@ -121,6 +121,7 @@ class SellTopUpController extends GetxController {
 
         if (results["success"] == true) {
           Fluttertoast.showToast(
+            gravity: ToastGravity.CENTER,
             msg: results["message"],
             backgroundColor: AppColors.primaryColor,
             textColor: Colors.white,

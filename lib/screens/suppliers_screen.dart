@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../controllers/supplierlist_controller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../utils/colors.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/suppliercard.dart';
+import 'supplier_view_screen.dart';
 
 class SuppliersScreen extends StatefulWidget {
   SuppliersScreen({super.key});
@@ -100,7 +100,17 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                         ),
                         actions: SupplierCardActions(
                           onBuy: () {},
-                          onView: () {},
+                          onView: () {
+                            Get.to(
+                              () => SupplierViewScreen(
+                                supplierID: data.id.toString(),
+                                status: data.status.toString(),
+                                name: data.name,
+                                company: data.company,
+                                totalPurchase: data.totalBuyAmount.toString(),
+                              ),
+                            );
+                          },
                           onEdit: () {},
                           onUpdatePercent: () {},
                           onPay: () {},

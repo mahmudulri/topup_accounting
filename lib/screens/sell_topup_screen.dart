@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:topup_accounting/models/resellerlist_model.dart';
 import 'package:topup_accounting/widgets/default_button.dart';
-
 import '../controllers/reseller_list_controller.dart';
 import '../controllers/selltop_up_controller.dart';
 import '../controllers/supplierlist_controller.dart';
@@ -250,6 +249,9 @@ class _SellTopupScreenState extends State<SellTopupScreen> {
                     children: [
                       Expanded(
                         child: TextField(
+                          onChanged: (value) {
+                            sellTopUpController.calculate();
+                          },
                           controller: sellTopUpController.baseAmountController,
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
@@ -290,6 +292,9 @@ class _SellTopupScreenState extends State<SellTopupScreen> {
                     children: [
                       Expanded(
                         child: TextField(
+                          onChanged: (value) {
+                            sellTopUpController.calculate();
+                          },
                           controller: sellTopUpController.paidAmountController,
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
@@ -389,6 +394,57 @@ class _SellTopupScreenState extends State<SellTopupScreen> {
                     ],
                   ),
                 ),
+                SizedBox(height: 8),
+                Obx(() {
+                  if (sellTopUpController.baseAmount.value == 0) {
+                    return SizedBox();
+                  }
+
+                  return Container(
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: KText(
+                            text: languagesController.tr("LIVE_CALCULATION"),
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+
+                        SizedBox(height: 8),
+
+                        _row(
+                          languagesController.tr("BASE_AMOUNT"),
+                          sellTopUpController.baseAmount.value,
+                        ),
+                        _row(
+                          "${languagesController.tr("BASE_AMOUNT")} (${sellTopUpController.bonus.value}%)",
+                          sellTopUpController.bonusAmount.value,
+                          isPlus: true,
+                        ),
+                        _row(
+                          languagesController.tr("TOTAL_TOPUP"),
+                          sellTopUpController.totalTopup.value,
+                        ),
+                        _row(
+                          languagesController.tr("PAID_NOW"),
+                          sellTopUpController.paidAmount.value,
+                          isMinus: true,
+                        ),
+                        _row(
+                          languagesController.tr("DUE_TO_SUPPLIER"),
+                          sellTopUpController.dueAmount.value,
+                        ),
+                      ],
+                    ),
+                  );
+                }),
 
                 SizedBox(height: 30),
 
@@ -421,10 +477,38 @@ class _SellTopupScreenState extends State<SellTopupScreen> {
                     },
                   ),
                 ),
+                SizedBox(height: 15),
               ],
             ),
           );
         }),
+      ),
+    );
+  }
+
+  Widget _row(
+    String title,
+    double amount, {
+    bool isPlus = false,
+    bool isMinus = false,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          KText(text: title, color: Colors.white),
+
+          KText(
+            text:
+                "${isPlus
+                    ? "+"
+                    : isMinus
+                    ? "-"
+                    : ""}${sellTopUpController.formatMoney(amount)}",
+            color: Colors.white,
+          ),
+        ],
       ),
     );
   }

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 TransactionsModel transactionsModelFromJson(String str) =>
     TransactionsModel.fromJson(json.decode(str));

@@ -54,8 +54,8 @@ class SignInController extends GetxController {
       );
 
       final results = jsonDecode(response.body);
-      print("Response Status Code: ${response.statusCode}");
-      print("Response Body: ${response.body}");
+      // print("Response Status Code: ${response.statusCode}");
+      // print("Response Body: ${response.body}");
 
       if (response.statusCode == 200) {
         box.write("userToken", results["token"]);
