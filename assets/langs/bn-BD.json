@@ -94,7 +94,30 @@
 "ENTER_REQUIRED_DATA": "প্রয়োজনীয় তথ্য দিন",
 "FILL_DATA_CORRECTLY": "সঠিকভাবে তথ্য পূরণ করুন",
 "TOP_UP_PURCHASED_SUCCESSFULLY": "টপ-আপ সফলভাবে ক্রয় করা হয়েছে",
-"SUCCESS": "সফল"
+"SUCCESS": "সফল",
+"COMPANY": "কোম্পানি",
+"SINCE": "থেকে",
+"PURCHASE": "ক্রয়",
+"STOCK": "স্টক",
+"DUE": "বকেয়া",
+"QUICK_ACTION": "দ্রুত কার্যক্রম",
+"BUY": "কিনুন",
+"DISABLE": "নিষ্ক্রিয় করুন",
+"DELETE": "মুছুন",
+"VIEW": "দেখুন",
+"EDIT": "সম্পাদনা",
+"UPDATE_%": "আপডেট %",
+"PAY": "পরিশোধ করুন",
+"BONUS_RATE": "বোনাস হার",
+"WITH_BONUS": "বোনাসসহ",
+"AVAILABLE_NOW": "এখন উপলব্ধ",
+"CURRENT_STOCK": "বর্তমান স্টক",
+"TOTAL_DUE": "মোট বকেয়া",
+"TOTAL_PURCHASE": "মোট ক্রয়",
+"PAID": "পরিশোধিত",
+"WORTH": "মূল্য",
+"OVERVIEW": "ওভারভিউ",
+"ANALYTICS": "অ্যানালিটিক্স"
 
 
 

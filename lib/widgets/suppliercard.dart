@@ -4,6 +4,7 @@
 // ═══════════════════════════════════════════════════════════════
 
 import 'package:flutter/material.dart';
+import 'package:topup_accounting/controllers/selltop_up_controller.dart';
 import 'package:topup_accounting/utils/colors.dart';
 
 // ───────────────────────────────────────────────────────────────
@@ -104,6 +105,7 @@ class SupplierCard extends StatelessWidget {
             _BonusRow(bonusPercentage: data.bonusPercentage),
             _StatsRow(data: data),
             _InfoRows(data: data),
+
             _ActionsBar(actions: actions),
           ],
         ),
@@ -133,7 +135,6 @@ class _TopBand extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Name + subtitle
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,7 +150,7 @@ class _TopBand extends StatelessWidget {
                 ),
                 const SizedBox(height: 3),
                 Text(
-                  '${data.company} · ${data.lastContact}',
+                  '${data.company}',
                   style: const TextStyle(color: Colors.white, fontSize: 12),
                 ),
               ],
@@ -178,7 +179,11 @@ class _TopBand extends StatelessWidget {
                 const SizedBox(width: 6),
                 Text(
                   data.phone,
-                  style: const TextStyle(color: Colors.white, fontSize: 12),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ],
             ),
@@ -207,7 +212,7 @@ class _BonusRow extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'Bonus rate',
+            languagesController.tr("BONUS_RATE"),
             style: TextStyle(
               fontSize: 12,
               color: Theme.of(context).textTheme.bodySmall?.color,
@@ -265,21 +270,22 @@ class _StatsRow extends StatelessWidget {
         child: Row(
           children: [
             _StatCell(
-              label: 'Purchase',
+              label: languagesController.tr("PURCHASE"),
               value: data.totalBuyAmount,
-              hint: '+${data.totalBuyTopupWithBonus} with bonus',
+              hint:
+                  '+${data.totalBuyTopupWithBonus} ${languagesController.tr("WITH_BONUS")}',
               valueColor: _kBlueVal,
             ),
             VerticalDivider(width: 0.5, color: div),
             _StatCell(
-              label: 'Stock',
+              label: languagesController.tr("STOCK"),
               value: data.currentStock,
-              hint: 'Available now',
+              hint: languagesController.tr("AVAILABLE_NOW"),
               valueColor: _kGreenVal,
             ),
             VerticalDivider(width: 0.5, color: div),
             _StatCell(
-              label: 'Due',
+              label: languagesController.tr("DUE"),
               value: data.totalDueAmount,
               hint: data.totalDueFormatted,
               valueColor: _kRedVal,
@@ -313,10 +319,10 @@ class _StatCell extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              label.toUpperCase(),
+              label,
               style: TextStyle(
                 fontSize: 11,
-                letterSpacing: 0.5,
+
                 color: Theme.of(
                   context,
                 ).textTheme.bodySmall?.color?.withOpacity(0.7),
@@ -351,7 +357,7 @@ class _StatCell extends StatelessWidget {
 }
 
 // ───────────────────────────────────────────────────────────────
-// 7. INFO ROWS
+// Company Row
 // ───────────────────────────────────────────────────────────────
 class _InfoRows extends StatelessWidget {
   final SupplierCardData data;
@@ -363,8 +369,52 @@ class _InfoRows extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: Column(
         children: [
-          _InfoRow(label: 'Company', value: data.company),
-          _InfoRow(label: 'Last contact', value: data.lastContact),
+          PaidRow(
+            label: languagesController.tr("TOTAL_PAID"),
+            value: data.totalDueAmount,
+          ),
+          _InfoRow(
+            label: languagesController.tr("COMPANY"),
+            value: data.company,
+          ),
+          _InfoRow(
+            label: languagesController.tr("SINCE"),
+            value: data.lastContact,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PaidRow extends StatelessWidget {
+  final String label;
+  final String value;
+  const PaidRow({required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    final div = Colors.black.withOpacity(0.07);
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: div, width: 0.5)),
+      ),
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.green,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            value,
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+          ),
         ],
       ),
     );
@@ -389,12 +439,7 @@ class _InfoRow extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(
-              fontSize: 13,
-              color: Theme.of(
-                context,
-              ).textTheme.bodySmall?.color?.withOpacity(0.7),
-            ),
+            style: TextStyle(fontSize: 13, color: AppColors.fontColor),
           ),
           Text(
             value,
@@ -433,7 +478,7 @@ class _ActionsBar extends StatelessWidget {
 
           // ── Disable ───────────────────────────────────────
           _OutlineIconButton(
-            label: 'Disable',
+            label: languagesController.tr("DISABLE"),
             icon: Icons.block,
             foreground: _kAmberText,
             borderColor: _kAmberBar.withOpacity(0.6),
@@ -444,7 +489,7 @@ class _ActionsBar extends StatelessWidget {
 
           // ── Delete ────────────────────────────────────────
           _OutlineIconButton(
-            label: 'Delete',
+            label: languagesController.tr("DELETE"),
             icon: Icons.delete_outline,
             foreground: _kRedVal,
             borderColor: _kRedBorder,
@@ -515,35 +560,35 @@ class _QuickActionButton extends StatelessWidget {
           context: context,
           value: 'buy',
           icon: Icons.shopping_cart_outlined,
-          label: 'Buy',
+          label: languagesController.tr("BUY"),
           onTap: actions.onBuy,
         ),
         _menuItem(
           context: context,
           value: 'view',
           icon: Icons.visibility_outlined,
-          label: 'View',
+          label: languagesController.tr("VIEW"),
           onTap: actions.onView,
         ),
         _menuItem(
           context: context,
           value: 'edit',
           icon: Icons.edit_outlined,
-          label: 'Edit',
+          label: languagesController.tr("EDIT"),
           onTap: actions.onEdit,
         ),
         _menuItem(
           context: context,
           value: 'pct',
           icon: Icons.percent,
-          label: 'Update %',
+          label: languagesController.tr("UPDATE_%"),
           onTap: actions.onUpdatePercent,
         ),
         _menuItem(
           context: context,
           value: 'pay',
           icon: Icons.credit_card_outlined,
-          label: 'Pay',
+          label: languagesController.tr("PAY"),
           onTap: actions.onPay,
         ),
       ],
@@ -596,7 +641,7 @@ class _QuickActionButton extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Quick action',
+                languagesController.tr("QUICK_ACTION"),
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,

@@ -94,7 +94,30 @@
 "ENTER_REQUIRED_DATA": "اړین معلومات دننه کړئ",
 "FILL_DATA_CORRECTLY": "معلومات سم ډک کړئ",
 "TOP_UP_PURCHASED_SUCCESSFULLY": "ټاپ اپ په بریالیتوب سره واخیستل شو",
-"SUCCESS": "بریالیتوب"
+"SUCCESS": "بریالیتوب",
+"COMPANY": "شرکت",
+"SINCE": "له",
+"PURCHASE": "پېرود",
+"STOCK": "سټاک",
+"DUE": "پاتې",
+"QUICK_ACTION": "چټک عمل",
+"BUY": "واخلئ",
+"DISABLE": "غیر فعال",
+"DELETE": "ړنګ کړئ",
+"VIEW": "وګورئ",
+"EDIT": "سمول",
+"UPDATE_%": "تازه کول %",
+"PAY": "تادیه",
+"BONUS_RATE": "د بونس کچه",
+"WITH_BONUS": "له بونس سره",
+"AVAILABLE_NOW": "اوس شتون لري",
+"CURRENT_STOCK": "اوسنی سټاک",
+"TOTAL_DUE": "ټول پاتې",
+"TOTAL_PURCHASE": "ټول پېرود",
+"PAID": "ورکړل شوی",
+"WORTH": "ارزښت",
+"OVERVIEW": "عمومي کتنه",
+"ANALYTICS": "تحلیلونه"
 
 
 

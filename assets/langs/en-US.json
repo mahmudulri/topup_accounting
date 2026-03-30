@@ -93,7 +93,30 @@
 "ENTER_REQUIRED_DATA": "Enter required data",
 "FILL_DATA_CORRECTLY": "Fill data correctly",
 "TOP_UP_PURCHASED_SUCCESSFULLY": "Top-Up Purchased Successfully",
-"SUCCESS": "Success"
+"SUCCESS": "Success",
+"COMPANY": "Company",
+"SINCE": "Since",
+"PURCHASE": "Purchase",
+"STOCK": "Stock",
+"DUE": "Due",
+"QUICK_ACTION": "Quick Action",
+"BUY": "Buy",
+"DISABLE": "Disable",
+"DELETE": "Delete",
+"VIEW": "View",
+"EDIT": "Edit",
+"UPDATE_%": "Update %",
+"PAY": "Pay",
+"BONUS_RATE": "Bonus Rate",
+"WITH_BONUS": "With Bonus",
+"AVAILABLE_NOW": "Available Now",
+"CURRENT_STOCK": "Current Stock",
+"TOTAL_DUE": "Total Due",
+"TOTAL_PURCHASE": "Total Purchase",
+"PAID": "Paid",
+"WORTH": "Worth",
+"OVERVIEW": "Overview",
+"ANALYTICS": "Analytics"
 
 
 

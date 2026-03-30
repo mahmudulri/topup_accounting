@@ -94,7 +94,30 @@
 "ENTER_REQUIRED_DATA": "أدخل البيانات المطلوبة",
 "FILL_DATA_CORRECTLY": "املأ البيانات بشكل صحيح",
 "TOP_UP_PURCHASED_SUCCESSFULLY": "تم شراء الشحن بنجاح",
-"SUCCESS": "نجاح"
+"SUCCESS": "نجاح",
+"COMPANY": "الشركة",
+"SINCE": "منذ",
+"PURCHASE": "شراء",
+"STOCK": "المخزون",
+"DUE": "المستحق",
+"QUICK_ACTION": "إجراء سريع",
+"BUY": "شراء",
+"DISABLE": "تعطيل",
+"DELETE": "حذف",
+"VIEW": "عرض",
+"EDIT": "تعديل",
+"UPDATE_%": "تحديث %",
+"PAY": "دفع",
+"BONUS_RATE": "معدل المكافأة",
+"WITH_BONUS": "مع المكافأة",
+"AVAILABLE_NOW": "متاح الآن",
+"CURRENT_STOCK": "المخزون الحالي",
+"TOTAL_DUE": "إجمالي المستحق",
+"TOTAL_PURCHASE": "إجمالي الشراء",
+"PAID": "مدفوع",
+"WORTH": "القيمة",
+"OVERVIEW": "نظرة عامة",
+"ANALYTICS": "التحليلات"
 
 
 

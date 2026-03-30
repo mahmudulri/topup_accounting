@@ -94,7 +94,30 @@
 "ENTER_REQUIRED_DATA": "اطلاعات لازم را وارد کنید",
 "FILL_DATA_CORRECTLY": "اطلاعات را درست وارد کنید",
 "TOP_UP_PURCHASED_SUCCESSFULLY": "شارژ با موفقیت خریداری شد",
-"SUCCESS": "موفق"
+"SUCCESS": "موفق",
+"COMPANY": "شرکت",
+"SINCE": "از",
+"PURCHASE": "خرید",
+"STOCK": "موجودی",
+"DUE": "بدهی",
+"QUICK_ACTION": "اقدام سریع",
+"BUY": "خرید",
+"DISABLE": "غیرفعال",
+"DELETE": "حذف",
+"VIEW": "مشاهده",
+"EDIT": "ویرایش",
+"UPDATE_%": "به‌روزرسانی %",
+"PAY": "پرداخت",
+"BONUS_RATE": "نرخ پاداش",
+"WITH_BONUS": "با پاداش",
+"AVAILABLE_NOW": "اکنون موجود",
+"CURRENT_STOCK": "موجودی فعلی",
+"TOTAL_DUE": "مجموع بدهی",
+"TOTAL_PURCHASE": "مجموع خرید",
+"PAID": "پرداخت‌شده",
+"WORTH": "ارزش",
+"OVERVIEW": "نمای کلی",
+"ANALYTICS": "تحلیل‌ها"
 
 
 

@@ -94,7 +94,30 @@
 "ENTER_REQUIRED_DATA": "Gerekli verileri girin",
 "FILL_DATA_CORRECTLY": "Verileri doğru girin",
 "TOP_UP_PURCHASED_SUCCESSFULLY": "Yükleme Başarıyla Satın Alındı",
-"SUCCESS": "Başarılı"
+"SUCCESS": "Başarılı",
+"COMPANY": "Şirket",
+"SINCE": "Den beri",
+"PURCHASE": "Satın Alma",
+"STOCK": "Stok",
+"DUE": "Borç",
+"QUICK_ACTION": "Hızlı İşlem",
+"BUY": "Satın Al",
+"DISABLE": "Devre Dışı Bırak",
+"DELETE": "Sil",
+"VIEW": "Görüntüle",
+"EDIT": "Düzenle",
+"UPDATE_%": "Güncelle %",
+"PAY": "Öde",
+"BONUS_RATE": "Bonus Oranı",
+"WITH_BONUS": "Bonuslu",
+"AVAILABLE_NOW": "Şimdi Mevcut",
+"CURRENT_STOCK": "Mevcut Stok",
+"TOTAL_DUE": "Toplam Borç",
+"TOTAL_PURCHASE": "Toplam Satın Alma",
+"PAID": "Ödenen",
+"WORTH": "Değer",
+"OVERVIEW": "Genel Bakış",
+"ANALYTICS": "Analizler"
 
 
 }

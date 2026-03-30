@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:topup_accounting/helpers/compactnumber_helpder.dart';
+import 'package:topup_accounting/helpers/localtime_helper.dart';
 import '../controllers/supplierlist_controller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../utils/colors.dart';
@@ -85,37 +87,72 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                           .value
                           .suppliers?[index];
 
-                      return SupplierCard(
-                        data: SupplierCardData(
-                          name: data!.name.toString(),
-                          company: data.company.toString(),
-                          phone: '01777777777',
-                          lastContact: 'Mar 12, 2026',
-                          bonusPercentage: 5,
-                          totalBuyAmount: '5.0L',
-                          totalBuyTopupWithBonus: '5.3L',
-                          currentStock: '4.3L',
-                          totalDueAmount: '120K',
-                          totalDueFormatted: 'AFG 120,000',
-                        ),
-                        actions: SupplierCardActions(
-                          onBuy: () {},
-                          onView: () {
-                            Get.to(
-                              () => SupplierViewScreen(
-                                supplierID: data.id.toString(),
-                                status: data.status.toString(),
-                                name: data.name,
-                                company: data.company,
-                                totalPurchase: data.totalBuyAmount.toString(),
+                      return GestureDetector(
+                        onTap: () {
+                          Get.to(
+                            () => SupplierViewScreen(
+                              supplierID: data.id.toString(),
+                              status: data.status.toString(),
+                              name: data.name,
+                              company: data.company,
+                              totalPurchase: data.totalBuyAmount.toString(),
+                              totalPaid: data.totalPaidAmount.toString(),
+                              totalDue: data.totalDueAmount!.toStringAsFixed(0),
+                              currentStock: data.currentStock.toString(),
+                            ),
+                          );
+                        },
+                        child: SupplierCard(
+                          data: SupplierCardData(
+                            name: data!.name.toString(),
+                            company: data.company.toString(),
+                            phone: data.phone.toString(),
+                            lastContact: convertToDate(
+                              data.createdAt.toString(),
+                            ),
+                            bonusPercentage: double.parse(
+                              data.bonusPercentage.toString(),
+                            ),
+                            totalBuyAmount: formatCompactNumber(
+                              double.parse(data.totalBuyAmount.toString()),
+                            ),
+                            totalBuyTopupWithBonus: formatCompactNumber(
+                              double.parse(
+                                data.totalBuyTopupWithBonus.toString(),
                               ),
-                            );
-                          },
-                          onEdit: () {},
-                          onUpdatePercent: () {},
-                          onPay: () {},
-                          onDisable: () {},
-                          onDelete: () {},
+                            ),
+                            currentStock: formatCompactNumber(
+                              double.parse(data.currentStock.toString()),
+                            ),
+                            totalDueAmount: formatCompactNumber(
+                              double.parse(data.totalDueAmount.toString()),
+                            ),
+                            totalDueFormatted: data.totalDueAmount!
+                                .toStringAsFixed(0),
+                          ),
+                          actions: SupplierCardActions(
+                            onBuy: () {},
+                            onView: () {
+                              Get.to(
+                                () => SupplierViewScreen(
+                                  supplierID: data.id.toString(),
+                                  status: data.status.toString(),
+                                  name: data.name,
+                                  company: data.company,
+                                  totalPurchase: data.totalBuyAmount.toString(),
+                                  totalPaid: data.totalPaidAmount.toString(),
+                                  totalDue: data.totalDueAmount!
+                                      .toStringAsFixed(0),
+                                  currentStock: data.currentStock.toString(),
+                                ),
+                              );
+                            },
+                            onEdit: () {},
+                            onUpdatePercent: () {},
+                            onPay: () {},
+                            onDisable: () {},
+                            onDelete: () {},
+                          ),
                         ),
                       );
                       // return Container(
