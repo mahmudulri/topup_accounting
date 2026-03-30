@@ -117,7 +117,23 @@
 "PAID": "ورکړل شوی",
 "WORTH": "ارزښت",
 "OVERVIEW": "عمومي کتنه",
-"ANALYTICS": "تحلیلونه"
+"ANALYTICS": "تحلیلونه",
+"ACTIVE": "فعال",
+"DEACTIVE": "غیر فعال",
+"DISABLED": "بند",
+"CONTACT_INFORMATION": "د اړیکو معلومات",
+"MEMBER_SINCE": "له غړیتوب راهیسې",
+"PHONE": "تلیفون",
+"PURCHASE_SUMMARY": "د پېرود لنډیز",
+"PAYMENT_SUMMARY": "د تادیې لنډیز",
+"TOTAL_WITH_BONUS": "ټول له بونس سره",
+"PAYMENT_RATIO": "د تادیې تناسب",
+"STOCK_INFORMATION": "د سټاک معلومات",
+"STOCK_VALUE": "د سټاک ارزښت",
+"AVG_PURCHAGE_PRICE": "اوسط د پېرود بیه",
+"LAST_PURCHASE": "وروستی پېرود",
+"PAY_DUE": "پاتې تادیه",
+"PRINT_REPORT": "راپور چاپ کړئ"
 
 
 

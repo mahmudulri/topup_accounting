@@ -99,6 +99,9 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                               totalPaid: data.totalPaidAmount.toString(),
                               totalDue: data.totalDueAmount!.toStringAsFixed(0),
                               currentStock: data.currentStock.toString(),
+                              phone: data.phone,
+                              created: data.createdAt.toString(),
+                              bonus: data.bonusPercentage.toString(),
                             ),
                           );
                         },
@@ -144,6 +147,9 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                                   totalDue: data.totalDueAmount!
                                       .toStringAsFixed(0),
                                   currentStock: data.currentStock.toString(),
+                                  phone: data.phone,
+                                  created: data.createdAt.toString(),
+                                  bonus: data.bonusPercentage.toString(),
                                 ),
                               );
                             },

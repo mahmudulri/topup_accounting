@@ -116,7 +116,23 @@
 "PAID": "Paid",
 "WORTH": "Worth",
 "OVERVIEW": "Overview",
-"ANALYTICS": "Analytics"
+"ANALYTICS": "Analytics",
+"ACTIVE": "Active",
+"DEACTIVE": "Inactive",
+"DISABLED": "Disabled",
+"CONTACT_INFORMATION": "Contact Information",
+"MEMBER_SINCE": "Member Since",
+"PHONE": "Phone",
+"PURCHASE_SUMMARY": "Purchase Summary",
+"PAYMENT_SUMMARY": "Payment Summary",
+"TOTAL_WITH_BONUS": "Total with Bonus",
+"PAYMENT_RATIO": "Payment Ratio",
+"STOCK_INFORMATION": "Stock Information",
+"STOCK_VALUE": "Stock Value",
+"AVG_PURCHAGE_PRICE": "Avg Purchase Price",
+"LAST_PURCHASE": "Last Purchase",
+"PAY_DUE": "Pay Due",
+"PRINT_REPORT": "Print Report"
 
 
 

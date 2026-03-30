@@ -117,7 +117,23 @@
 "PAID": "مدفوع",
 "WORTH": "القيمة",
 "OVERVIEW": "نظرة عامة",
-"ANALYTICS": "التحليلات"
+"ANALYTICS": "التحليلات",
+"ACTIVE": "نشط",
+"DEACTIVE": "غير نشط",
+"DISABLED": "معطل",
+"CONTACT_INFORMATION": "معلومات الاتصال",
+"MEMBER_SINCE": "عضو منذ",
+"PHONE": "الهاتف",
+"PURCHASE_SUMMARY": "ملخص الشراء",
+"PAYMENT_SUMMARY": "ملخص الدفع",
+"TOTAL_WITH_BONUS": "الإجمالي مع المكافأة",
+"PAYMENT_RATIO": "نسبة الدفع",
+"STOCK_INFORMATION": "معلومات المخزون",
+"STOCK_VALUE": "قيمة المخزون",
+"AVG_PURCHAGE_PRICE": "متوسط سعر الشراء",
+"LAST_PURCHASE": "آخر عملية شراء",
+"PAY_DUE": "دفع المستحق",
+"PRINT_REPORT": "طباعة التقرير"
 
 
 

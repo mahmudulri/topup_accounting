@@ -117,7 +117,23 @@
 "PAID": "পরিশোধিত",
 "WORTH": "মূল্য",
 "OVERVIEW": "ওভারভিউ",
-"ANALYTICS": "অ্যানালিটিক্স"
+"ANALYTICS": "অ্যানালিটিক্স",
+"ACTIVE": "সক্রিয়",
+"DEACTIVE": "নিষ্ক্রিয়",
+"DISABLED": "বন্ধ",
+"CONTACT_INFORMATION": "যোগাযোগের তথ্য",
+"MEMBER_SINCE": "সদস্য since",
+"PHONE": "ফোন",
+"PURCHASE_SUMMARY": "ক্রয়ের সারসংক্ষেপ",
+"PAYMENT_SUMMARY": "পেমেন্ট সারসংক্ষেপ",
+"TOTAL_WITH_BONUS": "বোনাসসহ মোট",
+"PAYMENT_RATIO": "পেমেন্ট অনুপাত",
+"STOCK_INFORMATION": "স্টক তথ্য",
+"STOCK_VALUE": "স্টকের মূল্য",
+"AVG_PURCHAGE_PRICE": "গড় ক্রয় মূল্য",
+"LAST_PURCHASE": "সর্বশেষ ক্রয়",
+"PAY_DUE": "বকেয়া পরিশোধ",
+"PRINT_REPORT": "রিপোর্ট প্রিন্ট করুন"
 
 
 

@@ -117,7 +117,23 @@
 "PAID": "Ödenen",
 "WORTH": "Değer",
 "OVERVIEW": "Genel Bakış",
-"ANALYTICS": "Analizler"
+"ANALYTICS": "Analizler",
+"ACTIVE": "Aktif",
+"DEACTIVE": "Pasif",
+"DISABLED": "Devre Dışı",
+"CONTACT_INFORMATION": "İletişim Bilgileri",
+"MEMBER_SINCE": "Üyelik Başlangıcı",
+"PHONE": "Telefon",
+"PURCHASE_SUMMARY": "Satın Alma Özeti",
+"PAYMENT_SUMMARY": "Ödeme Özeti",
+"TOTAL_WITH_BONUS": "Bonuslu Toplam",
+"PAYMENT_RATIO": "Ödeme Oranı",
+"STOCK_INFORMATION": "Stok Bilgisi",
+"STOCK_VALUE": "Stok Değeri",
+"AVG_PURCHAGE_PRICE": "Ort. Satın Alma Fiyatı",
+"LAST_PURCHASE": "Son Satın Alma",
+"PAY_DUE": "Borç Öde",
+"PRINT_REPORT": "Raporu Yazdır"
 
 
 }

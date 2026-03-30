@@ -117,7 +117,23 @@
 "PAID": "پرداخت‌شده",
 "WORTH": "ارزش",
 "OVERVIEW": "نمای کلی",
-"ANALYTICS": "تحلیل‌ها"
+"ANALYTICS": "تحلیل‌ها",
+"ACTIVE": "فعال",
+"DEACTIVE": "غیرفعال",
+"DISABLED": "غیرفعال شده",
+"CONTACT_INFORMATION": "اطلاعات تماس",
+"MEMBER_SINCE": "عضو از",
+"PHONE": "تلفن",
+"PURCHASE_SUMMARY": "خلاصه خرید",
+"PAYMENT_SUMMARY": "خلاصه پرداخت",
+"TOTAL_WITH_BONUS": "مجموع با پاداش",
+"PAYMENT_RATIO": "نسبت پرداخت",
+"STOCK_INFORMATION": "اطلاعات موجودی",
+"STOCK_VALUE": "ارزش موجودی",
+"AVG_PURCHAGE_PRICE": "میانگین قیمت خرید",
+"LAST_PURCHASE": "آخرین خرید",
+"PAY_DUE": "پرداخت بدهی",
+"PRINT_REPORT": "چاپ گزارش"
 
 
 

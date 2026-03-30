@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:topup_accounting/helpers/compactnumber_helpder.dart';
+import 'package:topup_accounting/helpers/localtime_helper.dart';
 
 import '../controllers/supplier_details_controller.dart';
 import '../global_controllers/languages_controller.dart';
@@ -17,6 +18,9 @@ class SupplierViewScreen extends StatefulWidget {
   String? totalDue;
   String? totalPaid;
   String? currentStock;
+  String? phone;
+  String? created;
+  String? bonus;
   SupplierViewScreen({
     super.key,
     this.supplierID,
@@ -27,6 +31,9 @@ class SupplierViewScreen extends StatefulWidget {
     this.totalDue,
     this.totalPaid,
     this.currentStock,
+    this.phone,
+    this.created,
+    this.bonus,
   });
 
   @override
@@ -165,7 +172,9 @@ class _SupplierViewScreenState extends State<SupplierViewScreen> {
                       icon: Icons.trending_down_rounded,
                       iconColor: const Color(0xFFFF6B6B),
                       iconBgColor: const Color(0xFFFFEEEE),
-                      value: widget.totalDue.toString(),
+                      value: formatCompactNumber(
+                        double.parse(widget.totalDue.toString()),
+                      ),
                       sub: languagesController.tr("TOTAL_DUE"),
                       label: languagesController.tr("PENDING"),
                       badge: languagesController.tr("HIGH_DUE"),
@@ -220,80 +229,352 @@ class _SupplierViewScreenState extends State<SupplierViewScreen> {
                       ),
                     ],
                   ),
-                  child: DefaultTabController(
-                    length: 3,
-                    child: Column(
-                      children: [
-                        // 🔹 Tab Bar
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(color: Colors.grey.shade200),
-                            ),
-                          ),
-                          child: TabBar(
-                            labelColor: AppColors.primaryColor,
-                            unselectedLabelColor: Colors.grey,
-                            indicatorColor: AppColors.primaryColor,
-                            tabs: [
-                              Tab(text: languagesController.tr("OVERVIEW")),
-                              Tab(text: languagesController.tr("TRANSACTIONS")),
-                              Tab(text: languagesController.tr("ANALYTICS")),
-                            ],
-                          ),
-                        ),
-
-                        // 🔹 Tab Views
-                        Expanded(
-                          child: TabBarView(
-                            children: [
-                              ListView(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      height: 200,
-                                      width: screenWidth,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.cardBg,
-                                        borderRadius: BorderRadius.circular(16),
-                                        border: Border.all(
-                                          width: 1,
-                                          color: AppColors.scaffoldBg,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black.withOpacity(
-                                              0.05,
-                                            ),
-                                            blurRadius: 12,
-                                            offset: Offset(0, 4),
-                                          ),
-                                        ],
+                  child: Obx(
+                    () => supplierDetailsController.isLoading.value == false
+                        ? DefaultTabController(
+                            length: 3,
+                            child: Column(
+                              children: [
+                                // 🔹 Tab Bar
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: Colors.grey.shade200,
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
-
-                              // Transactions Tab
-                              Center(
-                                child: KText(
-                                  text: languagesController.tr("TRANSACTIONS"),
+                                  child: TabBar(
+                                    labelColor: AppColors.primaryColor,
+                                    unselectedLabelColor: Colors.grey,
+                                    indicatorColor: AppColors.primaryColor,
+                                    tabs: [
+                                      Tab(
+                                        text: languagesController.tr(
+                                          "OVERVIEW",
+                                        ),
+                                      ),
+                                      Tab(
+                                        text: languagesController.tr(
+                                          "TRANSACTIONS",
+                                        ),
+                                      ),
+                                      Tab(
+                                        text: languagesController.tr(
+                                          "ANALYTICS",
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
 
-                              // Analytics Tab
-                              Center(
-                                child: KText(
-                                  text: languagesController.tr("ANALYTICS"),
+                                // 🔹 Tab Views
+                                Expanded(
+                                  child: TabBarView(
+                                    children: [
+                                      ListView(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Container(
+                                              width: screenWidth,
+                                              decoration: BoxDecoration(
+                                                color: AppColors.cardBg,
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                                border: Border.all(
+                                                  width: 1,
+                                                  color: AppColors.scaffoldBg,
+                                                ),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black
+                                                        .withOpacity(0.05),
+                                                    blurRadius: 12,
+                                                    offset: Offset(0, 4),
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(
+                                                  16,
+                                                ),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    // Title
+                                                    KText(
+                                                      text: languagesController
+                                                          .tr(
+                                                            "CONTACT_INFORMATION",
+                                                          ),
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: AppColors.bodyText,
+                                                    ),
+                                                    SizedBox(height: 12),
+
+                                                    // Phone Row
+                                                    Row(
+                                                      children: [
+                                                        CircleAvatar(
+                                                          radius: 20,
+                                                          backgroundColor:
+                                                              AppColors
+                                                                  .primaryColor
+                                                                  .withValues(
+                                                                    alpha: 0.12,
+                                                                  ),
+                                                          child: Icon(
+                                                            Icons.call,
+                                                            size: 16,
+                                                            color: AppColors
+                                                                .primaryColor,
+                                                          ),
+                                                        ),
+                                                        SizedBox(width: 10),
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            KText(
+                                                              text:
+                                                                  languagesController
+                                                                      .tr(
+                                                                        "PHONE",
+                                                                      ),
+                                                              fontSize: 12,
+                                                              color: AppColors
+                                                                  .bodyText,
+                                                            ),
+                                                            Text(
+                                                              widget.phone
+                                                                  .toString(),
+                                                              style: TextStyle(
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(height: 12),
+
+                                                    Divider(
+                                                      height: 1,
+                                                      color:
+                                                          AppColors.scaffoldBg,
+                                                    ),
+                                                    SizedBox(height: 12),
+
+                                                    // Company Row
+                                                    Row(
+                                                      children: [
+                                                        CircleAvatar(
+                                                          radius: 20,
+                                                          backgroundColor:
+                                                              AppColors
+                                                                  .primaryColor
+                                                                  .withValues(
+                                                                    alpha: 0.12,
+                                                                  ),
+                                                          child: Icon(
+                                                            Icons.business,
+                                                            size: 16,
+                                                            color: AppColors
+                                                                .primaryColor,
+                                                          ),
+                                                        ),
+                                                        SizedBox(width: 10),
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            KText(
+                                                              text: languagesController
+                                                                  .tr(
+                                                                    "COMPANY",
+                                                                  ),
+                                                              fontSize: 12,
+                                                              color: AppColors
+                                                                  .bodyText,
+                                                            ),
+                                                            Text(
+                                                              widget.company
+                                                                  .toString(),
+                                                              style: TextStyle(
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(height: 12),
+
+                                                    Divider(
+                                                      height: 1,
+                                                      color:
+                                                          AppColors.scaffoldBg,
+                                                    ),
+                                                    SizedBox(height: 12),
+
+                                                    // Member Since & Bonus Row
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Row(
+                                                            children: [
+                                                              CircleAvatar(
+                                                                radius: 16,
+                                                                backgroundColor: AppColors
+                                                                    .primaryColor
+                                                                    .withValues(
+                                                                      alpha:
+                                                                          0.12,
+                                                                    ),
+                                                                child: Icon(
+                                                                  Icons
+                                                                      .calendar_today,
+                                                                  size: 14,
+                                                                  color: AppColors
+                                                                      .primaryColor,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 8,
+                                                              ),
+                                                              Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  KText(
+                                                                    text: languagesController.tr(
+                                                                      "MEMBER_SINCE",
+                                                                    ),
+                                                                    fontSize:
+                                                                        12,
+                                                                    color: AppColors
+                                                                        .bodyText,
+                                                                  ),
+                                                                  Text(
+                                                                    convertToDate(
+                                                                      widget
+                                                                          .created
+                                                                          .toString(),
+                                                                    ),
+                                                                    style: TextStyle(
+                                                                      fontSize:
+                                                                          13,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          child: Row(
+                                                            children: [
+                                                              CircleAvatar(
+                                                                radius: 16,
+                                                                backgroundColor: AppColors
+                                                                    .primaryColor
+                                                                    .withValues(
+                                                                      alpha:
+                                                                          0.12,
+                                                                    ),
+                                                                child: Icon(
+                                                                  Icons
+                                                                      .star_rounded,
+                                                                  size: 14,
+                                                                  color: AppColors
+                                                                      .primaryColor,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 8,
+                                                              ),
+                                                              Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  KText(
+                                                                    text:
+                                                                        languagesController.tr(
+                                                                          "BONUS",
+                                                                        ) +
+                                                                        " % ",
+                                                                    fontSize:
+                                                                        12,
+                                                                    color: AppColors
+                                                                        .bodyText,
+                                                                  ),
+                                                                  Text(
+                                                                    widget.bonus
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                      fontSize:
+                                                                          13,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+
+                                      // Transactions Tab
+                                      Center(
+                                        child: KText(
+                                          text: languagesController.tr(
+                                            "TRANSACTIONS",
+                                          ),
+                                        ),
+                                      ),
+
+                                      // Analytics Tab
+                                      Center(
+                                        child: KText(
+                                          text: languagesController.tr(
+                                            "ANALYTICS",
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                              ],
+                            ),
+                          )
+                        : Center(child: CircularProgressIndicator()),
                   ),
                 ),
               ),
