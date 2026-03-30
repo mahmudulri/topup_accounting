@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:topup_accounting/helpers/compactnumber_helpder.dart';
 import 'package:topup_accounting/helpers/localtime_helper.dart';
-
 import '../controllers/supplier_details_controller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../utils/colors.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/supplier_balance_widget.dart';
+import '../widgets/timeago_helper.dart';
 
 class SupplierViewScreen extends StatefulWidget {
   String? supplierID;
@@ -248,6 +248,7 @@ class _SupplierViewScreenState extends State<SupplierViewScreen> {
                                     labelColor: AppColors.primaryColor,
                                     unselectedLabelColor: Colors.grey,
                                     indicatorColor: AppColors.primaryColor,
+                                    labelStyle: TextStyle(fontSize: 12),
                                     tabs: [
                                       Tab(
                                         text: languagesController.tr(
@@ -552,12 +553,144 @@ class _SupplierViewScreenState extends State<SupplierViewScreen> {
                                       ),
 
                                       // Transactions Tab
-                                      Center(
-                                        child: KText(
-                                          text: languagesController.tr(
-                                            "TRANSACTIONS",
-                                          ),
-                                        ),
+                                      ListView.builder(
+                                        itemCount: supplierDetailsController
+                                            .supplierDetails
+                                            .value
+                                            .allTransactions!
+                                            .data!
+                                            .length,
+                                        itemBuilder: (context, index) {
+                                          final data = supplierDetailsController
+                                              .supplierDetails
+                                              .value
+                                              .allTransactions!
+                                              .data![index];
+
+                                          // Static sample data — replace with real fields from `data`
+                                          final bool isPurchase =
+                                              index % 2 ==
+                                              0; // replace with: data.type == 'purchase'
+                                          final String title =
+                                              data.transactionType.toString() ==
+                                                  "purchase"
+                                              ? 'Purchase'
+                                              : 'Payment';
+                                          final String amount = isPurchase
+                                              ? '-\$20,000'
+                                              : '+\$500';
+                                          final String? paidAmount = isPurchase
+                                              ? 'Paid: \$13,000'
+                                              : null;
+                                          final Color amountColor = isPurchase
+                                              ? Colors.red
+                                              : Colors.green;
+                                          final Color iconBgColor = isPurchase
+                                              ? const Color(0xFFDCE8FF)
+                                              : const Color(0xFFFFEDD8);
+                                          final IconData icon = isPurchase
+                                              ? Icons.south_west
+                                              : Icons.north_east;
+                                          final Color iconColor = isPurchase
+                                              ? Colors.blue
+                                              : Colors.orange;
+
+                                          return Container(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 16,
+                                              vertical: 14,
+                                            ),
+                                            decoration: const BoxDecoration(
+                                              color: Colors.white,
+                                              border: Border(
+                                                bottom: BorderSide(
+                                                  color: Color(0xFFEEEEEE),
+                                                  width: 1,
+                                                ),
+                                              ),
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                // Left: icon + title + time
+                                                Row(
+                                                  children: [
+                                                    Container(
+                                                      width: 40,
+                                                      height: 40,
+                                                      decoration: BoxDecoration(
+                                                        color: iconBgColor,
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      child: Icon(
+                                                        icon,
+                                                        color: iconColor,
+                                                        size: 18,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 12),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        KText(
+                                                          text: title,
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.black87,
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 2,
+                                                        ),
+                                                        Text(
+                                                          TimeAgoHelper.getDetailedDifference(
+                                                            data.createdAt
+                                                                .toString(),
+                                                          ),
+                                                          style: TextStyle(
+                                                            fontSize: 10,
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+
+                                                // Right: amount + paid
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    Text(
+                                                      amount,
+                                                      style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color: amountColor,
+                                                      ),
+                                                    ),
+                                                    if (paidAmount != null) ...[
+                                                      const SizedBox(height: 2),
+                                                      Text(
+                                                        paidAmount,
+                                                        style: const TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.grey,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
                                       ),
 
                                       // Analytics Tab
