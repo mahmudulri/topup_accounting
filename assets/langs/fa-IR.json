@@ -133,7 +133,9 @@
 "AVG_PURCHAGE_PRICE": "میانگین قیمت خرید",
 "LAST_PURCHASE": "آخرین خرید",
 "PAY_DUE": "پرداخت بدهی",
-"PRINT_REPORT": "چاپ گزارش"
+"PRINT_REPORT": "چاپ گزارش",
+"THIS_IS_THE_AMOUNT_YOU_PAY_TO_SUPPLIER": "این مبلغی است که به تأمین‌کننده می‌پردازید",
+"CANCEL": "لغو"
 
 
 

@@ -132,7 +132,9 @@
 "AVG_PURCHAGE_PRICE": "Avg Purchase Price",
 "LAST_PURCHASE": "Last Purchase",
 "PAY_DUE": "Pay Due",
-"PRINT_REPORT": "Print Report"
+"PRINT_REPORT": "Print Report",
+"THIS_IS_THE_AMOUNT_YOU_PAY_TO_SUPPLIER": "This is the amount you pay to supplier",
+"CANCEL": "Cancel"
 
 
 

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:topup_accounting/controllers/buytop_up_controller.dart';
+import 'package:topup_accounting/utils/colors.dart';
+import 'package:topup_accounting/widgets/custom_text.dart';
+
+import '../global_controllers/languages_controller.dart';
 
 class BuyTopupSheet extends StatelessWidget {
   final String title;
   final String subtitle;
 
-  const BuyTopupSheet({super.key, required this.title, required this.subtitle});
-
+  BuyTopupSheet({super.key, required this.title, required this.subtitle});
+  final languagesController = Get.find<LanguagesController>();
   @override
   Widget build(BuildContext context) {
     final TextEditingController baseAmountController = TextEditingController();
@@ -20,7 +26,7 @@ class BuyTopupSheet extends StatelessWidget {
         ),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+            padding: EdgeInsets.fromLTRB(20, 16, 20, 24),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +35,7 @@ class BuyTopupSheet extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(8),
+                      padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Colors.blue.shade50,
                         shape: BoxShape.circle,
@@ -40,14 +46,14 @@ class BuyTopupSheet extends StatelessWidget {
                         size: 22,
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             title, // 🔥 dynamic
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
                               color: Colors.black87,
@@ -64,115 +70,170 @@ class BuyTopupSheet extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.close, color: Colors.black54),
+                      icon: Icon(Icons.close, color: Colors.black54),
                       onPressed: () => Navigator.pop(context),
                     ),
                   ],
                 ),
 
-                const Divider(height: 24),
+                Divider(height: 24),
 
                 /// ✅ EVERYTHING BELOW EXACT SAME (NO CHANGE)
-                const Text(
-                  'Base Amount *',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                KText(
+                  text: languagesController.tr("BASE_AMOUNT"),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 TextField(
                   controller: baseAmountController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: '0.00',
-                    prefixIcon: const Icon(
-                      Icons.attach_money,
-                      color: Colors.grey,
-                    ),
+                    prefixIcon: Icon(Icons.attach_money, color: Colors.grey),
                     filled: true,
-                    fillColor: Colors.grey.shade100,
-                    border: OutlineInputBorder(
+                    fillColor: Colors.white,
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
+                      borderSide: BorderSide(
+                        color: AppColors.borderColor,
+                        width: 1,
+                      ),
+                    ),
+
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: AppColors.primaryColor,
+                        width: 1,
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  'This is the amount you pay to supplier',
-                  style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                SizedBox(height: 4),
+                KText(
+                  text: languagesController.tr(
+                    "THIS_IS_THE_AMOUNT_YOU_PAY_TO_SUPPLIER",
+                  ),
+                  fontSize: 12,
+                  color: Colors.grey.shade600,
                 ),
-                const SizedBox(height: 16),
 
-                const Text(
-                  'Paid Amount',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                SizedBox(height: 16),
+
+                KText(
+                  text: languagesController.tr("PAID_AMOUNT"),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 TextField(
                   controller: paidAmountController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: '0.00',
-                    prefixIcon: const Icon(
-                      Icons.attach_money,
-                      color: Colors.grey,
-                    ),
+                    prefixIcon: Icon(Icons.attach_money, color: Colors.grey),
                     filled: true,
-                    fillColor: Colors.grey.shade100,
-                    border: OutlineInputBorder(
+                    fillColor: Colors.white,
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
+                      borderSide: BorderSide(
+                        color: AppColors.borderColor,
+                        width: 1,
+                      ),
+                    ),
+
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: AppColors.primaryColor,
+                        width: 1,
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  'Amount paid now (optional)',
-                  style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                SizedBox(height: 4),
+                KText(
+                  text:
+                      languagesController.tr("AMOUNT_PAID_NOW") +
+                      "(${languagesController.tr("OPTIONAL")})",
+                  fontSize: 12,
+                  color: Colors.grey.shade600,
                 ),
-                const SizedBox(height: 16),
 
-                const Text(
-                  'Reference Number',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                SizedBox(height: 16),
+
+                KText(
+                  text:
+                      languagesController.tr("REFERENCE_NUMBER") +
+                      "(${languagesController.tr("OPTIONAL")})",
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 TextField(
                   controller: referenceController,
                   decoration: InputDecoration(
-                    hintText: 'Enter reference number (optional)',
-                    prefixIcon: const Icon(
+                    hintText: languagesController.tr("ENTER_REFERENCE_NUMBER"),
+                    prefixIcon: Icon(
                       Icons.description_outlined,
                       color: Colors.grey,
                     ),
+
                     filled: true,
-                    fillColor: Colors.grey.shade100,
-                    border: OutlineInputBorder(
+                    fillColor: Colors.white,
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
+                      borderSide: BorderSide(
+                        color: AppColors.borderColor,
+                        width: 1,
+                      ),
+                    ),
+
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: AppColors.primaryColor,
+                        width: 1,
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
 
-                const Text(
-                  'Notes',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                KText(
+                  text: languagesController.tr("NOTES"),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 TextField(
                   controller: notesController,
                   maxLines: 3,
                   decoration: InputDecoration(
-                    hintText: 'Enter notes (optional)',
+                    hintText:
+                        languagesController.tr("ENTER_NOTES") +
+                        "(${languagesController.tr("OPTIONAL")})",
                     filled: true,
-                    fillColor: Colors.grey.shade100,
-                    border: OutlineInputBorder(
+                    fillColor: Colors.white,
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
+                      borderSide: BorderSide(
+                        color: AppColors.borderColor,
+                        width: 1,
+                      ),
+                    ),
+
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: AppColors.primaryColor,
+                        width: 1,
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
 
                 Row(
                   children: [
@@ -180,41 +241,40 @@ class BuyTopupSheet extends StatelessWidget {
                       child: OutlinedButton(
                         onPressed: () => Navigator.pop(context),
                         style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          padding: EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(12),
                           ),
                           side: BorderSide(color: Colors.grey.shade300),
                         ),
-                        child: const Text(
-                          'Cancel',
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        child: KText(
+                          text: languagesController.tr("CANCEL"),
+                          color: Colors.black87,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
                         ),
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 5),
                     Expanded(
                       child: ElevatedButton.icon(
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.shopping_cart_outlined,
                           size: 18,
                           color: Colors.white,
                         ),
-                        label: const Text(
-                          'Confirm Purchase',
-                          style: TextStyle(color: Colors.white),
+                        label: Text(
+                          languagesController.tr("CONFIRM_PURCHASE"),
+                          style: TextStyle(color: Colors.white, fontSize: 12),
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF6ABFB0),
-                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          backgroundColor: Color(0xFF6ABFB0),
+                          padding: EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(12),
                           ),
                           elevation: 0,
                         ),

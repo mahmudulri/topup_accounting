@@ -133,7 +133,9 @@
 "AVG_PURCHAGE_PRICE": "متوسط سعر الشراء",
 "LAST_PURCHASE": "آخر عملية شراء",
 "PAY_DUE": "دفع المستحق",
-"PRINT_REPORT": "طباعة التقرير"
+"PRINT_REPORT": "طباعة التقرير",
+"THIS_IS_THE_AMOUNT_YOU_PAY_TO_SUPPLIER": "هذا هو المبلغ الذي تدفعه للمورد",
+"CANCEL": "إلغاء"
 
 
 

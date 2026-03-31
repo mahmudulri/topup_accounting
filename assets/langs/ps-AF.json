@@ -133,7 +133,9 @@
 "AVG_PURCHAGE_PRICE": "اوسط د پېرود بیه",
 "LAST_PURCHASE": "وروستی پېرود",
 "PAY_DUE": "پاتې تادیه",
-"PRINT_REPORT": "راپور چاپ کړئ"
+"PRINT_REPORT": "راپور چاپ کړئ",
+"THIS_IS_THE_AMOUNT_YOU_PAY_TO_SUPPLIER": "دا هغه اندازه ده چې تاسو یې عرضه کوونکي ته ورکوئ",
+"CANCEL": "لغوه"
 
 
 

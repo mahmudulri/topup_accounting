@@ -133,7 +133,9 @@
 "AVG_PURCHAGE_PRICE": "গড় ক্রয় মূল্য",
 "LAST_PURCHASE": "সর্বশেষ ক্রয়",
 "PAY_DUE": "বকেয়া পরিশোধ",
-"PRINT_REPORT": "রিপোর্ট প্রিন্ট করুন"
+"PRINT_REPORT": "রিপোর্ট প্রিন্ট করুন",
+"THIS_IS_THE_AMOUNT_YOU_PAY_TO_SUPPLIER": "এটি সেই পরিমাণ যা আপনি সরবরাহকারীকে প্রদান করেন",
+"CANCEL": "বাতিল"
 
 
 

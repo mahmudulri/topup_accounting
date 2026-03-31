@@ -133,7 +133,9 @@
 "AVG_PURCHAGE_PRICE": "Ort. Satın Alma Fiyatı",
 "LAST_PURCHASE": "Son Satın Alma",
 "PAY_DUE": "Borç Öde",
-"PRINT_REPORT": "Raporu Yazdır"
+"PRINT_REPORT": "Raporu Yazdır",
+"THIS_IS_THE_AMOUNT_YOU_PAY_TO_SUPPLIER": "Bu, tedarikçiye ödediğiniz tutardır",
+"CANCEL": "İptal"
 
 
 }

@@ -137,9 +137,13 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                             onBuy: () {
                               showBuyTopupSheet(
                                 context: context,
-                                title: "Buy Topup",
+                                title: languagesController.tr("BUY_TOP_UP"),
                                 subtitle:
-                                    "Grammeenphone · Grammen phone BD (7% Bonus)",
+                                    data.name.toString() +
+                                    " - " +
+                                    data.company.toString() +
+                                    " " +
+                                    "(${data.bonusPercentage} % ${languagesController.tr("BONUS")})",
                               );
                             },
                             onView: () {
