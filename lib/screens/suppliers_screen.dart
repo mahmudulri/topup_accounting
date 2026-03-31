@@ -5,6 +5,7 @@ import 'package:topup_accounting/helpers/localtime_helper.dart';
 import '../controllers/supplierlist_controller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../utils/colors.dart';
+import '../widgets/buy_topup_sheet.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/suppliercard.dart';
 import 'supplier_view_screen.dart';
@@ -116,9 +117,8 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                             bonusPercentage: double.parse(
                               data.bonusPercentage.toString(),
                             ),
-                            totalBuyAmount: formatCompactNumber(
-                              double.parse(data.totalBuyAmount.toString()),
-                            ),
+                            totalBuyAmount: data.totalBuyAmount.toString(),
+                            totalPaidAmount: data.totalPaidAmount.toString(),
                             totalBuyTopupWithBonus: formatCompactNumber(
                               double.parse(
                                 data.totalBuyTopupWithBonus.toString(),
@@ -134,7 +134,14 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                                 .toStringAsFixed(0),
                           ),
                           actions: SupplierCardActions(
-                            onBuy: () {},
+                            onBuy: () {
+                              showBuyTopupSheet(
+                                context: context,
+                                title: "Buy Topup",
+                                subtitle:
+                                    "Grammeenphone · Grammen phone BD (7% Bonus)",
+                              );
+                            },
                             onView: () {
                               Get.to(
                                 () => SupplierViewScreen(
@@ -161,73 +168,6 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                           ),
                         ),
                       );
-                      // return Container(
-                      //   height: 250,
-                      //   width: screenWidth,
-                      //   decoration: BoxDecoration(
-                      //     border: Border.all(width: 1, color: AppColors.borderColor),
-                      //   ),
-                      //   child: Padding(
-                      //     padding: EdgeInsets.all(12.0),
-                      //     child: Column(
-                      //       children: [
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [
-                      //             Text("Reseller Name"),
-                      //             Text(data!.name.toString()),
-                      //           ],
-                      //         ),
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [
-                      //             Text("Address"),
-                      //             Text(data.company.toString()),
-                      //           ],
-                      //         ),
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [Text("Contact"), Text(data.phone.toString())],
-                      //         ),
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [
-                      //             Text("Bonus"),
-                      //             Text(data.bonusPercentage.toString()),
-                      //           ],
-                      //         ),
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [
-                      //             Text("Purchase"),
-                      //             Text(data.totalBuyAmount.toString()),
-                      //           ],
-                      //         ),
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [
-                      //             Text("Purchase With bonus"),
-                      //             Text(data.totalBuyTopupWithBonus.toString()),
-                      //           ],
-                      //         ),
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [
-                      //             Text("Stock"),
-                      //             Text(data.currentStock.toString()),
-                      //           ],
-                      //         ),
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [
-                      //             Text("Due"),
-                      //             Text(data.totalDueAmount.toString()),
-                      //           ],
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // );
                     },
                   )
                 : Center(child: CircularProgressIndicator()),
@@ -236,4 +176,22 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
       ),
     );
   }
+}
+
+void showBuyTopupSheet({
+  required BuildContext context,
+  required String title,
+  required String subtitle,
+}) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.white,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (context) {
+      return BuyTopupSheet(title: title, subtitle: subtitle);
+    },
+  );
 }

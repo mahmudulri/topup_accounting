@@ -5,12 +5,14 @@ import 'package:topup_accounting/screens/buytopup_screen.dart';
 import 'package:topup_accounting/widgets/drawer.dart';
 
 import '../controllers/dashboard_controller.dart';
+import '../controllers/myipcontroller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../global_controllers/scaffold_controller.dart';
 import '../helpers/compactnumber_helpder.dart';
 import '../utils/colors.dart';
 import '../widgets/balance_widget.dart';
 import '../widgets/custom_appbar.dart';
+import 'myipdetails_screen.dart';
 import 'sell_topup_screen.dart';
 
 class Dashboard extends StatefulWidget {
@@ -58,8 +60,8 @@ class _DashboardState extends State<Dashboard> {
         ],
       ),
       backgroundColor: AppColors.cardBg,
-      appBar: AppTopBar(),
 
+      appBar: AppTopBar(),
       body: Container(
         height: screenHeight,
         width: screenWidth,
@@ -145,10 +147,13 @@ class _DashboardState extends State<Dashboard> {
                                   ),
                                 ],
                               ),
-                              child: Icon(
-                                Icons.sync_rounded,
-                                color: AppColors.labelText,
-                                size: 20,
+                              child: GestureDetector(
+                                onTap: () {},
+                                child: Icon(
+                                  Icons.sync_rounded,
+                                  color: AppColors.labelText,
+                                  size: 20,
+                                ),
                               ),
                             ),
                           ),

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../global_controllers/languages_controller.dart';
 import '../global_controllers/scaffold_controller.dart';
+import '../screens/myipdetails_screen.dart';
 import '../utils/colors.dart';
 import 'custom_text.dart';
 import 'languagepicker.dart';
@@ -72,6 +73,7 @@ class _AppTopBarState extends State<AppTopBar> {
     super.dispose();
   }
 
+  String formattedDate = DateFormat('EEEE, MMMM d, y').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
     final lang = Get.find<LanguagesController>();
@@ -119,14 +121,19 @@ class _AppTopBarState extends State<AppTopBar> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              KText(
-                text: lang.tr("DASHBOARD"),
-                fontSize: 17,
-                fontWeight: FontWeight.w700,
-                color: AppColors.titleText,
+              GestureDetector(
+                onTap: () {
+                  Get.to(() => MyipdetailsScreen());
+                },
+                child: KText(
+                  text: lang.tr("DASHBOARD"),
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.titleText,
+                ),
               ),
               KText(
-                text: "Tuesday, March 17, 2026",
+                text: DateFormat('EEEE, MMMM d, y').format(DateTime.now()),
                 fontSize: 10,
                 fontWeight: FontWeight.w700,
                 color: AppColors.subtitleText,

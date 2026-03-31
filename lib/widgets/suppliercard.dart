@@ -5,6 +5,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:topup_accounting/controllers/selltop_up_controller.dart';
+import 'package:topup_accounting/helpers/compactnumber_helpder.dart';
 import 'package:topup_accounting/utils/colors.dart';
 
 // ───────────────────────────────────────────────────────────────
@@ -36,6 +37,7 @@ class SupplierCardData {
   final String lastContact;
   final double bonusPercentage;
   final String totalBuyAmount;
+  final String totalPaidAmount;
   final String totalBuyTopupWithBonus;
   final String currentStock;
   final String totalDueAmount;
@@ -48,6 +50,7 @@ class SupplierCardData {
     required this.lastContact,
     required this.bonusPercentage,
     required this.totalBuyAmount,
+    required this.totalPaidAmount,
     required this.totalBuyTopupWithBonus,
     required this.currentStock,
     required this.totalDueAmount,
@@ -102,7 +105,10 @@ class SupplierCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _TopBand(data: data),
-            _BonusRow(bonusPercentage: data.bonusPercentage),
+            RatioRow(
+              totalpaidAmount: double.parse(data.totalPaidAmount),
+              totalBuyAmount: double.parse(data.totalBuyAmount),
+            ),
             _StatsRow(data: data),
             _InfoRows(data: data),
 
@@ -197,13 +203,46 @@ class _TopBand extends StatelessWidget {
 // ───────────────────────────────────────────────────────────────
 // 5. BONUS ROW
 // ───────────────────────────────────────────────────────────────
-class _BonusRow extends StatelessWidget {
-  final double bonusPercentage;
-  const _BonusRow({required this.bonusPercentage});
+class RatioRow extends StatelessWidget {
+  final double totalpaidAmount;
+  final double totalBuyAmount;
+
+  const RatioRow({
+    super.key,
+    required this.totalpaidAmount,
+    required this.totalBuyAmount,
+  });
 
   @override
   Widget build(BuildContext context) {
     final div = Colors.black.withOpacity(0.07);
+
+    // ✅ Safe calculation
+    double ratio = 0;
+    if (totalBuyAmount > 0) {
+      ratio = (totalpaidAmount / totalBuyAmount) * 100;
+    }
+
+    // ✅ Clamp ratio (0–100)
+    ratio = ratio.clamp(0, 100);
+
+    double progressValue = ratio / 100;
+
+    // ✅ Dynamic color based on ratio
+    Color progressColor;
+    Color bgColor;
+
+    if (ratio < 50) {
+      progressColor = Colors.red;
+      bgColor = const Color(0xFFFCEBEB);
+    } else if (ratio < 80) {
+      progressColor = _kAmberBar;
+      bgColor = _kAmberBg;
+    } else {
+      progressColor = Colors.green;
+      bgColor = const Color(0xFFE9F7EF);
+    }
+
     return Container(
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(color: div, width: 0.5)),
@@ -212,37 +251,43 @@ class _BonusRow extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            languagesController.tr("BONUS_RATE"),
+            languagesController.tr("PAYMENT_RATIO"),
             style: TextStyle(
               fontSize: 12,
               color: Theme.of(context).textTheme.bodySmall?.color,
             ),
           ),
+
           const SizedBox(width: 10),
+
+          // ✅ Progress Bar
           Expanded(
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(3),
+              borderRadius: BorderRadius.circular(4),
               child: LinearProgressIndicator(
-                value: (bonusPercentage / 100).clamp(0.0, 1.0),
+                value: progressValue,
                 minHeight: 6,
                 backgroundColor: Colors.black.withOpacity(0.07),
-                valueColor: const AlwaysStoppedAnimation<Color>(_kAmberBar),
+                valueColor: AlwaysStoppedAnimation<Color>(progressColor),
               ),
             ),
           ),
+
           const SizedBox(width: 10),
+
+          // ✅ Percentage Box
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
-              color: _kAmberBg,
+              color: bgColor,
               borderRadius: BorderRadius.circular(6),
             ),
             child: Text(
-              '${bonusPercentage.toStringAsFixed(0)}%',
-              style: const TextStyle(
-                color: _kAmberText,
+              '${ratio.toStringAsFixed(0)}%',
+              style: TextStyle(
+                color: progressColor,
                 fontSize: 13,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
@@ -271,7 +316,7 @@ class _StatsRow extends StatelessWidget {
           children: [
             _StatCell(
               label: languagesController.tr("PURCHASE"),
-              value: data.totalBuyAmount,
+              value: formatCompactNumber(double.parse(data.totalBuyAmount)),
               hint:
                   '+${data.totalBuyTopupWithBonus} ${languagesController.tr("WITH_BONUS")}',
               valueColor: _kBlueVal,
@@ -371,7 +416,7 @@ class _InfoRows extends StatelessWidget {
         children: [
           PaidRow(
             label: languagesController.tr("TOTAL_PAID"),
-            value: data.totalDueAmount,
+            value: data.totalPaidAmount,
           ),
           _InfoRow(
             label: languagesController.tr("COMPANY"),
