@@ -135,7 +135,16 @@
 "PAY_DUE": "বকেয়া পরিশোধ",
 "PRINT_REPORT": "রিপোর্ট প্রিন্ট করুন",
 "THIS_IS_THE_AMOUNT_YOU_PAY_TO_SUPPLIER": "এটি সেই পরিমাণ যা আপনি সরবরাহকারীকে প্রদান করেন",
-"CANCEL": "বাতিল"
+"CANCEL": "বাতিল",
+"ADD_A_NEW_SUPPLIER_TO_YOUR_NETWORK": "আপনার নেটওয়ার্কে নতুন সরবরাহকারী যোগ করুন",
+"SUPPLIER_NAME": "সরবরাহকারীর নাম",
+"ENTER_SUPPLIER_NAME": "সরবরাহকারীর নাম লিখুন",
+"ENTER_PHONE_NUMBER": "ফোন নম্বর লিখুন",
+"INCLUDE_COUNTRY_CODE_E.G_+93": "দেশের কোড যুক্ত করুন (যেমন +93)",
+"COMPANY_NAME": "কোম্পানির নাম",
+"ENTER_COMPANY_NAME": "কোম্পানির নাম লিখুন",
+"PERCENTAGE_OF_BONUS_ON_EACH_PURCHASE": "প্রতি ক্রয়ে বোনাসের শতাংশ",
+"SUBMIT": "সাবমিট"
 
 
 

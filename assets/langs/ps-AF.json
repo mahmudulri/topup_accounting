@@ -135,7 +135,16 @@
 "PAY_DUE": "پاتې تادیه",
 "PRINT_REPORT": "راپور چاپ کړئ",
 "THIS_IS_THE_AMOUNT_YOU_PAY_TO_SUPPLIER": "دا هغه اندازه ده چې تاسو یې عرضه کوونکي ته ورکوئ",
-"CANCEL": "لغوه"
+"CANCEL": "لغوه",
+"ADD_A_NEW_SUPPLIER_TO_YOUR_NETWORK": "خپل شبکې ته نوی عرضه کوونکی اضافه کړئ",
+"SUPPLIER_NAME": "د عرضه کوونکي نوم",
+"ENTER_SUPPLIER_NAME": "د عرضه کوونکي نوم دننه کړئ",
+"ENTER_PHONE_NUMBER": "د تلیفون شمېره دننه کړئ",
+"INCLUDE_COUNTRY_CODE_E.G_+93": "د هېواد کوډ شامل کړئ (لکه +93)",
+"COMPANY_NAME": "د شرکت نوم",
+"ENTER_COMPANY_NAME": "د شرکت نوم دننه کړئ",
+"PERCENTAGE_OF_BONUS_ON_EACH_PURCHASE": "په هر پېرود کې د بونس سلنه",
+"SUBMIT": "وسپارئ"
 
 
 

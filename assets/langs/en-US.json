@@ -134,7 +134,16 @@
 "PAY_DUE": "Pay Due",
 "PRINT_REPORT": "Print Report",
 "THIS_IS_THE_AMOUNT_YOU_PAY_TO_SUPPLIER": "This is the amount you pay to supplier",
-"CANCEL": "Cancel"
+"CANCEL": "Cancel",
+"ADD_A_NEW_SUPPLIER_TO_YOUR_NETWORK": "Add a New Supplier to Your Network",
+"SUPPLIER_NAME": "Supplier Name",
+"ENTER_SUPPLIER_NAME": "Enter Supplier Name",
+"ENTER_PHONE_NUMBER": "Enter Phone Number",
+"INCLUDE_COUNTRY_CODE_E.G_+93": "Include country code (e.g. +93)",
+"COMPANY_NAME": "Company Name",
+"ENTER_COMPANY_NAME": "Enter Company Name",
+"PERCENTAGE_OF_BONUS_ON_EACH_PURCHASE": "Bonus Percentage on Each Purchase",
+"SUBMIT": "Submit"
 
 
 

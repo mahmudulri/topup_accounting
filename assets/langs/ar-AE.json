@@ -135,7 +135,16 @@
 "PAY_DUE": "دفع المستحق",
 "PRINT_REPORT": "طباعة التقرير",
 "THIS_IS_THE_AMOUNT_YOU_PAY_TO_SUPPLIER": "هذا هو المبلغ الذي تدفعه للمورد",
-"CANCEL": "إلغاء"
+"CANCEL": "إلغاء",
+"ADD_A_NEW_SUPPLIER_TO_YOUR_NETWORK": "أضف موردًا جديدًا إلى شبكتك",
+"SUPPLIER_NAME": "اسم المورد",
+"ENTER_SUPPLIER_NAME": "أدخل اسم المورد",
+"ENTER_PHONE_NUMBER": "أدخل رقم الهاتف",
+"INCLUDE_COUNTRY_CODE_E.G_+93": "أدخل رمز الدولة (مثل +93)",
+"COMPANY_NAME": "اسم الشركة",
+"ENTER_COMPANY_NAME": "أدخل اسم الشركة",
+"PERCENTAGE_OF_BONUS_ON_EACH_PURCHASE": "نسبة المكافأة لكل عملية شراء",
+"SUBMIT": "إرسال"
 
 
 

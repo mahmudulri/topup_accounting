@@ -99,7 +99,7 @@ class BuyTopupSheet extends StatelessWidget {
                     filled: true,
                     fillColor: Colors.white,
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(18),
                       borderSide: BorderSide(
                         color: AppColors.borderColor,
                         width: 1,
@@ -107,7 +107,7 @@ class BuyTopupSheet extends StatelessWidget {
                     ),
 
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(18),
                       borderSide: BorderSide(
                         color: AppColors.primaryColor,
                         width: 1,
@@ -141,7 +141,7 @@ class BuyTopupSheet extends StatelessWidget {
                     filled: true,
                     fillColor: Colors.white,
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(18),
                       borderSide: BorderSide(
                         color: AppColors.borderColor,
                         width: 1,
@@ -149,7 +149,7 @@ class BuyTopupSheet extends StatelessWidget {
                     ),
 
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(18),
                       borderSide: BorderSide(
                         color: AppColors.primaryColor,
                         width: 1,
@@ -188,7 +188,7 @@ class BuyTopupSheet extends StatelessWidget {
                     filled: true,
                     fillColor: Colors.white,
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(18),
                       borderSide: BorderSide(
                         color: AppColors.borderColor,
                         width: 1,
@@ -196,7 +196,7 @@ class BuyTopupSheet extends StatelessWidget {
                     ),
 
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(18),
                       borderSide: BorderSide(
                         color: AppColors.primaryColor,
                         width: 1,
@@ -222,7 +222,7 @@ class BuyTopupSheet extends StatelessWidget {
                     filled: true,
                     fillColor: Colors.white,
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(18),
                       borderSide: BorderSide(
                         color: AppColors.borderColor,
                         width: 1,
@@ -230,7 +230,7 @@ class BuyTopupSheet extends StatelessWidget {
                     ),
 
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(18),
                       borderSide: BorderSide(
                         color: AppColors.primaryColor,
                         width: 1,
@@ -248,7 +248,7 @@ class BuyTopupSheet extends StatelessWidget {
                         style: OutlinedButton.styleFrom(
                           padding: EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(18),
                           ),
                           side: BorderSide(color: Colors.grey.shade300),
                         ),
@@ -324,7 +324,7 @@ class BuyTopupSheet extends StatelessWidget {
                           backgroundColor: Color(0xFF6ABFB0),
                           padding: EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(18),
                           ),
                           elevation: 0,
                         ),

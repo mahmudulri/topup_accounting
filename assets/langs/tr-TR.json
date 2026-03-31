@@ -135,7 +135,16 @@
 "PAY_DUE": "Borç Öde",
 "PRINT_REPORT": "Raporu Yazdır",
 "THIS_IS_THE_AMOUNT_YOU_PAY_TO_SUPPLIER": "Bu, tedarikçiye ödediğiniz tutardır",
-"CANCEL": "İptal"
+"CANCEL": "İptal",
+"ADD_A_NEW_SUPPLIER_TO_YOUR_NETWORK": "Ağınıza Yeni Tedarikçi Ekleyin",
+"SUPPLIER_NAME": "Tedarikçi Adı",
+"ENTER_SUPPLIER_NAME": "Tedarikçi Adı Girin",
+"ENTER_PHONE_NUMBER": "Telefon Numarası Girin",
+"INCLUDE_COUNTRY_CODE_E.G_+93": "Ülke kodunu ekleyin (örn. +93)",
+"COMPANY_NAME": "Şirket Adı",
+"ENTER_COMPANY_NAME": "Şirket Adı Girin",
+"PERCENTAGE_OF_BONUS_ON_EACH_PURCHASE": "Her Satın Alma için Bonus Yüzdesi",
+"SUBMIT": "Gönder"
 
 
 }

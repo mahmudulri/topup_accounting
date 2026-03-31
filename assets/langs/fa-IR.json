@@ -135,7 +135,16 @@
 "PAY_DUE": "پرداخت بدهی",
 "PRINT_REPORT": "چاپ گزارش",
 "THIS_IS_THE_AMOUNT_YOU_PAY_TO_SUPPLIER": "این مبلغی است که به تأمین‌کننده می‌پردازید",
-"CANCEL": "لغو"
+"CANCEL": "لغو",
+"ADD_A_NEW_SUPPLIER_TO_YOUR_NETWORK": "یک تأمین‌کننده جدید به شبکه خود اضافه کنید",
+"SUPPLIER_NAME": "نام تأمین‌کننده",
+"ENTER_SUPPLIER_NAME": "نام تأمین‌کننده را وارد کنید",
+"ENTER_PHONE_NUMBER": "شماره تلفن را وارد کنید",
+"INCLUDE_COUNTRY_CODE_E.G_+93": "کد کشور را وارد کنید (مثال: +93)",
+"COMPANY_NAME": "نام شرکت",
+"ENTER_COMPANY_NAME": "نام شرکت را وارد کنید",
+"PERCENTAGE_OF_BONUS_ON_EACH_PURCHASE": "درصد پاداش برای هر خرید",
+"SUBMIT": "ارسال"
 
 
 

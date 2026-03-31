@@ -6,6 +6,7 @@ import '../controllers/buytop_up_controller.dart';
 import '../controllers/supplierlist_controller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../utils/colors.dart';
+import '../widgets/add_suppliershett.dart';
 import '../widgets/buy_topup_sheet.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/suppliercard.dart';
@@ -28,6 +29,7 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
   @override
   void initState() {
     super.initState();
+
     supplierlistController.fetchsupplierlist();
   }
 
@@ -63,6 +65,22 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
               fontSize: 17,
               fontWeight: FontWeight.w700,
               color: AppColors.titleText,
+            ),
+            Spacer(),
+            GestureDetector(
+              onTap: () {
+                showAddSupplierSheet(context);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Icon(Icons.add, color: Colors.white, size: 28),
+                ),
+              ),
             ),
           ],
         ),
