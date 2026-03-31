@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:topup_accounting/controllers/buytop_up_controller.dart';
+
 import 'package:topup_accounting/utils/colors.dart';
 import 'package:topup_accounting/widgets/custom_text.dart';
 
+import '../controllers/buytop_up_controller.dart';
 import '../global_controllers/languages_controller.dart';
+
+BuytopUpController buytopUpController = Get.put(BuytopUpController());
 
 class BuyTopupSheet extends StatelessWidget {
   final String title;
   final String subtitle;
+  final String supplierID;
 
-  BuyTopupSheet({super.key, required this.title, required this.subtitle});
+  BuyTopupSheet({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.supplierID,
+  });
   final languagesController = Get.find<LanguagesController>();
+
   @override
   Widget build(BuildContext context) {
-    final TextEditingController baseAmountController = TextEditingController();
-    final TextEditingController paidAmountController = TextEditingController();
-    final TextEditingController referenceController = TextEditingController();
-    final TextEditingController notesController = TextEditingController();
-
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(
@@ -31,7 +37,6 @@ class BuyTopupSheet extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                /// ✅ Header (ONLY TEXT DYNAMIC)
                 Row(
                   children: [
                     Container(
@@ -86,7 +91,7 @@ class BuyTopupSheet extends StatelessWidget {
                 ),
                 SizedBox(height: 8),
                 TextField(
-                  controller: baseAmountController,
+                  controller: buytopUpController.baseAmountController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: '0.00',
@@ -128,7 +133,7 @@ class BuyTopupSheet extends StatelessWidget {
                 ),
                 SizedBox(height: 8),
                 TextField(
-                  controller: paidAmountController,
+                  controller: buytopUpController.paidAmountController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: '0.00',
@@ -172,7 +177,7 @@ class BuyTopupSheet extends StatelessWidget {
                 ),
                 SizedBox(height: 8),
                 TextField(
-                  controller: referenceController,
+                  controller: buytopUpController.referenceController,
                   decoration: InputDecoration(
                     hintText: languagesController.tr("ENTER_REFERENCE_NUMBER"),
                     prefixIcon: Icon(
@@ -208,7 +213,7 @@ class BuyTopupSheet extends StatelessWidget {
                 ),
                 SizedBox(height: 8),
                 TextField(
-                  controller: notesController,
+                  controller: buytopUpController.notesController,
                   maxLines: 3,
                   decoration: InputDecoration(
                     hintText:
@@ -259,16 +264,61 @@ class BuyTopupSheet extends StatelessWidget {
                     Expanded(
                       child: ElevatedButton.icon(
                         onPressed: () {
-                          Navigator.pop(context);
+                          buytopUpController.supplierID.value = supplierID;
+
+                          /// ❌ Supplier not selected
+
+                          /// ❌ Base amount validation (must be valid number > 0)
+                          final baseText = buytopUpController
+                              .baseAmountController
+                              .text
+                              .trim();
+
+                          final base = double.tryParse(baseText);
+
+                          if (baseText.isEmpty || base == null || base <= 0) {
+                            Fluttertoast.showToast(
+                              msg: "Enter valid base amount",
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                            );
+                            return;
+                          }
+
+                          /// 🔶 Paid amount (optional but must be valid if entered)
+                          final paidText = buytopUpController
+                              .paidAmountController
+                              .text
+                              .trim();
+
+                          if (paidText.isNotEmpty) {
+                            final paid = double.tryParse(paidText);
+
+                            if (paid == null || paid < 0) {
+                              Fluttertoast.showToast(
+                                msg: "Invalid paid amount",
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                              );
+                              return;
+                            }
+                          }
+
+                          /// ✅ All good → controller handles remaining rules
+                          buytopUpController.buynow();
                         },
                         icon: Icon(
                           Icons.shopping_cart_outlined,
                           size: 18,
                           color: Colors.white,
                         ),
-                        label: Text(
-                          languagesController.tr("CONFIRM_PURCHASE"),
-                          style: TextStyle(color: Colors.white, fontSize: 12),
+                        label: Obx(
+                          () => Text(
+                            buytopUpController.isLoading.value == false
+                                ? languagesController.tr("CONFIRM_PURCHASE")
+                                : languagesController.tr("PLEASE_WAIT"),
+                            style: TextStyle(color: Colors.white, fontSize: 12),
+                          ),
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xFF6ABFB0),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:topup_accounting/helpers/compactnumber_helpder.dart';
 import 'package:topup_accounting/helpers/localtime_helper.dart';
+import '../controllers/buytop_up_controller.dart';
 import '../controllers/supplierlist_controller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../utils/colors.dart';
@@ -21,7 +22,7 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
   SupplierlistController supplierlistController = Get.put(
     SupplierlistController(),
   );
-
+  BuytopUpController buytopUpController = Get.put(BuytopUpController());
   final languagesController = Get.find<LanguagesController>();
 
   @override
@@ -135,15 +136,24 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                           ),
                           actions: SupplierCardActions(
                             onBuy: () {
+                              buytopUpController.baseAmount.value == 0.0;
+                              buytopUpController.paidAmount.value == 0.0;
+                              buytopUpController.baseAmountController.clear();
+                              buytopUpController.paidAmountController.clear();
+                              buytopUpController.referenceController.clear();
+                              buytopUpController.notesController.clear();
                               showBuyTopupSheet(
                                 context: context,
                                 title: languagesController.tr("BUY_TOP_UP"),
+
                                 subtitle:
                                     data.name.toString() +
                                     " - " +
                                     data.company.toString() +
                                     " " +
                                     "(${data.bonusPercentage} % ${languagesController.tr("BONUS")})",
+
+                                supplierID: data.id.toString(),
                               );
                             },
                             onView: () {
@@ -186,6 +196,7 @@ void showBuyTopupSheet({
   required BuildContext context,
   required String title,
   required String subtitle,
+  required String supplierID,
 }) {
   showModalBottomSheet(
     context: context,
@@ -195,7 +206,11 @@ void showBuyTopupSheet({
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
     builder: (context) {
-      return BuyTopupSheet(title: title, subtitle: subtitle);
+      return BuyTopupSheet(
+        title: title,
+        subtitle: subtitle,
+        supplierID: supplierID,
+      );
     },
   );
 }

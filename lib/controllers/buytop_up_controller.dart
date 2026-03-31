@@ -84,7 +84,9 @@ class BuytopUpController extends GetxController {
       Map body = {
         'supplier_id': supplierID.value,
         'base_amount': baseAmountController.text,
-        'paid_amount': paidAmountController.text,
+        'paid_amount': paidAmountController.text.isEmpty
+            ? "0"
+            : paidAmountController.text,
         'reference_no': referenceController.text,
         'notes': notesController.text,
       };
@@ -105,9 +107,9 @@ class BuytopUpController extends GetxController {
       print("Response Body: ${response.body}");
 
       if (response.statusCode == 200) {
-        baseAmount.value == 0.0;
+        resetCalculation();
         baseAmountController.clear();
-        paidAmount.value == 0.0;
+
         paidAmountController.clear();
         referenceController.clear();
         notesController.clear();
@@ -145,5 +147,23 @@ class BuytopUpController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  void resetCalculation() {
+    /// Clear text fields
+    baseAmountController.clear();
+    paidAmountController.clear();
+    referenceController.clear();
+    notesController.clear();
+
+    /// Reset reactive values
+    baseAmount.value = 0.0;
+    bonusAmount.value = 0.0;
+    totalTopup.value = 0.0;
+    paidAmount.value = 0.0;
+    dueAmount.value = 0.0;
+
+    /// Optional: reset bonus যদি দরকার হয়
+    // bonus.value = 0.0;
   }
 }
