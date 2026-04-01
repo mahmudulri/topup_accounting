@@ -44,9 +44,9 @@ class Summary {
 
 class Resellers {
   final int? totalResellers;
-  final int? totalSales;
-  final int? totalReceivedFromResellers;
-  final int? totalResellerDue;
+  final double? totalSales;
+  final double? totalReceivedFromResellers;
+  final double? totalResellerDue;
 
   Resellers({
     this.totalResellers,
@@ -57,9 +57,10 @@ class Resellers {
 
   factory Resellers.fromJson(Map<String, dynamic> json) => Resellers(
     totalResellers: json["total_resellers"],
-    totalSales: json["total_sales"],
-    totalReceivedFromResellers: json["total_received_from_resellers"],
-    totalResellerDue: json["total_reseller_due"],
+    totalSales: (json["total_sales"] as num?)?.toDouble(),
+    totalReceivedFromResellers: (json["total_received_from_resellers"] as num?)
+        ?.toDouble(),
+    totalResellerDue: (json["total_reseller_due"] as num?)?.toDouble(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -72,10 +73,10 @@ class Resellers {
 
 class Suppliers {
   final int? totalSuppliers;
-  final int? totalPurchases;
+  final double? totalPurchases;
   final double? totalPaidToSuppliers;
   final double? totalSupplierDue;
-  final int? totalStock;
+  final double? totalStock;
 
   Suppliers({
     this.totalSuppliers,
@@ -87,10 +88,10 @@ class Suppliers {
 
   factory Suppliers.fromJson(Map<String, dynamic> json) => Suppliers(
     totalSuppliers: json["total_suppliers"],
-    totalPurchases: json["total_purchases"],
-    totalPaidToSuppliers: json["total_paid_to_suppliers"].toDouble(),
-    totalSupplierDue: json["total_supplier_due"].toDouble(),
-    totalStock: json["total_stock"],
+    totalPurchases: (json["total_purchases"] as num?)?.toDouble(),
+    totalPaidToSuppliers: (json["total_paid_to_suppliers"] as num?)?.toDouble(),
+    totalSupplierDue: (json["total_supplier_due"] as num?)?.toDouble(),
+    totalStock: (json["total_stock"] as num?)?.toDouble(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -103,10 +104,10 @@ class Suppliers {
 }
 
 class Today {
-  final int? purchases;
-  final int? sales;
-  final int? paymentsToSuppliers;
-  final int? paymentsFromResellers;
+  final double? purchases;
+  final double? sales;
+  final double? paymentsToSuppliers;
+  final double? paymentsFromResellers;
 
   Today({
     this.purchases,
@@ -116,10 +117,11 @@ class Today {
   });
 
   factory Today.fromJson(Map<String, dynamic> json) => Today(
-    purchases: json["purchases"],
-    sales: json["sales"],
-    paymentsToSuppliers: json["payments_to_suppliers"],
-    paymentsFromResellers: json["payments_from_resellers"],
+    purchases: (json["purchases"] as num?)?.toDouble(),
+    sales: (json["sales"] as num?)?.toDouble(),
+    paymentsToSuppliers: (json["payments_to_suppliers"] as num?)?.toDouble(),
+    paymentsFromResellers: (json["payments_from_resellers"] as num?)
+        ?.toDouble(),
   );
 
   Map<String, dynamic> toJson() => {
