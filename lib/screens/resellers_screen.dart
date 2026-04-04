@@ -4,6 +4,7 @@ import '../controllers/reseller_list_controller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../global_controllers/scaffold_controller.dart';
 import '../utils/colors.dart';
+import '../widgets/add_resellershet.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/resellercard.dart';
 import 'reseller_view_screen.dart';
@@ -62,6 +63,22 @@ class _ResellersScreenState extends State<ResellersScreen> {
               fontSize: 17,
               fontWeight: FontWeight.w700,
               color: AppColors.titleText,
+            ),
+            Spacer(),
+            GestureDetector(
+              onTap: () {
+                showAddResellerSheet(context);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Icon(Icons.add, color: Colors.white, size: 28),
+                ),
+              ),
             ),
           ],
         ),

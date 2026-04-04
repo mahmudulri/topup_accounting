@@ -187,7 +187,7 @@ class _DashboardState extends State<Dashboard> {
                                   .toDouble(),
                             ),
                             sub:
-                                'AFG ${dashboardController.alldashboaddata.value.summary!.suppliers!.totalStock.toString()}',
+                                'AFG ${formatedprice(dashboardController.alldashboaddata.value.summary!.suppliers!.totalStock!.toDouble())}',
                             label: languagesController.tr("TOTAL_STOCK"),
                             bottomRight: '80.0%',
                             bottomRightColor: AppColors.primaryColor,

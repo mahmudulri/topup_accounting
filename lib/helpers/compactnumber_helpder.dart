@@ -10,3 +10,7 @@ String formatCompactNumber(double num) {
 
   return num.toStringAsFixed(0);
 }
+
+String formatedprice(double num) {
+  return ((num * 100).truncate() / 100).toStringAsFixed(2);
+}
