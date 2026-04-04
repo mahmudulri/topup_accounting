@@ -144,7 +144,11 @@
 "COMPANY_NAME": "Şirket Adı",
 "ENTER_COMPANY_NAME": "Şirket Adı Girin",
 "PERCENTAGE_OF_BONUS_ON_EACH_PURCHASE": "Her Satın Alma için Bonus Yüzdesi",
-"SUBMIT": "Gönder"
+"SUBMIT": "Gönder",
+"ADD_A_NEW_RESELLER_TO_YOUR_NETWORK": "Ağınıza Yeni Bayi Ekleyin",
+"RESELLER_NAME": "Bayi Adı",
+"CITY": "Şehir",
+"ENTER_CITY_NAME": "Şehir Adı Girin"
 
 
 }

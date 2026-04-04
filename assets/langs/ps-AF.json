@@ -144,7 +144,11 @@
 "COMPANY_NAME": "د شرکت نوم",
 "ENTER_COMPANY_NAME": "د شرکت نوم دننه کړئ",
 "PERCENTAGE_OF_BONUS_ON_EACH_PURCHASE": "په هر پېرود کې د بونس سلنه",
-"SUBMIT": "وسپارئ"
+"SUBMIT": "وسپارئ",
+"ADD_A_NEW_RESELLER_TO_YOUR_NETWORK": "خپل شبکې ته نوی ریسیلر اضافه کړئ",
+"RESELLER_NAME": "د ریسیلر نوم",
+"CITY": "ښار",
+"ENTER_CITY_NAME": "د ښار نوم دننه کړئ"
 
 
 

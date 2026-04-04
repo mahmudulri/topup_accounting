@@ -6,7 +6,11 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:topup_accounting/utils/colors.dart';
 import '../utils/api_endpoints.dart';
-import 'supplierlist_controller.dart';
+import 'reseller_list_controller.dart';
+
+ResellerListController resellerListController = Get.put(
+  ResellerListController(),
+);
 
 class AddResellerController extends GetxController {
   final TextEditingController nameController = TextEditingController();
@@ -48,6 +52,7 @@ class AddResellerController extends GetxController {
 
       // ✅ API returns 201 (not 200)
       if (response.statusCode == 201) {
+        resellerListController.fetchReseller();
         if (results["status"] == true) {
           Fluttertoast.showToast(
             msg: results["message"],

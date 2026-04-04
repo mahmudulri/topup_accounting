@@ -144,7 +144,11 @@
 "COMPANY_NAME": "نام شرکت",
 "ENTER_COMPANY_NAME": "نام شرکت را وارد کنید",
 "PERCENTAGE_OF_BONUS_ON_EACH_PURCHASE": "درصد پاداش برای هر خرید",
-"SUBMIT": "ارسال"
+"SUBMIT": "ارسال",
+"ADD_A_NEW_RESELLER_TO_YOUR_NETWORK": "یک نماینده جدید به شبکه خود اضافه کنید",
+"RESELLER_NAME": "نام نماینده",
+"CITY": "شهر",
+"ENTER_CITY_NAME": "نام شهر را وارد کنید"
 
 
 

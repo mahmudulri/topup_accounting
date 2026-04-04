@@ -144,7 +144,11 @@
 "COMPANY_NAME": "কোম্পানির নাম",
 "ENTER_COMPANY_NAME": "কোম্পানির নাম লিখুন",
 "PERCENTAGE_OF_BONUS_ON_EACH_PURCHASE": "প্রতি ক্রয়ে বোনাসের শতাংশ",
-"SUBMIT": "সাবমিট"
+"SUBMIT": "সাবমিট",
+"ADD_A_NEW_RESELLER_TO_YOUR_NETWORK": "আপনার নেটওয়ার্কে নতুন রিসেলার যোগ করুন",
+"RESELLER_NAME": "রিসেলারের নাম",
+"CITY": "শহর",
+"ENTER_CITY_NAME": "শহরের নাম লিখুন"
 
 
 

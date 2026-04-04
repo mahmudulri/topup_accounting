@@ -96,7 +96,7 @@ class _AddResellerBottomSheetState extends State<AddResellerBottomSheet> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             KText(
-                              text: languagesController.tr("ADD_SUPPLIER"),
+                              text: languagesController.tr("ADD_RESELLER"),
                               fontSize: 20,
                               fontWeight: FontWeight.w700,
                               color: _labelColor,
@@ -104,7 +104,7 @@ class _AddResellerBottomSheetState extends State<AddResellerBottomSheet> {
                             SizedBox(height: 2),
                             KText(
                               text: languagesController.tr(
-                                "ADD_A_NEW_SUPPLIER_TO_YOUR_NETWORK",
+                                "ADD_A_NEW_RESELLER_TO_YOUR_NETWORK",
                               ),
                               fontSize: 13,
                               color: Color(0xFF7A9490),
@@ -124,7 +124,7 @@ class _AddResellerBottomSheetState extends State<AddResellerBottomSheet> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildLabel(languagesController.tr("SUPPLIER_NAME")),
+                        _buildLabel(languagesController.tr("RESELLER_NAME")),
                         _buildTextField(
                           controller: addResellerController.nameController,
                           hint: languagesController.tr("ENTER_SUPPLIER_NAME"),
@@ -151,10 +151,10 @@ class _AddResellerBottomSheetState extends State<AddResellerBottomSheet> {
                         ),
                         SizedBox(height: 16),
 
-                        _buildLabel(languagesController.tr("COMPANY_NAME")),
+                        _buildLabel(languagesController.tr("CITY")),
                         _buildTextField(
                           controller: addResellerController.cityController,
-                          hint: languagesController.tr("ENTER_COMPANY_NAME"),
+                          hint: languagesController.tr("ENTER_CITY_NAME"),
                           validator: (v) => (v == null || v.trim().isEmpty)
                               ? 'Required'
                               : null,

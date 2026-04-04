@@ -143,7 +143,11 @@
 "COMPANY_NAME": "Company Name",
 "ENTER_COMPANY_NAME": "Enter Company Name",
 "PERCENTAGE_OF_BONUS_ON_EACH_PURCHASE": "Bonus Percentage on Each Purchase",
-"SUBMIT": "Submit"
+"SUBMIT": "Submit",
+"ADD_A_NEW_RESELLER_TO_YOUR_NETWORK": "Add a New Reseller to Your Network",
+"RESELLER_NAME": "Reseller Name",
+"CITY": "City",
+"ENTER_CITY_NAME": "Enter City Name"
 
 
 
