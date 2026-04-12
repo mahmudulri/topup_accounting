@@ -148,7 +148,15 @@
 "ADD_A_NEW_RESELLER_TO_YOUR_NETWORK": "আপনার নেটওয়ার্কে নতুন রিসেলার যোগ করুন",
 "RESELLER_NAME": "রিসেলারের নাম",
 "CITY": "শহর",
-"ENTER_CITY_NAME": "শহরের নাম লিখুন"
+"ENTER_CITY_NAME": "শহরের নাম লিখুন",
+"UPDATE_SUPPLIER": "সরবরাহকারী আপডেট করুন",
+"UPDATE": "আপডেট করুন",
+"UPDATE_RESELLER": "রিসেলার আপডেট করুন",
+"ARE_YOU_SURE_YOU_WANT_TO_DELETE_THIS_ITEM": "আপনি কি নিশ্চিত এই আইটেমটি মুছতে চান?",
+"DELETE_CONFIRMATION": "মুছার নিশ্চিতকরণ",
+"LOGOUT": "লগ আউট",
+"PROFILE": "প্রোফাইল",
+"SETTINGS": "সেটিংস"
 
 
 

@@ -24,35 +24,27 @@ class _PackagesScreenState extends State<PackagesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      child: Scaffold(
-        backgroundColor: const Color(0xFFF4F7F6),
-        appBar: AppBar(
-          title: const Text(
-            "Packages",
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-          centerTitle: true,
-          elevation: 0,
-          flexibleSpace: Container(
-            decoration: const BoxDecoration(
-              gradient: AppColors.primaryGradient,
-            ),
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.search_rounded),
-              onPressed: () {},
-            ),
-          ],
+    return Scaffold(
+      backgroundColor: const Color(0xFFF4F7F6),
+      appBar: AppBar(
+        title: const Text(
+          "Packages",
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
-        body: Obx(() {
-          if (controller.isLoading.value) return _buildLoading();
-          if (controller.errorMessage.isNotEmpty) return _buildError();
-          return _buildBody();
-        }),
+        centerTitle: true,
+        elevation: 0,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(gradient: AppColors.primaryGradient),
+        ),
+        actions: [
+          IconButton(icon: const Icon(Icons.search_rounded), onPressed: () {}),
+        ],
       ),
+      body: Obx(() {
+        if (controller.isLoading.value) return _buildLoading();
+        if (controller.errorMessage.isNotEmpty) return _buildError();
+        return _buildBody();
+      }),
     );
   }
 
@@ -405,18 +397,18 @@ class _PackageCard extends StatelessWidget {
           ),
         ),
 
-        // Featured badge — top right, overlapping the card border
+        // Featured badge — flush with top-right corner of the card
         if (featured)
           Positioned(
-            top: -1,
-            right: 20,
+            top: 0,
+            right: 0,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: const BoxDecoration(
                 color: Color(0xFFF5A623),
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
+                  topRight: Radius.circular(18),
+                  bottomLeft: Radius.circular(12),
                 ),
               ),
               child: const Row(

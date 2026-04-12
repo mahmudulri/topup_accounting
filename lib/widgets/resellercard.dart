@@ -524,13 +524,13 @@ class _QuickActionButton extends StatelessWidget {
           label: 'Edit',
           onTap: actions.onEdit,
         ),
-        _menuItem(
-          context: context,
-          value: 'pct',
-          icon: Icons.percent,
-          label: 'Update %',
-          onTap: actions.onUpdatePercent,
-        ),
+        // _menuItem(
+        //   context: context,
+        //   value: 'pct',
+        //   icon: Icons.percent,
+        //   label: 'Update %',
+        //   onTap: actions.onUpdatePercent,
+        // ),
         _menuItem(
           context: context,
           value: 'pay',

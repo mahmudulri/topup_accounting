@@ -148,7 +148,15 @@
 "ADD_A_NEW_RESELLER_TO_YOUR_NETWORK": "Ağınıza Yeni Bayi Ekleyin",
 "RESELLER_NAME": "Bayi Adı",
 "CITY": "Şehir",
-"ENTER_CITY_NAME": "Şehir Adı Girin"
+"ENTER_CITY_NAME": "Şehir Adı Girin",
+"UPDATE_SUPPLIER": "Tedarikçiyi Güncelle",
+"UPDATE": "Güncelle",
+"UPDATE_RESELLER": "Satıcıyı Güncelle",
+"ARE_YOU_SURE_YOU_WANT_TO_DELETE_THIS_ITEM": "Bu öğeyi silmek istediğinizden emin misiniz?",
+"DELETE_CONFIRMATION": "Silme Onayı",
+"LOGOUT": "Çıkış Yap",
+"PROFILE": "Profil",
+"SETTINGS": "Ayarlar"
 
 
 }

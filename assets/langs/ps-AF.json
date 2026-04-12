@@ -148,7 +148,15 @@
 "ADD_A_NEW_RESELLER_TO_YOUR_NETWORK": "خپل شبکې ته نوی ریسیلر اضافه کړئ",
 "RESELLER_NAME": "د ریسیلر نوم",
 "CITY": "ښار",
-"ENTER_CITY_NAME": "د ښار نوم دننه کړئ"
+"ENTER_CITY_NAME": "د ښار نوم دننه کړئ",
+"UPDATE_SUPPLIER": "عرضه کوونکی تازه کړئ",
+"UPDATE": "تازه کړئ",
+"UPDATE_RESELLER": "ریسیلر تازه کړئ",
+"ARE_YOU_SURE_YOU_WANT_TO_DELETE_THIS_ITEM": "ایا تاسو ډاډه یاست چې دا توکی حذف کول غواړئ؟",
+"DELETE_CONFIRMATION": "د حذف تایید",
+"LOGOUT": "وتل",
+"PROFILE": "پروفایل",
+"SETTINGS": "تنظیمات"
 
 
 

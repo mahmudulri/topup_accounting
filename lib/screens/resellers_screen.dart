@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../controllers/delete_reseller_controller.dart';
 import '../controllers/reseller_list_controller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../global_controllers/scaffold_controller.dart';
@@ -7,6 +8,7 @@ import '../utils/colors.dart';
 import '../widgets/add_resellershet.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/resellercard.dart';
+import '../widgets/update_resellersheet.dart';
 import 'reseller_view_screen.dart';
 
 class ResellersScreen extends StatefulWidget {
@@ -23,6 +25,10 @@ class _ResellersScreenState extends State<ResellersScreen> {
 
   ResellerListController resellerListController = Get.put(
     ResellerListController(),
+  );
+
+  DeleteResellerController deleteResellerController = Get.put(
+    DeleteResellerController(),
   );
 
   @override
@@ -123,11 +129,95 @@ class _ResellersScreenState extends State<ResellersScreen> {
                           onView: () {
                             Get.to(() => ResellerViewScreen());
                           },
-                          onEdit: () {},
+                          onEdit: () {
+                            upldateresellersheet(context, {
+                              "id": data.id,
+                              "name": data.name,
+                              "phone": data.phone,
+                              "city": data.city,
+                              "bonus_percentage": data.bonusPercentage,
+                            });
+                          },
                           onUpdatePercent: () {},
                           onPay: () {},
                           onDisable: () {},
-                          onDelete: () {},
+                          onDelete: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  title: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.warning_amber_rounded,
+                                        color: Colors.orange,
+                                        size: 28,
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        languagesController.tr(
+                                          "DELETE_CONFIRMATION",
+                                        ),
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  content: Text(
+                                    languagesController.tr(
+                                      "ARE_YOU_SURE_YOU_WANT_TO_DELETE_THIS_ITEM",
+                                    ),
+
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(
+                                          context,
+                                        ).pop(); // Close dialog
+                                      },
+                                      child: Text(
+                                        languagesController.tr("CANCEL"),
+                                        style: TextStyle(
+                                          color: Colors.grey.shade700,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(
+                                          context,
+                                        ).pop(); // Close dialog first
+                                        deleteResellerController.deletenow(
+                                          data.id.toString(),
+                                        );
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.red,
+                                        foregroundColor: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        languagesController.tr("DELETE"),
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                         ),
                       );
                       // return Container(

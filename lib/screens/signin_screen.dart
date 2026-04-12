@@ -7,6 +7,7 @@ import 'package:topup_accounting/global_controllers/languages_controller.dart';
 
 import '../widgets/custom_text.dart';
 import '../widgets/languagepicker.dart';
+import 'packages_screen.dart';
 
 class SigninScreen extends StatefulWidget {
   SigninScreen({super.key});
@@ -275,7 +276,9 @@ class _SigninScreenState extends State<SigninScreen> {
                               ),
                               SizedBox(width: 6),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  Get.to(() => PackagesScreen());
+                                },
                                 child: KText(
                                   text: languagesController.tr("VIEW_PACKAGES"),
 

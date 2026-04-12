@@ -148,7 +148,15 @@
 "ADD_A_NEW_RESELLER_TO_YOUR_NETWORK": "أضف موزعًا جديدًا إلى شبكتك",
 "RESELLER_NAME": "اسم الموزع",
 "CITY": "المدينة",
-"ENTER_CITY_NAME": "أدخل اسم المدينة"
+"ENTER_CITY_NAME": "أدخل اسم المدينة",
+"UPDATE_SUPPLIER": "تحديث المورد",
+"UPDATE": "تحديث",
+"UPDATE_RESELLER": "تحديث الموزع",
+"ARE_YOU_SURE_YOU_WANT_TO_DELETE_THIS_ITEM": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
+"DELETE_CONFIRMATION": "تأكيد الحذف",
+"LOGOUT": "تسجيل الخروج",
+"PROFILE": "الملف الشخصي",
+"SETTINGS": "الإعدادات"
 
 
 

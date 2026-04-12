@@ -147,7 +147,15 @@
 "ADD_A_NEW_RESELLER_TO_YOUR_NETWORK": "Add a New Reseller to Your Network",
 "RESELLER_NAME": "Reseller Name",
 "CITY": "City",
-"ENTER_CITY_NAME": "Enter City Name"
+"ENTER_CITY_NAME": "Enter City Name",
+"UPDATE_SUPPLIER": "Update Supplier",
+"UPDATE": "Update",
+"UPDATE_RESELLER": "Update Reseller",
+"ARE_YOU_SURE_YOU_WANT_TO_DELETE_THIS_ITEM": "Are you sure you want to delete this item?",
+"DELETE_CONFIRMATION": "Delete Confirmation",
+"LOGOUT": "Log Out",
+"PROFILE": "Profile",
+"SETTINGS": "Settings"
 
 
 

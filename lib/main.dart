@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
 import 'global_controllers/languages_controller.dart';
 import 'global_controllers/scaffold_controller.dart';
 import 'global_controllers/time_zone_controller.dart';

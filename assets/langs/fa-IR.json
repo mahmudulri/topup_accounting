@@ -148,7 +148,15 @@
 "ADD_A_NEW_RESELLER_TO_YOUR_NETWORK": "یک نماینده جدید به شبکه خود اضافه کنید",
 "RESELLER_NAME": "نام نماینده",
 "CITY": "شهر",
-"ENTER_CITY_NAME": "نام شهر را وارد کنید"
+"ENTER_CITY_NAME": "نام شهر را وارد کنید",
+"UPDATE_SUPPLIER": "به‌روزرسانی تأمین‌کننده",
+"UPDATE": "به‌روزرسانی",
+"UPDATE_RESELLER": "به‌روزرسانی فروشنده",
+"ARE_YOU_SURE_YOU_WANT_TO_DELETE_THIS_ITEM": "آیا مطمئن هستید که می‌خواهید این مورد را حذف کنید؟",
+"DELETE_CONFIRMATION": "تأیید حذف",
+"LOGOUT": "خروج",
+"PROFILE": "پروفایل",
+"SETTINGS": "تنظیمات"
 
 
 

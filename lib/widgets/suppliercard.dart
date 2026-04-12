@@ -622,13 +622,13 @@ class _QuickActionButton extends StatelessWidget {
           label: languagesController.tr("EDIT"),
           onTap: actions.onEdit,
         ),
-        _menuItem(
-          context: context,
-          value: 'pct',
-          icon: Icons.percent,
-          label: languagesController.tr("UPDATE_%"),
-          onTap: actions.onUpdatePercent,
-        ),
+        // _menuItem(
+        //   context: context,
+        //   value: 'pct',
+        //   icon: Icons.percent,
+        //   label: languagesController.tr("UPDATE_%"),
+        //   onTap: actions.onUpdatePercent,
+        // ),
         _menuItem(
           context: context,
           value: 'pay',

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:topup_accounting/helpers/compactnumber_helpder.dart';
 import 'package:topup_accounting/helpers/localtime_helper.dart';
 import '../controllers/buytop_up_controller.dart';
+import '../controllers/delete_supplier_controller.dart';
 import '../controllers/supplierlist_controller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../utils/colors.dart';
@@ -10,6 +11,7 @@ import '../widgets/add_suppliershett.dart';
 import '../widgets/buy_topup_sheet.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/suppliercard.dart';
+import '../widgets/update_suppliersheet.dart';
 import 'supplier_view_screen.dart';
 
 class SuppliersScreen extends StatefulWidget {
@@ -22,6 +24,10 @@ class SuppliersScreen extends StatefulWidget {
 class _SuppliersScreenState extends State<SuppliersScreen> {
   SupplierlistController supplierlistController = Get.put(
     SupplierlistController(),
+  );
+
+  DeleteSupplierController deleteSupplierController = Get.put(
+    DeleteSupplierController(),
   );
   BuytopUpController buytopUpController = Get.put(BuytopUpController());
   final languagesController = Get.find<LanguagesController>();
@@ -192,11 +198,95 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                                 ),
                               );
                             },
-                            onEdit: () {},
+                            onEdit: () {
+                              updateSuppliersheet(context, {
+                                "id": data.id,
+                                "name": data.name,
+                                "phone": data.phone,
+                                "company": data.company,
+                                "bonus_percentage": data.bonusPercentage,
+                              });
+                            },
                             onUpdatePercent: () {},
                             onPay: () {},
                             onDisable: () {},
-                            onDelete: () {},
+                            onDelete: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    title: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.warning_amber_rounded,
+                                          color: Colors.orange,
+                                          size: 28,
+                                        ),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          languagesController.tr(
+                                            "DELETE_CONFIRMATION",
+                                          ),
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    content: Text(
+                                      languagesController.tr(
+                                        "ARE_YOU_SURE_YOU_WANT_TO_DELETE_THIS_ITEM",
+                                      ),
+
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(
+                                            context,
+                                          ).pop(); // Close dialog
+                                        },
+                                        child: Text(
+                                          languagesController.tr("CANCEL"),
+                                          style: TextStyle(
+                                            color: Colors.grey.shade700,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(
+                                            context,
+                                          ).pop(); // Close dialog first
+                                          deleteSupplierController.deletenow(
+                                            data.id.toString(),
+                                          );
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.red,
+                                          foregroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              10,
+                                            ),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          languagesController.tr("DELETE"),
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
                           ),
                         ),
                       );

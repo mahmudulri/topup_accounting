@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:topup_accounting/screens/signin_screen.dart';
 import '../global_controllers/languages_controller.dart';
 import '../global_controllers/scaffold_controller.dart';
 import '../screens/myipdetails_screen.dart';
@@ -370,8 +371,8 @@ class _ProfileDropdown extends StatelessWidget {
               iconColor: Color(0xFFFF6B6B),
               labelColor: Color(0xFFFF6B6B),
               onTap: () {
-                onClose();
-                // handle logout
+                box.remove("userToken");
+                Get.offAll(SigninScreen());
               },
             ),
 
