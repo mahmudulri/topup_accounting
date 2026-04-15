@@ -23,16 +23,30 @@ class ProfitModel {
   });
 
   factory ProfitModel.fromJson(Map<String, dynamic> json) => ProfitModel(
-    success: json["success"],
-    profitAnalysis: ProfitAnalysis.fromJson(json["profit_analysis"]),
-    bonusAnalysis: BonusAnalysis.fromJson(json["bonus_analysis"]),
-    dueAnalysis: DueAnalysis.fromJson(json["due_analysis"]),
-    supplierBreakdown: List<SupplierBreakdown>.from(
-      json["supplier_breakdown"].map((x) => SupplierBreakdown.fromJson(x)),
-    ),
-    resellerBreakdown: List<ResellerBreakdown>.from(
-      json["reseller_breakdown"].map((x) => ResellerBreakdown.fromJson(x)),
-    ),
+    success: json["success"] == null ? null : json["success"],
+    profitAnalysis: json["profit_analysis"] == null
+        ? null
+        : ProfitAnalysis.fromJson(json["profit_analysis"]),
+    bonusAnalysis: json["bonus_analysis"] == null
+        ? null
+        : BonusAnalysis.fromJson(json["bonus_analysis"]),
+    dueAnalysis: json["due_analysis"] == null
+        ? null
+        : DueAnalysis.fromJson(json["due_analysis"]),
+    supplierBreakdown: json["supplier_breakdown"] == null
+        ? null
+        : List<SupplierBreakdown>.from(
+            json["supplier_breakdown"].map(
+              (x) => SupplierBreakdown.fromJson(x),
+            ),
+          ),
+    resellerBreakdown: json["reseller_breakdown"] == null
+        ? null
+        : List<ResellerBreakdown>.from(
+            json["reseller_breakdown"].map(
+              (x) => ResellerBreakdown.fromJson(x),
+            ),
+          ),
   );
 
   Map<String, dynamic> toJson() => {
@@ -50,9 +64,9 @@ class ProfitModel {
 }
 
 class BonusAnalysis {
-  final double? totalBonusReceived;
-  final double? totalBonusGiven;
-  final double? netBonusImpact;
+  final String? totalBonusReceived;
+  final String? totalBonusGiven;
+  final String? netBonusImpact;
 
   BonusAnalysis({
     this.totalBonusReceived,
@@ -61,9 +75,9 @@ class BonusAnalysis {
   });
 
   factory BonusAnalysis.fromJson(Map<String, dynamic> json) => BonusAnalysis(
-    totalBonusReceived: (json["total_bonus_received"] as num?)?.toDouble(),
-    totalBonusGiven: (json["total_bonus_given"] as num?)?.toDouble(),
-    netBonusImpact: (json["net_bonus_impact"] as num?)?.toDouble(),
+    totalBonusReceived: json["total_bonus_received"],
+    totalBonusGiven: json["total_bonus_given"],
+    netBonusImpact: json["net_bonus_impact"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -74,9 +88,9 @@ class BonusAnalysis {
 }
 
 class DueAnalysis {
-  final double? totalSupplierDue;
-  final double? totalResellerDue;
-  final double? netReceivable;
+  final String? totalSupplierDue;
+  final String? totalResellerDue;
+  final String? netReceivable;
 
   DueAnalysis({
     this.totalSupplierDue,
@@ -85,9 +99,9 @@ class DueAnalysis {
   });
 
   factory DueAnalysis.fromJson(Map<String, dynamic> json) => DueAnalysis(
-    totalSupplierDue: (json["total_supplier_due"] as num?)?.toDouble(),
-    totalResellerDue: (json["total_reseller_due"] as num?)?.toDouble(),
-    netReceivable: (json["net_receivable"] as num?)?.toDouble(),
+    totalSupplierDue: json["total_supplier_due"],
+    totalResellerDue: json["total_reseller_due"],
+    netReceivable: json["net_receivable"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -98,13 +112,13 @@ class DueAnalysis {
 }
 
 class ProfitAnalysis {
-  final Today? total;
+  final Total? total;
   final Today? today;
 
   ProfitAnalysis({this.total, this.today});
 
   factory ProfitAnalysis.fromJson(Map<String, dynamic> json) => ProfitAnalysis(
-    total: json["total"] == null ? null : Today.fromJson(json["total"]),
+    total: json["total"] == null ? null : Total.fromJson(json["total"]),
     today: json["today"] == null ? null : Today.fromJson(json["today"]),
   );
 
@@ -115,18 +129,41 @@ class ProfitAnalysis {
 }
 
 class Today {
-  final double? revenue;
-  final double? cost;
-  final double? profit;
+  final String? revenue;
+  final String? cost;
+  final String? profit;
   final String? profitMargin;
 
   Today({this.revenue, this.cost, this.profit, this.profitMargin});
 
   factory Today.fromJson(Map<String, dynamic> json) => Today(
-    revenue: (json["revenue"] as num?)?.toDouble(),
-    cost: (json["cost"] as num?)?.toDouble(),
-    profit: (json["profit"] as num?)?.toDouble(),
-    profitMargin: json["profit_margin"]?.toString(),
+    revenue: json["revenue"],
+    cost: json["cost"],
+    profit: json["profit"],
+    profitMargin: json["profit_margin"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "revenue": revenue,
+    "cost": cost,
+    "profit": profit,
+    "profit_margin": profitMargin,
+  };
+}
+
+class Total {
+  final String? revenue;
+  final String? cost;
+  final String? profit;
+  final String? profitMargin;
+
+  Total({this.revenue, this.cost, this.profit, this.profitMargin});
+
+  factory Total.fromJson(Map<String, dynamic> json) => Total(
+    revenue: json["revenue"],
+    cost: json["cost"],
+    profit: json["profit"],
+    profitMargin: json["profit_margin"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -140,9 +177,9 @@ class Today {
 class ResellerBreakdown {
   final int? id;
   final String? name;
-  final int? totalSales;
-  final double? totalReceived;
-  final double? totalDue;
+  final String? totalSales;
+  final String? totalReceived;
+  final String? totalDue;
 
   ResellerBreakdown({
     this.id,
@@ -154,11 +191,11 @@ class ResellerBreakdown {
 
   factory ResellerBreakdown.fromJson(Map<String, dynamic> json) =>
       ResellerBreakdown(
-        id: json["id"] == null ? null : json["id"],
-        name: json["name"] == null ? null : json["name"],
-        totalSales: json["total_sales"] == null ? null : json["total_sales"],
-        totalReceived: (json["total_received"] as num?)?.toDouble(),
-        totalDue: (json["total_due"] as num?)?.toDouble(),
+        id: json["id"],
+        name: json["name"],
+        totalSales: json["total_sales"],
+        totalReceived: json["total_received"],
+        totalDue: json["total_due"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -173,9 +210,9 @@ class ResellerBreakdown {
 class SupplierBreakdown {
   final int? id;
   final String? name;
-  final double? totalPurchases;
-  final double? totalPayments;
-  final double? totalDue;
+  final String? totalPurchases;
+  final String? totalPayments;
+  final String? totalDue;
 
   SupplierBreakdown({
     this.id,
@@ -187,11 +224,11 @@ class SupplierBreakdown {
 
   factory SupplierBreakdown.fromJson(Map<String, dynamic> json) =>
       SupplierBreakdown(
-        id: json["id"] == null ? null : json["id"],
-        name: json["name"] == null ? null : json["name"],
-        totalPurchases: (json["total_purchases"] as num?)?.toDouble(),
-        totalPayments: (json["total_payments"] as num?)?.toDouble(),
-        totalDue: (json["total_due"] as num?)?.toDouble(),
+        id: json["id"],
+        name: json["name"],
+        totalPurchases: json["total_purchases"],
+        totalPayments: json["total_payments"],
+        totalDue: json["total_due"],
       );
 
   Map<String, dynamic> toJson() => {

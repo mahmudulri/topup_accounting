@@ -13,73 +13,62 @@ class DashboardModel {
 
   factory DashboardModel.fromJson(Map<String, dynamic> json) => DashboardModel(
     success: json["success"],
-    summary: Summary.fromJson(json["summary"]),
+    summary: json["summary"] == null ? null : Summary.fromJson(json["summary"]),
   );
 
   Map<String, dynamic> toJson() => {
     "success": success,
-    "summary": summary!.toJson(),
+    "summary": summary?.toJson(),
   };
 }
+
+// ================= SUMMARY =================
 
 class Summary {
   final Suppliers? suppliers;
   final Resellers? resellers;
+  final Transactions? transactions;
   final Today? today;
 
-  Summary({this.suppliers, this.resellers, this.today});
+  Summary({this.suppliers, this.resellers, this.transactions, this.today});
 
   factory Summary.fromJson(Map<String, dynamic> json) => Summary(
-    suppliers: Suppliers.fromJson(json["suppliers"]),
-    resellers: Resellers.fromJson(json["resellers"]),
-    today: Today.fromJson(json["today"]),
+    suppliers: json["suppliers"] == null
+        ? null
+        : Suppliers.fromJson(json["suppliers"]),
+    resellers: json["resellers"] == null
+        ? null
+        : Resellers.fromJson(json["resellers"]),
+    transactions: json["transactions"] == null
+        ? null
+        : Transactions.fromJson(json["transactions"]),
+    today: json["today"] == null ? null : Today.fromJson(json["today"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "suppliers": suppliers!.toJson(),
-    "resellers": resellers!.toJson(),
-    "today": today!.toJson(),
+    "suppliers": suppliers?.toJson(),
+    "resellers": resellers?.toJson(),
+    "transactions": transactions?.toJson(),
+    "today": today?.toJson(),
   };
 }
 
-class Resellers {
-  final int? totalResellers;
-  final double? totalSales;
-  final double? totalReceivedFromResellers;
-  final double? totalResellerDue;
-
-  Resellers({
-    this.totalResellers,
-    this.totalSales,
-    this.totalReceivedFromResellers,
-    this.totalResellerDue,
-  });
-
-  factory Resellers.fromJson(Map<String, dynamic> json) => Resellers(
-    totalResellers: json["total_resellers"],
-    totalSales: (json["total_sales"] as num?)?.toDouble(),
-    totalReceivedFromResellers: (json["total_received_from_resellers"] as num?)
-        ?.toDouble(),
-    totalResellerDue: (json["total_reseller_due"] as num?)?.toDouble(),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "total_resellers": totalResellers,
-    "total_sales": totalSales,
-    "total_received_from_resellers": totalReceivedFromResellers,
-    "total_reseller_due": totalResellerDue,
-  };
-}
+// ================= SUPPLIERS =================
 
 class Suppliers {
   final int? totalSuppliers;
-  final double? totalPurchases;
-  final double? totalPaidToSuppliers;
-  final double? totalSupplierDue;
-  final double? totalStock;
+  final int? activeSuppliers;
+  final int? inactiveSuppliers;
+
+  final String? totalPurchases;
+  final String? totalPaidToSuppliers;
+  final String? totalSupplierDue;
+  final String? totalStock;
 
   Suppliers({
     this.totalSuppliers,
+    this.activeSuppliers,
+    this.inactiveSuppliers,
     this.totalPurchases,
     this.totalPaidToSuppliers,
     this.totalSupplierDue,
@@ -88,26 +77,90 @@ class Suppliers {
 
   factory Suppliers.fromJson(Map<String, dynamic> json) => Suppliers(
     totalSuppliers: json["total_suppliers"],
-    totalPurchases: (json["total_purchases"] as num?)?.toDouble(),
-    totalPaidToSuppliers: (json["total_paid_to_suppliers"] as num?)?.toDouble(),
-    totalSupplierDue: (json["total_supplier_due"] as num?)?.toDouble(),
-    totalStock: (json["total_stock"] as num?)?.toDouble(),
+    activeSuppliers: json["active_suppliers"],
+    inactiveSuppliers: json["inactive_suppliers"],
+    totalPurchases: json["total_purchases"],
+    totalPaidToSuppliers: json["total_paid_to_suppliers"],
+    totalSupplierDue: json["total_supplier_due"],
+    totalStock: json["total_stock"],
   );
 
   Map<String, dynamic> toJson() => {
     "total_suppliers": totalSuppliers,
+    "active_suppliers": activeSuppliers,
+    "inactive_suppliers": inactiveSuppliers,
     "total_purchases": totalPurchases,
     "total_paid_to_suppliers": totalPaidToSuppliers,
     "total_supplier_due": totalSupplierDue,
     "total_stock": totalStock,
   };
+
+  // 🔥 Helper getters (for calculation)
+  double get totalPurchasesDouble =>
+      double.tryParse(totalPurchases ?? "0") ?? 0;
+
+  double get totalPaidDouble =>
+      double.tryParse(totalPaidToSuppliers ?? "0") ?? 0;
+
+  double get totalDueDouble => double.tryParse(totalSupplierDue ?? "0") ?? 0;
+
+  double get totalStockDouble => double.tryParse(totalStock ?? "0") ?? 0;
 }
 
+// ================= RESELLERS =================
+
+class Resellers {
+  final int? totalResellers;
+  final int? activeResellers;
+  final int? inactiveResellers;
+
+  final String? totalSales;
+  final String? totalReceivedFromResellers;
+  final String? totalResellerDue;
+
+  Resellers({
+    this.totalResellers,
+    this.activeResellers,
+    this.inactiveResellers,
+    this.totalSales,
+    this.totalReceivedFromResellers,
+    this.totalResellerDue,
+  });
+
+  factory Resellers.fromJson(Map<String, dynamic> json) => Resellers(
+    totalResellers: json["total_resellers"],
+    activeResellers: json["active_resellers"],
+    inactiveResellers: json["inactive_resellers"],
+    totalSales: json["total_sales"],
+    totalReceivedFromResellers: json["total_received_from_resellers"],
+    totalResellerDue: json["total_reseller_due"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "total_resellers": totalResellers,
+    "active_resellers": activeResellers,
+    "inactive_resellers": inactiveResellers,
+    "total_sales": totalSales,
+    "total_received_from_resellers": totalReceivedFromResellers,
+    "total_reseller_due": totalResellerDue,
+  };
+
+  // 🔥 Helper getters
+  double get totalSalesDouble => double.tryParse(totalSales ?? "0") ?? 0;
+
+  double get totalReceivedDouble =>
+      double.tryParse(totalReceivedFromResellers ?? "0") ?? 0;
+
+  double get totalDueDouble => double.tryParse(totalResellerDue ?? "0") ?? 0;
+}
+
+// ================= TODAY =================
+
 class Today {
-  final double? purchases;
-  final double? sales;
-  final double? paymentsToSuppliers;
-  final double? paymentsFromResellers;
+  final String? purchases;
+  final String? sales;
+  final String? paymentsToSuppliers;
+  final String? paymentsFromResellers;
 
   Today({
     this.purchases,
@@ -117,11 +170,10 @@ class Today {
   });
 
   factory Today.fromJson(Map<String, dynamic> json) => Today(
-    purchases: (json["purchases"] as num?)?.toDouble(),
-    sales: (json["sales"] as num?)?.toDouble(),
-    paymentsToSuppliers: (json["payments_to_suppliers"] as num?)?.toDouble(),
-    paymentsFromResellers: (json["payments_from_resellers"] as num?)
-        ?.toDouble(),
+    purchases: json["purchases"],
+    sales: json["sales"],
+    paymentsToSuppliers: json["payments_to_suppliers"],
+    paymentsFromResellers: json["payments_from_resellers"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -130,4 +182,22 @@ class Today {
     "payments_to_suppliers": paymentsToSuppliers,
     "payments_from_resellers": paymentsFromResellers,
   };
+
+  // 🔥 Helper getters
+  double get purchasesDouble => double.tryParse(purchases ?? "0") ?? 0;
+
+  double get salesDouble => double.tryParse(sales ?? "0") ?? 0;
+}
+
+// ================= TRANSACTIONS =================
+
+class Transactions {
+  final int? total;
+
+  Transactions({this.total});
+
+  factory Transactions.fromJson(Map<String, dynamic> json) =>
+      Transactions(total: json["total"]);
+
+  Map<String, dynamic> toJson() => {"total": total};
 }

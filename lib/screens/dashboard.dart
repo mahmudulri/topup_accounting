@@ -6,12 +6,16 @@ import 'package:topup_accounting/widgets/drawer.dart';
 
 import '../controllers/dashboard_controller.dart';
 import '../controllers/myipcontroller.dart';
+import '../controllers/profit_controller.dart';
+import '../controllers/summary_controller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../global_controllers/scaffold_controller.dart';
 import '../helpers/compactnumber_helpder.dart';
 import '../utils/colors.dart';
 import '../widgets/balance_widget.dart';
 import '../widgets/custom_appbar.dart';
+import '../widgets/performanceoverview_widget.dart';
+import '../widgets/todays_activity_widget.dart';
 import 'myipdetails_screen.dart';
 import 'sell_topup_screen.dart';
 
@@ -29,6 +33,14 @@ class _DashboardState extends State<Dashboard> {
   final scaffoldController = Get.find<ScaffoldController>();
 
   DashboardController dashboardController = Get.put(DashboardController());
+
+  ProfitController profitController = Get.put(ProfitController());
+
+  @override
+  void initState() {
+    super.initState();
+    profitController.fetchprofitData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,100 +78,102 @@ class _DashboardState extends State<Dashboard> {
         height: screenHeight,
         width: screenWidth,
         child: Obx(
-          () => dashboardController.isLoading.value == false
+          () =>
+              dashboardController.isLoading.value == false &&
+                  profitController.isLoading.value == false
               ? ListView(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(12, 5, 12, 0),
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color: AppColors.cardBg,
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(
-                                color: Colors.grey.shade200,
-                                width: 1.5,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.04),
-                                  blurRadius: 8,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: Row(
-                              children: periods.map((key) {
-                                final isSel = _period == key;
-                                return GestureDetector(
-                                  onTap: () => setState(() => _period = key),
-                                  child: AnimatedContainer(
-                                    duration: Duration(milliseconds: 200),
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                      vertical: 8,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: isSel
-                                          ? AppColors.primaryColor
-                                          : Colors.transparent,
-                                      borderRadius: BorderRadius.circular(24),
-                                    ),
-                                    child: Text(
-                                      languagesController.tr(key),
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: isSel
-                                            ? FontWeight.w600
-                                            : FontWeight.w400,
-                                        color: isSel
-                                            ? Colors.white
-                                            : AppColors.mutedText,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          ),
+                    // Padding(
+                    //   padding: EdgeInsets.fromLTRB(12, 5, 12, 0),
+                    //   child: Row(
+                    //     children: [
+                    //       Container(
+                    //         padding: EdgeInsets.all(4),
+                    //         decoration: BoxDecoration(
+                    //           color: AppColors.cardBg,
+                    //           borderRadius: BorderRadius.circular(30),
+                    //           border: Border.all(
+                    //             color: Colors.grey.shade200,
+                    //             width: 1.5,
+                    //           ),
+                    //           boxShadow: [
+                    //             BoxShadow(
+                    //               color: Colors.black.withOpacity(0.04),
+                    //               blurRadius: 8,
+                    //               offset: Offset(0, 2),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //         child: Row(
+                    //           children: periods.map((key) {
+                    //             final isSel = _period == key;
+                    //             return GestureDetector(
+                    //               onTap: () => setState(() => _period = key),
+                    //               child: AnimatedContainer(
+                    //                 duration: Duration(milliseconds: 200),
+                    //                 padding: EdgeInsets.symmetric(
+                    //                   horizontal: 16,
+                    //                   vertical: 8,
+                    //                 ),
+                    //                 decoration: BoxDecoration(
+                    //                   color: isSel
+                    //                       ? AppColors.primaryColor
+                    //                       : Colors.transparent,
+                    //                   borderRadius: BorderRadius.circular(24),
+                    //                 ),
+                    //                 child: Text(
+                    //                   languagesController.tr(key),
+                    //                   style: TextStyle(
+                    //                     fontSize: 13,
+                    //                     fontWeight: isSel
+                    //                         ? FontWeight.w600
+                    //                         : FontWeight.w400,
+                    //                     color: isSel
+                    //                         ? Colors.white
+                    //                         : AppColors.mutedText,
+                    //                   ),
+                    //                 ),
+                    //               ),
+                    //             );
+                    //           }).toList(),
+                    //         ),
+                    //       ),
 
-                          Spacer(),
+                    //       Spacer(),
 
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              width: 42,
-                              height: 42,
-                              decoration: BoxDecoration(
-                                color: AppColors.cardBg,
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: Colors.grey.shade200,
-                                  width: 1.5,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.04),
-                                    blurRadius: 8,
-                                    offset: Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              child: GestureDetector(
-                                onTap: () {},
-                                child: Icon(
-                                  Icons.sync_rounded,
-                                  color: AppColors.labelText,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    //       GestureDetector(
+                    //         onTap: () {},
+                    //         child: Container(
+                    //           width: 42,
+                    //           height: 42,
+                    //           decoration: BoxDecoration(
+                    //             color: AppColors.cardBg,
+                    //             shape: BoxShape.circle,
+                    //             border: Border.all(
+                    //               color: Colors.grey.shade200,
+                    //               width: 1.5,
+                    //             ),
+                    //             boxShadow: [
+                    //               BoxShadow(
+                    //                 color: Colors.black.withOpacity(0.04),
+                    //                 blurRadius: 8,
+                    //                 offset: Offset(0, 2),
+                    //               ),
+                    //             ],
+                    //           ),
+                    //           child: GestureDetector(
+                    //             onTap: () {},
+                    //             child: Icon(
+                    //               Icons.sync_rounded,
+                    //               color: AppColors.labelText,
+                    //               size: 20,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
 
                     // inside your ListView children:
                     Padding(
@@ -177,17 +191,15 @@ class _DashboardState extends State<Dashboard> {
                             icon: Icons.inventory_2_outlined,
                             iconColor: const Color(0xFF5B8DEF),
                             iconBgColor: const Color(0xFFEEF4FF),
-                            value: formatCompactNumber(
-                              dashboardController
-                                  .alldashboaddata
-                                  .value
-                                  .summary!
-                                  .suppliers!
-                                  .totalStock!
-                                  .toDouble(),
-                            ),
+                            value: dashboardController
+                                .alldashboaddata
+                                .value
+                                .summary!
+                                .suppliers!
+                                .totalStock!
+                                .toString(),
                             sub:
-                                'AFG ${formatedprice(dashboardController.alldashboaddata.value.summary!.suppliers!.totalStock!.toDouble())}',
+                                'AFG ${dashboardController.alldashboaddata.value.summary!.suppliers!.totalStock.toString()}',
                             label: languagesController.tr("TOTAL_STOCK"),
                             bottomRight: '80.0%',
                             bottomRightColor: AppColors.primaryColor,
@@ -228,6 +240,54 @@ class _DashboardState extends State<Dashboard> {
                         ],
                       ),
                     ),
+
+                    SizedBox(height: 10),
+                    PerformanceOverviewCard(
+                      revenue: profitController
+                          .allprofitData
+                          .value
+                          .profitAnalysis!
+                          .total!
+                          .revenue
+                          .toString(),
+                      // revenueChange: '+12.5%',
+                      revenuePositive: true,
+                      cost: profitController
+                          .allprofitData
+                          .value
+                          .profitAnalysis!
+                          .total!
+                          .cost!
+                          .toString(),
+
+                      // costChange: '-8.2%',
+                      costPositive: false,
+                      profitMargin: profitController
+                          .allprofitData
+                          .value
+                          .profitAnalysis!
+                          .total!
+                          .profitMargin!
+                          .toString(),
+                      profitLabel: 'Overall',
+                      netBonus: profitController
+                          .allprofitData
+                          .value
+                          .bonusAnalysis!
+                          .netBonusImpact
+                          .toString(),
+                      netBonusLabel: 'units',
+                    ),
+                    SizedBox(height: 10),
+                    // TodaysActivityCard(
+                    //   purchasesAmount: "120",
+                    //   purchasesTransactions: 0,
+                    //   salesAmount: 'AFG 0',
+                    //   salesTransactions: 0,
+                    //   todaysProfit: '+AFG 0',
+                    //   profitMargin: '0%',
+                    //   dailyTarget: 'AFG 0',
+                    // ),
                   ],
                 )
               : Center(child: CircularProgressIndicator()),
@@ -235,4 +295,9 @@ class _DashboardState extends State<Dashboard> {
       ),
     );
   }
+}
+
+String formatDouble(double? value) {
+  double v = value ?? 0;
+  return v.toStringAsFixed(2);
 }

@@ -232,7 +232,7 @@ class _SupplierViewScreenState extends State<SupplierViewScreen> {
                   child: Obx(
                     () => supplierDetailsController.isLoading.value == false
                         ? DefaultTabController(
-                            length: 3,
+                            length: 2,
                             child: Column(
                               children: [
                                 // 🔹 Tab Bar
@@ -260,11 +260,11 @@ class _SupplierViewScreenState extends State<SupplierViewScreen> {
                                           "TRANSACTIONS",
                                         ),
                                       ),
-                                      Tab(
-                                        text: languagesController.tr(
-                                          "ANALYTICS",
-                                        ),
-                                      ),
+                                      // Tab(
+                                      //   text: languagesController.tr(
+                                      //     "ANALYTICS",
+                                      //   ),
+                                      // ),
                                     ],
                                   ),
                                 ),
@@ -694,13 +694,13 @@ class _SupplierViewScreenState extends State<SupplierViewScreen> {
                                       ),
 
                                       // Analytics Tab
-                                      Center(
-                                        child: KText(
-                                          text: languagesController.tr(
-                                            "ANALYTICS",
-                                          ),
-                                        ),
-                                      ),
+                                      // Center(
+                                      //   child: KText(
+                                      //     text: languagesController.tr(
+                                      //       "ANALYTICS",
+                                      //     ),
+                                      //   ),
+                                      // ),
                                     ],
                                   ),
                                 ),
