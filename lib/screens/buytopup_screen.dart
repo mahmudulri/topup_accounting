@@ -162,14 +162,15 @@ class _BuytopupScreenState extends State<BuytopupScreen> {
                       /// 🔹 Select
                       onChanged: (value) {
                         selectedSupplier.value = value;
-                        print(value!.name);
+                        print(value!.bonusPercentage.toString());
 
-                        buytopUpController.bonus.value = value.bonusPercentage!
-                            .toDouble();
-                        buytopUpController.supplierID.value = value.id
+                        buytopUpController.bonus.value =
+                            double.tryParse(value.bonusPercentage ?? '0') ??
+                            0.0;
+                        buytopUpController.supplierID.value = value.id!
                             .toString();
 
-                        buytopUpController.calculate();
+                        // buytopUpController.calculate();
                       },
                     ),
                   ),

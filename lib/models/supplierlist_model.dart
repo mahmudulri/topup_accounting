@@ -23,17 +23,23 @@ class SuppliersListModel {
       SuppliersListModel(
         status: json["status"],
         message: json["message"],
-        suppliers: List<Supplier>.from(
-          json["suppliers"].map((x) => Supplier.fromJson(x)),
-        ),
-        pagination: Pagination.fromJson(json["pagination"]),
+        suppliers: json["suppliers"] == null
+            ? []
+            : List<Supplier>.from(
+                json["suppliers"].map((x) => Supplier.fromJson(x)),
+              ),
+        pagination: json["pagination"] == null
+            ? null
+            : Pagination.fromJson(json["pagination"]),
       );
 
   Map<String, dynamic> toJson() => {
     "status": status,
     "message": message,
-    "suppliers": List<dynamic>.from(suppliers!.map((x) => x.toJson())),
-    "pagination": pagination!.toJson(),
+    "suppliers": suppliers == null
+        ? []
+        : List<dynamic>.from(suppliers!.map((x) => x.toJson())),
+    "pagination": pagination?.toJson(),
   };
 }
 
@@ -41,19 +47,27 @@ class Pagination {
   final int? totalItems;
   final int? totalPages;
   final int? currentPage;
+  final int? itemPerPage;
 
-  Pagination({this.totalItems, this.totalPages, this.currentPage});
+  Pagination({
+    this.totalItems,
+    this.totalPages,
+    this.currentPage,
+    this.itemPerPage,
+  });
 
   factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
     totalItems: json["total_items"],
     totalPages: json["total_pages"],
     currentPage: json["current_page"],
+    itemPerPage: json["item_per_page"],
   );
 
   Map<String, dynamic> toJson() => {
     "total_items": totalItems,
     "total_pages": totalPages,
     "current_page": currentPage,
+    "item_per_page": itemPerPage,
   };
 }
 
@@ -63,13 +77,16 @@ class Supplier {
   final String? name;
   final String? phone;
   final String? company;
-  final double? bonusPercentage;
-  final double? totalBuyAmount;
-  final double? totalBuyTopup;
-  final double? totalBuyTopupWithBonus;
-  final double? totalPaidAmount;
-  final double? totalDueAmount;
-  final double? currentStock;
+
+  // 🔥 NOW STRING
+  final String? bonusPercentage;
+  final String? totalBuyAmount;
+  final String? totalBuyTopup;
+  final String? totalBuyTopupWithBonus;
+  final String? totalPaidAmount;
+  final String? totalDueAmount;
+  final String? currentStock;
+
   final int? status;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -93,24 +110,22 @@ class Supplier {
   });
 
   factory Supplier.fromJson(Map<String, dynamic> json) => Supplier(
-    id: (json["id"] as num?)?.toInt(),
-    businessOwnerId: (json["business_owner_id"] as num?)?.toInt(),
+    id: json["id"],
+    businessOwnerId: json["business_owner_id"],
     name: json["name"],
     phone: json["phone"],
     company: json["company"],
 
-    // double safe
-    bonusPercentage: (json["bonus_percentage"] as num?)?.toDouble(),
-    totalBuyAmount: (json["total_buy_amount"] as num?)?.toDouble(),
-    totalPaidAmount: (json["total_paid_amount"] as num?)?.toDouble(),
+    // 🔥 STRING assign
+    bonusPercentage: json["bonus_percentage"],
+    totalBuyAmount: json["total_buy_amount"],
+    totalBuyTopup: json["total_buy_topup"],
+    totalBuyTopupWithBonus: json["total_buy_topup_with_bonus"],
+    totalPaidAmount: json["total_paid_amount"],
+    totalDueAmount: json["total_due_amount"],
+    currentStock: json["current_stock"],
 
-    // int safe
-    totalBuyTopup: (json["total_buy_topup"] as num?)?.toDouble(),
-    totalBuyTopupWithBonus: (json["total_buy_topup_with_bonus"] as num?)
-        ?.toDouble(),
-    totalDueAmount: (json["total_due_amount"] as num?)?.toDouble(),
-    currentStock: (json["current_stock"] as num?)?.toDouble(),
-    status: (json["status"] as num?)?.toInt(),
+    status: json["status"],
 
     createdAt: json["createdAt"] != null
         ? DateTime.parse(json["createdAt"])
@@ -137,4 +152,14 @@ class Supplier {
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
   };
+
+  // 🔥 Helper getters (VERY USEFUL)
+  double get totalBuyAmountDouble =>
+      double.tryParse(totalBuyAmount ?? "0") ?? 0;
+
+  double get totalPaidDouble => double.tryParse(totalPaidAmount ?? "0") ?? 0;
+
+  double get totalDueDouble => double.tryParse(totalDueAmount ?? "0") ?? 0;
+
+  double get stockDouble => double.tryParse(currentStock ?? "0") ?? 0;
 }

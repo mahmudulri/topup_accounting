@@ -123,7 +123,7 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                               company: data.company,
                               totalPurchase: data.totalBuyAmount.toString(),
                               totalPaid: data.totalPaidAmount.toString(),
-                              totalDue: data.totalDueAmount!.toStringAsFixed(0),
+                              totalDue: data.totalDueAmount!.toString(),
                               currentStock: data.currentStock.toString(),
                               phone: data.phone,
                               created: data.createdAt.toString(),
@@ -155,8 +155,7 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                             totalDueAmount: formatCompactNumber(
                               double.parse(data.totalDueAmount.toString()),
                             ),
-                            totalDueFormatted: data.totalDueAmount!
-                                .toStringAsFixed(0),
+                            totalDueFormatted: data.totalDueAmount!.toString(),
                           ),
                           actions: SupplierCardActions(
                             onBuy: () {
@@ -189,8 +188,7 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                                   company: data.company,
                                   totalPurchase: data.totalBuyAmount.toString(),
                                   totalPaid: data.totalPaidAmount.toString(),
-                                  totalDue: data.totalDueAmount!
-                                      .toStringAsFixed(0),
+                                  totalDue: data.totalDueAmount!.toString(),
                                   currentStock: data.currentStock.toString(),
                                   phone: data.phone,
                                   created: data.createdAt.toString(),

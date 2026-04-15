@@ -66,16 +66,16 @@ class Pagination {
 }
 
 class Summary {
-  final double? totalBaseAmount;
-  final double? totalPaidAmount;
-  final double? totalBonusAmount;
+  final String? totalBaseAmount;
+  final String? totalPaidAmount;
+  final String? totalBonusAmount;
 
   Summary({this.totalBaseAmount, this.totalPaidAmount, this.totalBonusAmount});
 
   factory Summary.fromJson(Map<String, dynamic> json) => Summary(
-    totalBaseAmount: (json["total_base_amount"] as num?)?.toDouble(),
-    totalPaidAmount: (json["total_paid_amount"] as num?)?.toDouble(),
-    totalBonusAmount: (json["total_bonus_amount"] as num?)?.toDouble(),
+    totalBaseAmount: json["total_base_amount"],
+    totalPaidAmount: json["total_paid_amount"],
+    totalBonusAmount: json["total_bonus_amount"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -83,6 +83,13 @@ class Summary {
     "total_paid_amount": totalPaidAmount,
     "total_bonus_amount": totalBonusAmount,
   };
+
+  // 🔥 getters
+  double get totalBaseDouble => double.tryParse(totalBaseAmount ?? "0") ?? 0;
+
+  double get totalPaidDouble => double.tryParse(totalPaidAmount ?? "0") ?? 0;
+
+  double get totalBonusDouble => double.tryParse(totalBonusAmount ?? "0") ?? 0;
 }
 
 class Transaction {
@@ -91,18 +98,22 @@ class Transaction {
   final int? supplierId;
   final int? resellerId;
   final String? transactionType;
-  final double? baseAmount;
-  final double? bonusPercentage;
-  final double? bonusAmount;
-  final double? totalAmount;
-  final double? paidAmount;
-  final double? dueAmount;
-  final double? previousDue;
+
+  final String? baseAmount;
+  final String? bonusPercentage;
+  final String? bonusAmount;
+  final String? totalAmount;
+  final String? paidAmount;
+  final String? dueAmount;
+  final String? previousDue;
+
   final String? referenceNo;
   final String? notes;
+
   final DateTime? transactionDate;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+
   final Supplier? supplier;
   final Reseller? reseller;
 
@@ -129,26 +140,23 @@ class Transaction {
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
-    id: json["id"] == null ? null : json["id"],
-    businessOwnerId: json["business_owner_id"] == null
-        ? null
-        : json["business_owner_id"],
-    supplierId: json["supplier_id"] == null ? null : json["supplier_id"],
-    resellerId: json["reseller_id"] == null ? null : json["reseller_id"],
-    transactionType: json["transaction_type"] == null
-        ? null
-        : json["transaction_type"],
+    id: json["id"],
+    businessOwnerId: json["business_owner_id"],
+    supplierId: json["supplier_id"],
+    resellerId: json["reseller_id"],
+    transactionType: json["transaction_type"],
 
-    baseAmount: (json["base_amount"] as num?)?.toDouble(),
-    bonusPercentage: (json["bonus_percentage"] as num?)?.toDouble(),
-    bonusAmount: (json["bonus_amount"] as num?)?.toDouble(),
-    totalAmount: (json["total_amount"] as num?)?.toDouble(),
-    paidAmount: (json["paid_amount"] as num?)?.toDouble(),
-    dueAmount: (json["due_amount"] as num?)?.toDouble(),
-    previousDue: (json["previous_due"] as num?)?.toDouble(),
+    baseAmount: json["base_amount"],
+    bonusPercentage: json["bonus_percentage"],
+    bonusAmount: json["bonus_amount"],
+    totalAmount: json["total_amount"],
+    paidAmount: json["paid_amount"],
+    dueAmount: json["due_amount"],
+    previousDue: json["previous_due"],
 
-    referenceNo: json["reference_no"] == null ? null : json["reference_no"],
-    notes: json["notes"] == null ? null : json["notes"],
+    referenceNo: json["reference_no"],
+    notes: json["notes"],
+
     transactionDate: json["transaction_date"] == null
         ? null
         : DateTime.parse(json["transaction_date"]),
@@ -158,6 +166,7 @@ class Transaction {
     updatedAt: json["updatedAt"] == null
         ? null
         : DateTime.parse(json["updatedAt"]),
+
     supplier: json["supplier"] == null
         ? null
         : Supplier.fromJson(json["supplier"]),
@@ -181,28 +190,21 @@ class Transaction {
     "previous_due": previousDue,
     "reference_no": referenceNo,
     "notes": notes,
-    "transaction_date": transactionDate!.toIso8601String(),
-    "createdAt": createdAt!.toIso8601String(),
-    "updatedAt": updatedAt!.toIso8601String(),
-    "supplier": supplier!.toJson(),
-    "reseller": reseller!.toJson(),
+    "transaction_date": transactionDate?.toIso8601String(),
+    "createdAt": createdAt?.toIso8601String(),
+    "updatedAt": updatedAt?.toIso8601String(),
+    "supplier": supplier?.toJson(),
+    "reseller": reseller?.toJson(),
   };
-}
 
-class Reseller {
-  final int? id;
-  final String? name;
-  final String? city;
+  // 🔥 getters (VERY IMPORTANT)
+  double get baseAmountDouble => double.tryParse(baseAmount ?? "0") ?? 0;
 
-  Reseller({this.id, this.name, this.city});
+  double get totalAmountDouble => double.tryParse(totalAmount ?? "0") ?? 0;
 
-  factory Reseller.fromJson(Map<String, dynamic> json) => Reseller(
-    id: json["id"] == null ? null : json["id"],
-    name: json["name"] == null ? null : json["name"],
-    city: json["city"] == null ? null : json["city"],
-  );
+  double get paidAmountDouble => double.tryParse(paidAmount ?? "0") ?? 0;
 
-  Map<String, dynamic> toJson() => {"id": id, "name": name, "city": city};
+  double get dueAmountDouble => double.tryParse(dueAmount ?? "0") ?? 0;
 }
 
 class Supplier {
@@ -212,11 +214,21 @@ class Supplier {
 
   Supplier({this.id, this.name, this.company});
 
-  factory Supplier.fromJson(Map<String, dynamic> json) => Supplier(
-    id: json["id"] == null ? null : json["id"],
-    name: json["name"] == null ? null : json["name"],
-    company: json["company"] == null ? null : json["company"],
-  );
+  factory Supplier.fromJson(Map<String, dynamic> json) =>
+      Supplier(id: json["id"], name: json["name"], company: json["company"]);
 
   Map<String, dynamic> toJson() => {"id": id, "name": name, "company": company};
+}
+
+class Reseller {
+  final int? id;
+  final String? name;
+  final String? city;
+
+  Reseller({this.id, this.name, this.city});
+
+  factory Reseller.fromJson(Map<String, dynamic> json) =>
+      Reseller(id: json["id"], name: json["name"], city: json["city"]);
+
+  Map<String, dynamic> toJson() => {"id": id, "name": name, "city": city};
 }

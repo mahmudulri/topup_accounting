@@ -572,21 +572,31 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                     }
 
                                     final double baseAmount =
-                                        (data.baseAmount as num?)?.toDouble() ??
-                                        0;
-                                    final double paidAmount =
-                                        (data.paidAmount as num?)?.toDouble() ??
-                                        0;
-                                    final double dueAmount =
-                                        (data.dueAmount as num?)?.toDouble() ??
-                                        0;
-                                    final double previousdeu =
-                                        (data.previousDue as num?)
-                                            ?.toDouble() ??
+                                        double.tryParse(
+                                          data.baseAmount ?? "0",
+                                        ) ??
                                         0;
 
-                                    final double partialamount =
-                                        dueAmount - previousdeu;
+                                    final double paidAmount =
+                                        double.tryParse(
+                                          data.paidAmount ?? "0",
+                                        ) ??
+                                        0;
+
+                                    final double dueAmount =
+                                        double.tryParse(
+                                          data.dueAmount ?? "0",
+                                        ) ??
+                                        0;
+
+                                    final double previousDue =
+                                        double.tryParse(
+                                          data.previousDue ?? "0",
+                                        ) ??
+                                        0;
+
+                                    final double partialAmount =
+                                        dueAmount - previousDue;
 
                                     // ── card ─────────────────────────────────────────────────
                                     return Container(
@@ -721,7 +731,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                                   label: languagesController.tr(
                                                     "BASE_AMOUNT",
                                                   ),
-                                                  value: baseAmount,
+                                                  value: baseAmount.toString(),
                                                   color: Color(0xFF64748B),
                                                 ),
                                                 _divider(),
@@ -729,7 +739,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                                   label: languagesController.tr(
                                                     "PAID_AMOUNT",
                                                   ),
-                                                  value: paidAmount,
+                                                  value: paidAmount.toString(),
                                                   color: Color(0xFF10B981),
                                                 ),
                                                 _divider(),
@@ -737,10 +747,12 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                                   label: languagesController.tr(
                                                     "PARTIAL",
                                                   ),
-                                                  value: partialamount,
-                                                  color: partialamount > 0
-                                                      ? Color(0xFFDC2626)
-                                                      : Color(0xFF64748B),
+                                                  value: partialAmount
+                                                      .toString(),
+
+                                                  color: partialAmount > 0
+                                                      ? const Color(0xFFDC2626)
+                                                      : const Color(0xFF64748B),
                                                 ),
                                               ],
                                             ),
@@ -805,7 +817,7 @@ class _AmountTile extends StatelessWidget {
   _AmountTile({required this.label, required this.value, required this.color});
 
   final String label;
-  final double value;
+  final String value;
   final Color color;
 
   @override
@@ -815,7 +827,7 @@ class _AmountTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "${value.toStringAsFixed(2)}",
+            "${value}",
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,
