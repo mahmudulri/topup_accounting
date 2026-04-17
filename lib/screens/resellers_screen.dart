@@ -126,15 +126,50 @@ class _ResellersScreenState extends State<ResellersScreen> {
                             totalsales: data.totalSellAmount.toString(),
                             city: data.city.toString(),
                             phone: data.phone.toString(),
-                            lastContact: convertToDate(
+
+                            createdat: convertToFormattedDate(
                               data.createdAt.toString(),
                             ),
-                            bonusPercentage: 5,
-                            totalBuyAmount: '5.0L',
-                            totalBuyTopupWithBonus: '5.3L',
-                            currentStock: '4.3L',
-                            totalDueAmount: '120K',
-                            totalDueFormatted: 'AFG 120,000',
+
+                            bonusPercentage: data.bonusPercentage.toString(),
+                            withbonus: data.totalSellTopupWithBonus.toString(),
+                            totalDueAmount: data.totalDueAmount.toString(),
+
+                            // ✅ Bonus Given
+                            bonusGiven:
+                                ((double.tryParse(
+                                              data.totalSellTopupWithBonus
+                                                  .toString(),
+                                            ) ??
+                                            0) -
+                                        (double.tryParse(
+                                              data.totalSellAmount.toString(),
+                                            ) ??
+                                            0))
+                                    .toStringAsFixed(2),
+
+                            // ✅ Collection Ratio (MAIN FIX)
+                            currentRatio: (() {
+                              final totalSales =
+                                  double.tryParse(
+                                    data.totalSellAmount.toString(),
+                                  ) ??
+                                  0;
+
+                              final due =
+                                  double.tryParse(
+                                    data.totalDueAmount.toString(),
+                                  ) ??
+                                  0;
+
+                              final received = totalSales - due;
+
+                              if (totalSales == 0) return "0";
+
+                              final ratio = (received / totalSales) * 100;
+
+                              return ratio.toStringAsFixed(1); // 69.2
+                            })(),
                           ),
                           actions: ResellerCardActions(
                             onBuy: () {},

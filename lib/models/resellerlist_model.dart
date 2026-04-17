@@ -150,13 +150,13 @@ class Reseller {
   };
 
   // 🔥 Helper getters (VERY IMPORTANT)
-  double get totalSellDouble => double.tryParse(totalSellAmount ?? "0") ?? 0;
+  // double get totalSellDouble => double.tryParse(totalSellAmount ?? "0") ?? 0;
 
-  double get totalReceivedDouble =>
-      double.tryParse(totalReceivedAmount ?? "0") ?? 0;
+  // double get totalReceivedDouble =>
+  //     double.tryParse(totalReceivedAmount ?? "0") ?? 0;
 
-  double get totalDueDouble => double.tryParse(totalDueAmount ?? "0") ?? 0;
+  // double get totalDueDouble => double.tryParse(totalDueAmount ?? "0") ?? 0;
 
-  double get totalWithBonusDouble =>
-      double.tryParse(totalSellTopupWithBonus ?? "0") ?? 0;
+  // double get totalWithBonusDouble =>
+  //     double.tryParse(totalSellTopupWithBonus ?? "0") ?? 0;
 }

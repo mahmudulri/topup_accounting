@@ -4,6 +4,7 @@
 // ═══════════════════════════════════════════════════════════════
 
 import 'package:flutter/material.dart';
+import 'package:topup_accounting/controllers/buytop_up_controller.dart';
 import 'package:topup_accounting/utils/colors.dart';
 
 // ───────────────────────────────────────────────────────────────
@@ -30,13 +31,12 @@ class ResellerCardData {
   final String status;
   final String totalsales;
   final String phone;
-  final String lastContact;
-  final double bonusPercentage;
-  final String totalBuyAmount;
-  final String totalBuyTopupWithBonus;
-  final String currentStock;
+  final String bonusPercentage;
+  final String currentRatio;
+  final String bonusGiven;
+  final String withbonus;
   final String totalDueAmount;
-  final String totalDueFormatted;
+  final String createdat;
 
   const ResellerCardData({
     required this.name,
@@ -44,13 +44,13 @@ class ResellerCardData {
     required this.status,
     required this.totalsales,
     required this.phone,
-    required this.lastContact,
     required this.bonusPercentage,
-    required this.totalBuyAmount,
-    required this.totalBuyTopupWithBonus,
-    required this.currentStock,
+    required this.currentRatio,
+    required this.bonusGiven,
+    required this.withbonus,
     required this.totalDueAmount,
-    required this.totalDueFormatted,
+
+    required this.createdat,
   });
 }
 
@@ -127,7 +127,10 @@ class ResellerCard extends StatelessWidget {
               _TopBand(data: data),
 
               _StatsRow(data: data),
-              _BonusRow(bonusPercentage: data.bonusPercentage),
+              _BonusRow(
+                bonusPercentage: data.bonusPercentage.toString(),
+                currentRatio: data.currentRatio,
+              ),
 
               _ActionsBar(actions: actions),
             ],
@@ -168,7 +171,7 @@ class _TopBand extends StatelessWidget {
                 Text(
                   data.name,
                   style: TextStyle(
-                    color: AppColors.labelText,
+                    color: AppColors.fontColor2,
                     fontSize: 16,
                     fontWeight: FontWeight.w800,
                   ),
@@ -176,18 +179,58 @@ class _TopBand extends StatelessWidget {
                 Text(
                   data.city,
                   style: TextStyle(
-                    color: AppColors.labelText,
+                    color: AppColors.fontColor2,
                     fontSize: 16,
                     fontWeight: FontWeight.w300,
                   ),
                 ),
-                Text(
-                  data.phone,
-                  style: TextStyle(
-                    color: AppColors.labelText,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                  ),
+                Row(
+                  children: [
+                    Icon(Icons.call, color: AppColors.fontColor2, size: 16),
+                    SizedBox(width: 5),
+                    Text(
+                      data.phone,
+                      style: TextStyle(
+                        color: AppColors.fontColor2,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.percent, color: AppColors.fontColor2, size: 16),
+                    SizedBox(width: 5),
+                    Text(
+                      data.bonusPercentage.toString() +
+                          "%"
+                              " " +
+                          languagesController.tr("BONUS"),
+                      style: TextStyle(
+                        color: AppColors.fontColor2,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.calendar_today,
+                      color: AppColors.fontColor2,
+                      size: 16,
+                    ),
+                    SizedBox(width: 5),
+                    Text(
+                      languagesController.tr("SINCE") +
+                          " " +
+                          data.createdat.toString(),
+                      style: TextStyle(
+                        color: AppColors.fontColor2,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -229,8 +272,10 @@ class _TopBand extends StatelessWidget {
 // 5. BONUS ROW
 // ───────────────────────────────────────────────────────────────
 class _BonusRow extends StatelessWidget {
-  final double bonusPercentage;
-  const _BonusRow({required this.bonusPercentage});
+  final String bonusPercentage;
+  final String currentRatio;
+
+  const _BonusRow({required this.bonusPercentage, required this.currentRatio});
 
   @override
   Widget build(BuildContext context) {
@@ -254,7 +299,7 @@ class _BonusRow extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(3),
               child: LinearProgressIndicator(
-                value: (bonusPercentage / 100).clamp(0.0, 1.0),
+                value: (double.tryParse(currentRatio) ?? 0) / 100,
                 minHeight: 6,
                 backgroundColor: Colors.black.withOpacity(0.07),
                 valueColor: const AlwaysStoppedAnimation<Color>(_kAmberBar),
@@ -269,7 +314,7 @@ class _BonusRow extends StatelessWidget {
               borderRadius: BorderRadius.circular(6),
             ),
             child: Text(
-              '${bonusPercentage.toStringAsFixed(0)}%',
+              '${double.tryParse(currentRatio)?.toStringAsFixed(1) ?? "0.0"}%',
               style: const TextStyle(
                 color: _kAmberText,
                 fontSize: 13,
@@ -309,14 +354,14 @@ class _StatsRow extends StatelessWidget {
             VerticalDivider(width: 0.5, color: div),
             _StatCell(
               label: 'With Bonus',
-              value: data.currentStock,
+              value: data.withbonus,
 
               valueColor: _kGreenVal,
             ),
             VerticalDivider(width: 0.5, color: div),
             _StatCell(
               label: 'Bonus Given',
-              value: data.totalDueAmount,
+              value: data.bonusGiven,
 
               valueColor: _kRedVal,
             ),
@@ -344,7 +389,7 @@ class _StatCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
+        padding: EdgeInsets.fromLTRB(16, 14, 16, 14),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -363,7 +408,7 @@ class _StatCell extends StatelessWidget {
             Text(
               value,
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 13,
                 fontWeight: FontWeight.w700,
                 color: valueColor,
               ),
@@ -387,7 +432,7 @@ class _InfoRows extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: Column(
-        children: [_InfoRow(label: 'Since', value: data.lastContact)],
+        children: [_InfoRow(label: 'Since', value: data.createdat)],
       ),
     );
   }
