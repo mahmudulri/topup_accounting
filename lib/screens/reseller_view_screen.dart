@@ -6,7 +6,29 @@ import '../utils/colors.dart';
 import '../widgets/custom_text.dart';
 
 class ResellerViewScreen extends StatelessWidget {
-  ResellerViewScreen({super.key});
+  String? resellerID;
+  String? status;
+  String? name;
+  String? phone;
+  String? city;
+  String? totalSales;
+  String? totalDue;
+  String? totalReceived;
+  String? totalBonus;
+  String? created;
+
+  ResellerViewScreen({
+    super.key,
+    this.resellerID,
+    this.status,
+    this.name,
+    this.city,
+    this.totalSales,
+    this.totalDue,
+    this.totalReceived,
+    this.totalBonus,
+    this.created,
+  });
 
   final languagesController = Get.find<LanguagesController>();
 

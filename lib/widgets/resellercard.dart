@@ -9,12 +9,8 @@ import 'package:topup_accounting/utils/colors.dart';
 // ───────────────────────────────────────────────────────────────
 // PALETTE
 // ───────────────────────────────────────────────────────────────
-const _kBandDark = Color(0xFF0C447C);
+
 const _kBandMid = AppColors.primaryColor;
-const _kBandAccent = Color(0xFF378ADD);
-const _kBandText = Color(0xFFE6F1FB);
-const _kBandSub = Color(0xFF85B7EB);
-const _kBandPill = Color(0xFFB5D4F4);
 const _kGreenDot = Color(0xFF5DCAA5);
 const _kBlueVal = Color(0xFF185FA5);
 const _kGreenVal = Color(0xFF3B6D11);
@@ -30,7 +26,9 @@ const _kRedBorder = Color(0xFFF09595);
 // ───────────────────────────────────────────────────────────────
 class ResellerCardData {
   final String name;
-
+  final String city;
+  final String status;
+  final String totalsales;
   final String phone;
   final String lastContact;
   final double bonusPercentage;
@@ -42,7 +40,9 @@ class ResellerCardData {
 
   const ResellerCardData({
     required this.name,
-
+    required this.city,
+    required this.status,
+    required this.totalsales,
     required this.phone,
     required this.lastContact,
     required this.bonusPercentage,
@@ -84,28 +84,54 @@ class ResellerCard extends StatelessWidget {
   final ResellerCardData data;
   final ResellerCardActions actions;
 
-  const ResellerCard({super.key, required this.data, required this.actions});
+  ResellerCard({super.key, required this.data, required this.actions});
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(16),
+    return Padding(
+      padding: EdgeInsets.all(5),
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: Colors.black.withOpacity(0.08), width: 0.5),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _TopBand(data: data),
-            _BonusRow(bonusPercentage: data.bonusPercentage),
-            _StatsRow(data: data),
-            _InfoRows(data: data),
-            _ActionsBar(actions: actions),
+          boxShadow: [
+            // Bottom shadow (main elevation)
+            BoxShadow(
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 16,
+              offset: Offset(0, 6),
+            ),
+
+            // Top shadow (subtle)
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 10,
+              offset: Offset(0, -4), // 👈 negative for top
+            ),
+
+            // Ambient soft shadow
+            BoxShadow(
+              color: Colors.black.withOpacity(0.02),
+              blurRadius: 4,
+              offset: Offset(0, 0),
+            ),
           ],
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(4.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _TopBand(data: data),
+
+              _StatsRow(data: data),
+              _BonusRow(bonusPercentage: data.bonusPercentage),
+
+              _ActionsBar(actions: actions),
+            ],
+          ),
         ),
       ),
     );
@@ -128,7 +154,7 @@ class _TopBand extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.primaryColor,
+      color: Colors.white,
       padding: EdgeInsets.fromLTRB(18, 18, 18, 14),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,13 +164,29 @@ class _TopBand extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 2),
+                SizedBox(height: 2),
                 Text(
                   data.name,
-                  style: const TextStyle(
-                    color: _kBandText,
+                  style: TextStyle(
+                    color: AppColors.labelText,
                     fontSize: 16,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                Text(
+                  data.city,
+                  style: TextStyle(
+                    color: AppColors.labelText,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                Text(
+                  data.phone,
+                  style: TextStyle(
+                    color: AppColors.labelText,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
@@ -156,24 +198,23 @@ class _TopBand extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: BoxDecoration(
-              color: _kBandMid,
+              color: Colors.green.withAlpha(50),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Row(
-              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
                   width: 7,
                   height: 7,
                   decoration: const BoxDecoration(
-                    color: _kGreenDot,
+                    color: Colors.green,
                     shape: BoxShape.circle,
                   ),
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  data.phone,
-                  style: const TextStyle(color: Colors.white, fontSize: 12),
+                  data.status == "1" ? "Active" : "Inactive",
+                  style: TextStyle(color: Colors.green, fontSize: 12),
                 ),
               ],
             ),
@@ -202,7 +243,7 @@ class _BonusRow extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'Bonus rate',
+            'Current Ratio',
             style: TextStyle(
               fontSize: 12,
               color: Theme.of(context).textTheme.bodySmall?.color,
@@ -260,23 +301,23 @@ class _StatsRow extends StatelessWidget {
         child: Row(
           children: [
             _StatCell(
-              label: 'Purchase',
-              value: data.totalBuyAmount,
-              hint: '+${data.totalBuyTopupWithBonus} with bonus',
+              label: 'Total Sales',
+              value: data.totalsales,
+
               valueColor: _kBlueVal,
             ),
             VerticalDivider(width: 0.5, color: div),
             _StatCell(
-              label: 'Stock',
+              label: 'With Bonus',
               value: data.currentStock,
-              hint: 'Available now',
+
               valueColor: _kGreenVal,
             ),
             VerticalDivider(width: 0.5, color: div),
             _StatCell(
-              label: 'Due',
+              label: 'Bonus Given',
               value: data.totalDueAmount,
-              hint: data.totalDueFormatted,
+
               valueColor: _kRedVal,
             ),
           ],
@@ -289,13 +330,13 @@ class _StatsRow extends StatelessWidget {
 class _StatCell extends StatelessWidget {
   final String label;
   final String value;
-  final String hint;
+
   final Color valueColor;
 
   const _StatCell({
     required this.label,
     required this.value,
-    required this.hint,
+
     required this.valueColor,
   });
 
@@ -308,34 +349,23 @@ class _StatCell extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              label.toUpperCase(),
+              label,
               style: TextStyle(
                 fontSize: 11,
-                letterSpacing: 0.5,
+
                 color: Theme.of(
                   context,
                 ).textTheme.bodySmall?.color?.withOpacity(0.7),
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             Text(
               value,
               style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
                 color: valueColor,
-                height: 1,
-              ),
-            ),
-            const SizedBox(height: 3),
-            Text(
-              hint,
-              style: TextStyle(
-                fontSize: 11,
-                color: Theme.of(
-                  context,
-                ).textTheme.bodySmall?.color?.withOpacity(0.6),
               ),
             ),
           ],
@@ -357,7 +387,7 @@ class _InfoRows extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: Column(
-        children: [_InfoRow(label: 'Last contact', value: data.lastContact)],
+        children: [_InfoRow(label: 'Since', value: data.lastContact)],
       ),
     );
   }

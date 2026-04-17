@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:topup_accounting/helpers/localtime_helper.dart';
 import '../controllers/delete_reseller_controller.dart';
 import '../controllers/reseller_list_controller.dart';
 import '../global_controllers/languages_controller.dart';
@@ -94,10 +95,13 @@ class _ResellersScreenState extends State<ResellersScreen> {
         width: screenWidth,
 
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.symmetric(horizontal: 3),
           child: Obx(
             () => resellerListController.isLoading.value == false
-                ? ListView.builder(
+                ? ListView.separated(
+                    separatorBuilder: (context, index) {
+                      return SizedBox(height: 0);
+                    },
                     itemCount:
                         resellerListController
                             .allresellers
@@ -111,113 +115,122 @@ class _ResellersScreenState extends State<ResellersScreen> {
                           .value
                           .resellers?[index];
 
-                      return ResellerCard(
-                        data: ResellerCardData(
-                          name: data!.name.toString(),
-
-                          phone: '01777777777',
-                          lastContact: 'Mar 12, 2026',
-                          bonusPercentage: 5,
-                          totalBuyAmount: '5.0L',
-                          totalBuyTopupWithBonus: '5.3L',
-                          currentStock: '4.3L',
-                          totalDueAmount: '120K',
-                          totalDueFormatted: 'AFG 120,000',
-                        ),
-                        actions: ResellerCardActions(
-                          onBuy: () {},
-                          onView: () {
-                            Get.to(() => ResellerViewScreen());
-                          },
-                          onEdit: () {
-                            upldateresellersheet(context, {
-                              "id": data.id,
-                              "name": data.name,
-                              "phone": data.phone,
-                              "city": data.city,
-                              "bonus_percentage": data.bonusPercentage,
-                            });
-                          },
-                          onUpdatePercent: () {},
-                          onPay: () {},
-                          onDisable: () {},
-                          onDelete: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  title: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.warning_amber_rounded,
-                                        color: Colors.orange,
-                                        size: 28,
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        languagesController.tr(
-                                          "DELETE_CONFIRMATION",
-                                        ),
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  content: Text(
-                                    languagesController.tr(
-                                      "ARE_YOU_SURE_YOU_WANT_TO_DELETE_THIS_ITEM",
+                      return GestureDetector(
+                        onTap: () {
+                          Get.to(() => ResellerViewScreen());
+                        },
+                        child: ResellerCard(
+                          data: ResellerCardData(
+                            name: data!.name.toString(),
+                            status: data.status.toString(),
+                            totalsales: data.totalSellAmount.toString(),
+                            city: data.city.toString(),
+                            phone: data.phone.toString(),
+                            lastContact: convertToDate(
+                              data.createdAt.toString(),
+                            ),
+                            bonusPercentage: 5,
+                            totalBuyAmount: '5.0L',
+                            totalBuyTopupWithBonus: '5.3L',
+                            currentStock: '4.3L',
+                            totalDueAmount: '120K',
+                            totalDueFormatted: 'AFG 120,000',
+                          ),
+                          actions: ResellerCardActions(
+                            onBuy: () {},
+                            onView: () {
+                              Get.to(() => ResellerViewScreen());
+                            },
+                            onEdit: () {
+                              upldateresellersheet(context, {
+                                "id": data.id,
+                                "name": data.name,
+                                "phone": data.phone,
+                                "city": data.city,
+                                "bonus_percentage": data.bonusPercentage,
+                              });
+                            },
+                            onUpdatePercent: () {},
+                            onPay: () {},
+                            onDisable: () {},
+                            onDelete: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
                                     ),
-
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(
-                                          context,
-                                        ).pop(); // Close dialog
-                                      },
-                                      child: Text(
-                                        languagesController.tr("CANCEL"),
-                                        style: TextStyle(
-                                          color: Colors.grey.shade700,
-                                          fontSize: 16,
+                                    title: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.warning_amber_rounded,
+                                          color: Colors.orange,
+                                          size: 28,
                                         ),
-                                      ),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          languagesController.tr(
+                                            "DELETE_CONFIRMATION",
+                                          ),
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(
-                                          context,
-                                        ).pop(); // Close dialog first
-                                        deleteResellerController.deletenow(
-                                          data.id.toString(),
-                                        );
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.red,
-                                        foregroundColor: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            10,
+                                    content: Text(
+                                      languagesController.tr(
+                                        "ARE_YOU_SURE_YOU_WANT_TO_DELETE_THIS_ITEM",
+                                      ),
+
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(
+                                            context,
+                                          ).pop(); // Close dialog
+                                        },
+                                        child: Text(
+                                          languagesController.tr("CANCEL"),
+                                          style: TextStyle(
+                                            color: Colors.grey.shade700,
+                                            fontSize: 16,
                                           ),
                                         ),
                                       ),
-                                      child: Text(
-                                        languagesController.tr("DELETE"),
-                                        style: TextStyle(fontSize: 16),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(
+                                            context,
+                                          ).pop(); // Close dialog first
+                                          deleteResellerController.deletenow(
+                                            data.id.toString(),
+                                          );
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.red,
+                                          foregroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              10,
+                                            ),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          languagesController.tr("DELETE"),
+                                          style: TextStyle(fontSize: 16),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ),
                       );
                       // return Container(
