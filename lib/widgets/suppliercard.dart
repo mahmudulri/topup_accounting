@@ -549,9 +549,7 @@ class _ActionsBar extends StatelessWidget {
 
 // ───────────────────────────────────────────────────────────────
 // 9. QUICK ACTION BUTTON
-//    Single button "Quick action ▾" — opens a popup menu
-//    with all 5 actions listed under a "Quick actions" header
-// ───────────────────────────────────────────────────────────────
+
 class _QuickActionButton extends StatelessWidget {
   final SupplierCardActions actions;
   const _QuickActionButton({required this.actions});
@@ -587,7 +585,7 @@ class _QuickActionButton extends StatelessWidget {
           enabled: false,
           height: 32,
           child: Text(
-            'QUICK ACTIONS',
+            'Quick Action',
             style: TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w500,

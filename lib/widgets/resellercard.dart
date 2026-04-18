@@ -1,16 +1,7 @@
-// ═══════════════════════════════════════════════════════════════
-// Reseller_card.dart
-// Import this file and call ResellerCard(data: …, actions: …)
-// ═══════════════════════════════════════════════════════════════
-
 import 'package:flutter/material.dart';
 import 'package:topup_accounting/controllers/buytop_up_controller.dart';
 import 'package:topup_accounting/utils/colors.dart';
 import 'package:topup_accounting/widgets/custom_text.dart';
-
-// ───────────────────────────────────────────────────────────────
-// PALETTE
-// ───────────────────────────────────────────────────────────────
 
 const _kBandMid = AppColors.primaryColor;
 const _kGreenDot = Color(0xFF5DCAA5);
@@ -23,9 +14,6 @@ const _kAmberBar = Color(0xFFEF9F27);
 const _kRedBg = Color(0xFFFCEBEB);
 const _kRedBorder = Color(0xFFF09595);
 
-// ───────────────────────────────────────────────────────────────
-// 1. DATA MODEL
-// ───────────────────────────────────────────────────────────────
 class ResellerCardData {
   final String name;
   final String city;
@@ -60,7 +48,7 @@ class ResellerCardData {
 // 2. ACTIONS MODEL
 // ───────────────────────────────────────────────────────────────
 class ResellerCardActions {
-  final VoidCallback? onBuy;
+  final VoidCallback? onSell;
   final VoidCallback? onView;
   final VoidCallback? onEdit;
   final VoidCallback? onUpdatePercent;
@@ -69,7 +57,7 @@ class ResellerCardActions {
   final VoidCallback? onDelete;
 
   const ResellerCardActions({
-    this.onBuy,
+    this.onSell,
     this.onView,
     this.onEdit,
     this.onUpdatePercent,
@@ -525,7 +513,7 @@ class _QuickActionButton extends StatelessWidget {
           enabled: false,
           height: 32,
           child: Text(
-            'QUICK ACTIONS',
+            'Quick Action',
             style: TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w500,
@@ -541,10 +529,10 @@ class _QuickActionButton extends StatelessWidget {
         // ── Menu items ────────────────────────────────────
         _menuItem(
           context: context,
-          value: 'buy',
+          value: 'sell',
           icon: Icons.shopping_cart_outlined,
-          label: 'Buy',
-          onTap: actions.onBuy,
+          label: 'Sell',
+          onTap: actions.onSell,
         ),
         _menuItem(
           context: context,
@@ -569,9 +557,9 @@ class _QuickActionButton extends StatelessWidget {
         // ),
         _menuItem(
           context: context,
-          value: 'pay',
+          value: 'collect',
           icon: Icons.credit_card_outlined,
-          label: 'Pay',
+          label: 'Collect',
           onTap: actions.onPay,
         ),
       ],

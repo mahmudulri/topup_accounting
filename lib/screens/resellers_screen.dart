@@ -9,6 +9,7 @@ import '../utils/colors.dart';
 import '../widgets/add_resellershet.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/resellercard.dart';
+import '../widgets/sell_to_resellersheet.dart';
 import '../widgets/update_resellersheet.dart';
 import 'reseller_view_screen.dart';
 
@@ -186,9 +187,41 @@ class _ResellersScreenState extends State<ResellersScreen> {
                             })(),
                           ),
                           actions: ResellerCardActions(
-                            onBuy: () {},
+                            onSell: () {
+                              sellTopUpController.baseAmount.value == 0.0;
+                              sellTopUpController.paidAmount.value == 0.0;
+                              sellTopUpController.baseAmountController.clear();
+                              sellTopUpController.paidAmountController.clear();
+                              sellTopUpController.referenceController.clear();
+                              sellTopUpController.notesController.clear();
+                              selltopupsheet(
+                                context: context,
+                                title: languagesController.tr("SELL_TOP_UP"),
+
+                                subtitle:
+                                    data.name.toString() +
+                                    " - " +
+                                    data.city.toString() +
+                                    " " +
+                                    "(${data.bonusPercentage} % ${languagesController.tr("BONUS")})",
+
+                                supplierID: data.id.toString(),
+                              );
+                            },
                             onView: () {
-                              Get.to(() => ResellerViewScreen());
+                              Get.to(
+                                () => ResellerViewScreen(
+                                  resellerID: data.id.toString(),
+                                  name: data.name,
+                                  status: data.status.toString(),
+                                  phone: data.phone,
+                                  city: data.city,
+                                  totalSales: data.totalSellAmount,
+                                  totalDue: data.totalDueAmount,
+                                  totalReceived: data.totalReceivedAmount,
+                                  totalWithBonus: data.totalSellTopupWithBonus,
+                                ),
+                              );
                             },
                             onEdit: () {
                               upldateresellersheet(context, {
@@ -282,79 +315,35 @@ class _ResellersScreenState extends State<ResellersScreen> {
                           ),
                         ),
                       );
-                      // return Container(
-                      //   height: 250,
-                      //   width: screenWidth,
-                      //   decoration: BoxDecoration(
-                      //     border: Border.all(width: 1, color: AppColors.borderColor),
-                      //   ),
-                      //   child: Padding(
-                      //     padding: EdgeInsets.all(12.0),
-                      //     child: Column(
-                      //       children: [
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [
-                      //             Text("Reseller Name"),
-                      //             Text(data!.name.toString()),
-                      //           ],
-                      //         ),
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [
-                      //             Text("Address"),
-                      //             Text(data.company.toString()),
-                      //           ],
-                      //         ),
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [Text("Contact"), Text(data.phone.toString())],
-                      //         ),
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [
-                      //             Text("Bonus"),
-                      //             Text(data.bonusPercentage.toString()),
-                      //           ],
-                      //         ),
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [
-                      //             Text("Purchase"),
-                      //             Text(data.totalBuyAmount.toString()),
-                      //           ],
-                      //         ),
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [
-                      //             Text("Purchase With bonus"),
-                      //             Text(data.totalBuyTopupWithBonus.toString()),
-                      //           ],
-                      //         ),
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [
-                      //             Text("Stock"),
-                      //             Text(data.currentStock.toString()),
-                      //           ],
-                      //         ),
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [
-                      //             Text("Due"),
-                      //             Text(data.totalDueAmount.toString()),
-                      //           ],
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // );
                     },
                   )
                 : Center(child: CircularProgressIndicator()),
           ),
         ),
       ),
+    );
+  }
+
+  void selltopupsheet({
+    required BuildContext context,
+    required String title,
+    required String subtitle,
+    required String supplierID,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return SellToResellersheet(
+          title: title,
+          subtitle: subtitle,
+          supplierID: supplierID,
+        );
+      },
     );
   }
 }
