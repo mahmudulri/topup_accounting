@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:topup_accounting/controllers/buytop_up_controller.dart';
 import 'package:topup_accounting/utils/colors.dart';
+import 'package:topup_accounting/widgets/custom_text.dart';
 
 // ───────────────────────────────────────────────────────────────
 // PALETTE
@@ -36,6 +37,7 @@ class ResellerCardData {
   final String bonusGiven;
   final String withbonus;
   final String totalDueAmount;
+  final String totalreceivedAmount;
   final String createdat;
 
   const ResellerCardData({
@@ -49,7 +51,7 @@ class ResellerCardData {
     required this.bonusGiven,
     required this.withbonus,
     required this.totalDueAmount,
-
+    required this.totalreceivedAmount,
     required this.createdat,
   });
 }
@@ -125,8 +127,12 @@ class ResellerCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               _TopBand(data: data),
-
+              DueReceivedBox(
+                deuamounut: data.totalDueAmount,
+                receivedAmount: data.totalreceivedAmount,
+              ),
               _StatsRow(data: data),
+
               _BonusRow(
                 bonusPercentage: data.bonusPercentage.toString(),
                 currentRatio: data.currentRatio,
@@ -241,7 +247,9 @@ class _TopBand extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: BoxDecoration(
-              color: Colors.green.withAlpha(50),
+              color: data.status == "1"
+                  ? Colors.green.withAlpha(50)
+                  : Colors.red.withAlpha(50),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Row(
@@ -249,15 +257,18 @@ class _TopBand extends StatelessWidget {
                 Container(
                   width: 7,
                   height: 7,
-                  decoration: const BoxDecoration(
-                    color: Colors.green,
+                  decoration: BoxDecoration(
+                    color: data.status == "1" ? Colors.green : Colors.red,
                     shape: BoxShape.circle,
                   ),
                 ),
                 const SizedBox(width: 6),
                 Text(
                   data.status == "1" ? "Active" : "Inactive",
-                  style: TextStyle(color: Colors.green, fontSize: 12),
+                  style: TextStyle(
+                    color: data.status == "1" ? Colors.green : Colors.red,
+                    fontSize: 12,
+                  ),
                 ),
               ],
             ),
@@ -423,55 +434,6 @@ class _StatCell extends StatelessWidget {
 // ───────────────────────────────────────────────────────────────
 // 7. INFO ROWS
 // ───────────────────────────────────────────────────────────────
-class _InfoRows extends StatelessWidget {
-  final ResellerCardData data;
-  const _InfoRows({required this.data});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18),
-      child: Column(
-        children: [_InfoRow(label: 'Since', value: data.createdat)],
-      ),
-    );
-  }
-}
-
-class _InfoRow extends StatelessWidget {
-  final String label;
-  final String value;
-  const _InfoRow({required this.label, required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    final div = Colors.black.withOpacity(0.07);
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: div, width: 0.5)),
-      ),
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 13,
-              color: Theme.of(
-                context,
-              ).textTheme.bodySmall?.color?.withOpacity(0.7),
-            ),
-          ),
-          Text(
-            value,
-            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 // ───────────────────────────────────────────────────────────────
 // 8. ACTIONS BAR
@@ -526,8 +488,7 @@ class _ActionsBar extends StatelessWidget {
 
 // ───────────────────────────────────────────────────────────────
 // 9. QUICK ACTION BUTTON
-//    Single button "Quick action ▾" — opens a popup menu
-//    with all 5 actions listed under a "Quick actions" header
+
 // ───────────────────────────────────────────────────────────────
 class _QuickActionButton extends StatelessWidget {
   final ResellerCardActions actions;
@@ -733,6 +694,76 @@ class _OutlineIconButton extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class DueReceivedBox extends StatelessWidget {
+  final String? deuamounut;
+  final String? receivedAmount;
+
+  DueReceivedBox({super.key, this.deuamounut, this.receivedAmount});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(5),
+      child: Container(
+        height: 70,
+        width: double.infinity,
+
+        child: Row(
+          children: [
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor.withAlpha(20),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      KText(text: languagesController.tr("DUE")),
+                      KText(
+                        text: deuamounut.toString(),
+                        fontWeight: FontWeight.w600,
+                        color: Colors.red,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: 10),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor.withAlpha(20),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      KText(text: languagesController.tr("RECEIVED")),
+                      KText(
+                        text: receivedAmount.toString(),
+                        fontWeight: FontWeight.w600,
+                        color: Colors.green,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

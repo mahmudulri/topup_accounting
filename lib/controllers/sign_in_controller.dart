@@ -59,6 +59,14 @@ class SignInController extends GetxController {
 
       if (response.statusCode == 200) {
         box.write("userToken", results["token"]);
+        box.write(
+          "currencyName",
+          results["business_owner"]["currency"]["name"],
+        );
+        box.write(
+          "currencyCode",
+          results["business_owner"]["currency"]["code"],
+        );
 
         // dashboardController.fetchDashboardData();
 

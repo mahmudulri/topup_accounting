@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:topup_accounting/screens/buytopup_screen.dart';
 import 'package:topup_accounting/widgets/drawer.dart';
 
@@ -42,6 +43,7 @@ class _DashboardState extends State<Dashboard> {
     profitController.fetchprofitData();
   }
 
+  final box = GetStorage();
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
@@ -184,34 +186,30 @@ class _DashboardState extends State<Dashboard> {
                         physics: const NeverScrollableScrollPhysics(),
                         crossAxisSpacing: 8,
                         mainAxisSpacing: 8,
-                        childAspectRatio: 1.0,
+                        childAspectRatio: 1.1,
                         children: [
                           // Card 1 — Total Stock
                           StatCard(
                             icon: Icons.inventory_2_outlined,
                             iconColor: const Color(0xFF5B8DEF),
                             iconBgColor: const Color(0xFFEEF4FF),
-                            value: dashboardController
-                                .alldashboaddata
-                                .value
-                                .summary!
-                                .suppliers!
-                                .totalStock!
-                                .toString(),
-                            sub:
-                                'AFG ${dashboardController.alldashboaddata.value.summary!.suppliers!.totalStock.toString()}',
+                            value:
+                                " ${box.read("currencyCode")} ${dashboardController.alldashboaddata.value.summary!.suppliers!.totalStock!.toString()}",
+
                             label: languagesController.tr("TOTAL_STOCK"),
-                            bottomRight: '80.0%',
+                            bottomRight:
+                                '${dashboardController.stockPercentage.toStringAsFixed(1)}%',
                             bottomRightColor: AppColors.primaryColor,
                           ),
 
-                          // Card 2 — Supplier Due
+                          // Card 2 — Supplier Due box.read("currencyCode")
                           StatCard(
                             icon: Icons.trending_down_rounded,
                             iconColor: const Color(0xFFFF6B6B),
                             iconBgColor: const Color(0xFFFFEEEE),
-                            value: 'AFG 120,000',
-                            sub: '3 ${languagesController.tr("PENDING")}',
+                            value:
+                                " ${box.read("currencyCode")} ${dashboardController.alldashboaddata.value.summary!.suppliers!.totalSupplierDue!.toString()}",
+                            // sub: '3 ${languagesController.tr("PENDING")}',
                             label: languagesController.tr("SUPPLIER_DUE"),
                             badge: languagesController.tr("HIGH_DUE"),
                             badgeColor: const Color(0xFFFF9800),
@@ -223,8 +221,10 @@ class _DashboardState extends State<Dashboard> {
                             icon: Icons.trending_up_rounded,
                             iconColor: AppColors.primaryColor,
                             iconBgColor: const Color(0xFFE8FBF5),
-                            value: 'AFG 40,000',
-                            sub: '1 ${languagesController.tr("PENDING")}',
+                            value:
+                                " ${box.read("currencyCode")} ${profitController.allprofitData.value.dueAnalysis!.totalResellerDue.toString()}",
+
+                            // sub: '1 ${languagesController.tr("PENDING")}',
                             label: languagesController.tr("RESELLER_DUE"),
                           ),
 
@@ -233,8 +233,9 @@ class _DashboardState extends State<Dashboard> {
                             icon: Icons.trending_up_rounded,
                             iconColor: AppColors.primaryColor,
                             iconBgColor: const Color(0xFFE8FBF5),
-                            value: '+AFG 0',
-                            sub: languagesController.tr("PROFIT"),
+                            value:
+                                '${box.read("currencyCode")} ${profitController.allprofitData.value.profitAnalysis!.today!.profit.toString()}',
+                            // sub: languagesController.tr("PROFIT"),
                             label: languagesController.tr("TODAY'S_PROFIT"),
                           ),
                         ],
@@ -279,15 +280,18 @@ class _DashboardState extends State<Dashboard> {
                       netBonusLabel: 'units',
                     ),
                     SizedBox(height: 10),
-                    // TodaysActivityCard(
-                    //   purchasesAmount: "120",
-                    //   purchasesTransactions: 0,
-                    //   salesAmount: 'AFG 0',
-                    //   salesTransactions: 0,
-                    //   todaysProfit: '+AFG 0',
-                    //   profitMargin: '0%',
-                    //   dailyTarget: 'AFG 0',
-                    // ),
+                    TodaysActivityCard(
+                      purchasesAmount:
+                          '${box.read("currencyCode")} ${dashboardController.alldashboaddata.value.summary!.today!.purchases.toString()}',
+
+                      purchasesTransactions: 0,
+                      salesAmount:
+                          '${box.read("currencyCode")} ${dashboardController.alldashboaddata.value.summary!.today!.sales.toString()}',
+                      salesTransactions: 0,
+                      todaysProfit:
+                          '${box.read("currencyCode")} ${profitController.allprofitData.value.profitAnalysis!.today!.profit.toString()}',
+                      profitMargin: '0%',
+                    ),
                   ],
                 )
               : Center(child: CircularProgressIndicator()),

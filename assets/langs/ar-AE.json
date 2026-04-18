@@ -156,7 +156,11 @@
 "DELETE_CONFIRMATION": "تأكيد الحذف",
 "LOGOUT": "تسجيل الخروج",
 "PROFILE": "الملف الشخصي",
-"SETTINGS": "الإعدادات"
+"SETTINGS": "الإعدادات",
+"RECEIVED": "تم الاستلام",
+"TOTAL_RECEIVED": "إجمالي المستلم",
+"TOTAL_SALES": "إجمالي المبيعات",
+"CURRENT_BONUS": "المكافأة الحالية"
 
 
 

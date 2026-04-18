@@ -8,18 +8,16 @@ class TodaysActivityCard extends StatelessWidget {
   final int salesTransactions;
 
   final String todaysProfit;
-  final String profitMargin;
-  final String dailyTarget;
+  final String? profitMargin;
 
-  const TodaysActivityCard({
+  TodaysActivityCard({
     super.key,
     required this.purchasesAmount,
     required this.purchasesTransactions,
     required this.salesAmount,
     required this.salesTransactions,
     required this.todaysProfit,
-    required this.profitMargin,
-    required this.dailyTarget,
+    this.profitMargin,
   });
 
   @override
@@ -32,11 +30,11 @@ class TodaysActivityCard extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.06),
             blurRadius: 20,
-            offset: const Offset(0, 4),
+            offset: Offset(0, 4),
           ),
         ],
       ),
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -44,13 +42,9 @@ class TodaysActivityCard extends StatelessWidget {
           // Header
           Row(
             children: [
-              const Icon(
-                Icons.schedule_rounded,
-                color: Color(0xFF9333EA),
-                size: 22,
-              ),
-              const SizedBox(width: 10),
-              const Text(
+              Icon(Icons.schedule_rounded, color: Color(0xFF9333EA), size: 22),
+              SizedBox(width: 10),
+              Text(
                 "Today's Activity",
                 style: TextStyle(
                   fontSize: 17,
@@ -61,21 +55,21 @@ class TodaysActivityCard extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: 18),
+          SizedBox(height: 18),
 
           // Purchases Section
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color(0xFFEFF6FF),
+              color: Color(0xFFEFF6FF),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  children: const [
+                  children: [
                     Icon(
                       Icons.shopping_cart_outlined,
                       color: Color(0xFF3B82F6),
@@ -92,30 +86,27 @@ class TodaysActivityCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   purchasesAmount,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                     color: Color(0xFF1E1E2D),
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.inventory_2_outlined,
                       size: 14,
                       color: Color(0xFF6B7280),
                     ),
-                    const SizedBox(width: 5),
+                    SizedBox(width: 5),
                     Text(
                       '$purchasesTransactions Transactions',
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: Color(0xFF6B7280),
-                      ),
+                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
                     ),
                   ],
                 ),
@@ -123,21 +114,21 @@ class TodaysActivityCard extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
 
           // Sales Section
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color(0xFFF0FDF4),
+              color: Color(0xFFF0FDF4),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  children: const [
+                  children: [
                     Icon(
                       Icons.credit_card_outlined,
                       color: Color(0xFF22C55E),
@@ -154,30 +145,27 @@ class TodaysActivityCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   salesAmount,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                     color: Color(0xFF1E1E2D),
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.people_outline,
                       size: 14,
                       color: Color(0xFF6B7280),
                     ),
-                    const SizedBox(width: 5),
+                    SizedBox(width: 5),
                     Text(
                       '$salesTransactions Transactions',
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: Color(0xFF6B7280),
-                      ),
+                      style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
                     ),
                   ],
                 ),
@@ -185,20 +173,20 @@ class TodaysActivityCard extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
 
           // Today's Profit Section
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color(0xFFF0FDF4),
+              color: Color(0xFFF0FDF4),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   "Today's Profit",
                   style: TextStyle(
                     fontSize: 13,
@@ -206,17 +194,17 @@ class TodaysActivityCard extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Text(
                   todaysProfit,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                     color: Color(0xFF16A34A),
                   ),
                 ),
-                const SizedBox(height: 10),
-                const Text(
+                SizedBox(height: 10),
+                Text(
                   'Profit Margin',
                   style: TextStyle(
                     fontSize: 13,
@@ -224,32 +212,14 @@ class TodaysActivityCard extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Text(
-                  profitMargin,
-                  style: const TextStyle(
+                  profitMargin.toString(),
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
                     color: Color(0xFF16A34A),
                   ),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.track_changes_outlined,
-                      size: 15,
-                      color: Color(0xFF6B7280),
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      'Daily Target: $dailyTarget',
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: Color(0xFF6B7280),
-                      ),
-                    ),
-                  ],
                 ),
               ],
             ),

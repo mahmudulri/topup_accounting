@@ -117,7 +117,19 @@ class _ResellersScreenState extends State<ResellersScreen> {
 
                       return GestureDetector(
                         onTap: () {
-                          Get.to(() => ResellerViewScreen());
+                          Get.to(
+                            () => ResellerViewScreen(
+                              resellerID: data.id.toString(),
+                              name: data.name,
+                              status: data.status.toString(),
+                              phone: data.phone,
+                              city: data.city,
+                              totalSales: data.totalSellAmount,
+                              totalDue: data.totalDueAmount,
+                              totalReceived: data.totalReceivedAmount,
+                              totalWithBonus: data.totalSellTopupWithBonus,
+                            ),
+                          );
                         },
                         child: ResellerCard(
                           data: ResellerCardData(
@@ -134,6 +146,8 @@ class _ResellersScreenState extends State<ResellersScreen> {
                             bonusPercentage: data.bonusPercentage.toString(),
                             withbonus: data.totalSellTopupWithBonus.toString(),
                             totalDueAmount: data.totalDueAmount.toString(),
+                            totalreceivedAmount: data.totalReceivedAmount
+                                .toString(),
 
                             // ✅ Bonus Given
                             bonusGiven:

@@ -156,7 +156,11 @@
 "DELETE_CONFIRMATION": "Silme Onayı",
 "LOGOUT": "Çıkış Yap",
 "PROFILE": "Profil",
-"SETTINGS": "Ayarlar"
+"SETTINGS": "Ayarlar",
+"RECEIVED": "Alındı",
+"TOTAL_RECEIVED": "Toplam Alınan",
+"TOTAL_SALES": "Toplam Satış",
+"CURRENT_BONUS": "Mevcut Bonus"
 
 
 }

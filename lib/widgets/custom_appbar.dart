@@ -124,7 +124,7 @@ class _AppTopBarState extends State<AppTopBar> {
             children: [
               GestureDetector(
                 onTap: () {
-                  Get.to(() => MyipdetailsScreen());
+                  // print(box.read("currencyCode"));
                 },
                 child: KText(
                   text: lang.tr("DASHBOARD"),

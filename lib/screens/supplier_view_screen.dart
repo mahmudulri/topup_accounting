@@ -70,18 +70,12 @@ class _SupplierViewScreenState extends State<SupplierViewScreen> {
           elevation: 0,
           title: Row(
             children: [
-              Container(
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                  gradient: AppColors.primaryGradient,
-                  borderRadius: BorderRadius.circular(9),
-                ),
-                child: Icon(
-                  Icons.account_balance_wallet_rounded,
-                  color: Colors.white,
-                  size: 17,
-                ),
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+
+                child: Icon(Icons.arrow_back),
               ),
               SizedBox(width: 8),
               Column(

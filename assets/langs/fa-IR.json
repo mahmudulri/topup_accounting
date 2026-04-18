@@ -156,7 +156,11 @@
 "DELETE_CONFIRMATION": "تأیید حذف",
 "LOGOUT": "خروج",
 "PROFILE": "پروفایل",
-"SETTINGS": "تنظیمات"
+"SETTINGS": "تنظیمات",
+"RECEIVED": "دریافت شده",
+"TOTAL_RECEIVED": "مجموع دریافتی",
+"TOTAL_SALES": "مجموع فروش",
+"CURRENT_BONUS": "پاداش فعلی"
 
 
 

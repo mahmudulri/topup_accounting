@@ -156,7 +156,11 @@
 "DELETE_CONFIRMATION": "د حذف تایید",
 "LOGOUT": "وتل",
 "PROFILE": "پروفایل",
-"SETTINGS": "تنظیمات"
+"SETTINGS": "تنظیمات",
+"RECEIVED": "ترلاسه شوی",
+"TOTAL_RECEIVED": "ټول ترلاسه شوي",
+"TOTAL_SALES": "ټول خرڅلاو",
+"CURRENT_BONUS": "اوسنی بونس"
 
 
 

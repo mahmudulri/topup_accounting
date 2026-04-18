@@ -155,7 +155,11 @@
 "DELETE_CONFIRMATION": "Delete Confirmation",
 "LOGOUT": "Log Out",
 "PROFILE": "Profile",
-"SETTINGS": "Settings"
+"SETTINGS": "Settings",
+"RECEIVED": "Received",
+"TOTAL_RECEIVED": "Total Received",
+"TOTAL_SALES": "Total Sales",
+"CURRENT_BONUS": "Current Bonus"
 
 
 

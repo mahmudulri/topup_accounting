@@ -8,7 +8,7 @@ class StatCard extends StatelessWidget {
     required this.iconColor,
     required this.iconBgColor,
     required this.value,
-    required this.sub,
+    this.sub,
     required this.label,
     this.badge,
     this.badgeColor,
@@ -27,7 +27,7 @@ class StatCard extends StatelessWidget {
   final String value;
 
   /// Small text below value  e.g. "AFG 400,000" or "3 Pending"
-  final String sub;
+  final String? sub;
 
   /// Bottom-left label  e.g. "Total Stock"
   final String label;
@@ -124,9 +124,12 @@ class StatCard extends StatelessWidget {
             SizedBox(height: 3),
 
             // ── Sub text ──────────────────────────────────────
-            Text(
-              sub,
-              style: TextStyle(fontSize: 11, color: AppColors.mutedText),
+            Visibility(
+              visible: sub.toString() != "null",
+              child: Text(
+                sub.toString(),
+                style: TextStyle(fontSize: 11, color: AppColors.mutedText),
+              ),
             ),
 
             Spacer(),
@@ -137,7 +140,11 @@ class StatCard extends StatelessWidget {
               children: [
                 Text(
                   label,
-                  style: TextStyle(fontSize: 13, color: AppColors.mutedText),
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: AppColors.mutedText,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 Spacer(),
                 if (bottomRight != null)

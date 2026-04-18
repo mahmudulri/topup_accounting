@@ -156,7 +156,11 @@
 "DELETE_CONFIRMATION": "মুছার নিশ্চিতকরণ",
 "LOGOUT": "লগ আউট",
 "PROFILE": "প্রোফাইল",
-"SETTINGS": "সেটিংস"
+"SETTINGS": "সেটিংস",
+"RECEIVED": "গৃহীত",
+"TOTAL_RECEIVED": "মোট গৃহীত",
+"TOTAL_SALES": "মোট বিক্রয়",
+"CURRENT_BONUS": "বর্তমান বোনাস"
 
 
 
