@@ -23,13 +23,13 @@ final Rxn<Supplier> selectedSupplier = Rxn<Supplier>();
 class SellToResellersheet extends StatefulWidget {
   final String title;
   final String subtitle;
-  final String supplierID;
+  final String resellerID;
 
   SellToResellersheet({
     super.key,
     required this.title,
     required this.subtitle,
-    required this.supplierID,
+    required this.resellerID,
   });
 
   @override
@@ -356,8 +356,8 @@ class _SellToResellersheetState extends State<SellToResellersheet> {
                     Expanded(
                       child: ElevatedButton.icon(
                         onPressed: () {
-                          sellTopUpController.supplierID.value =
-                              widget.supplierID;
+                          sellTopUpController.resellerID.value =
+                              widget.resellerID;
 
                           /// ❌ Supplier not selected
 

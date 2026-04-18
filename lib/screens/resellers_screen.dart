@@ -205,7 +205,7 @@ class _ResellersScreenState extends State<ResellersScreen> {
                                     " " +
                                     "(${data.bonusPercentage} % ${languagesController.tr("BONUS")})",
 
-                                supplierID: data.id.toString(),
+                                resellerID: data.id.toString(),
                               );
                             },
                             onView: () {
@@ -328,7 +328,7 @@ class _ResellersScreenState extends State<ResellersScreen> {
     required BuildContext context,
     required String title,
     required String subtitle,
-    required String supplierID,
+    required String resellerID,
   }) {
     showModalBottomSheet(
       context: context,
@@ -338,10 +338,11 @@ class _ResellersScreenState extends State<ResellersScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) {
+        print(resellerID.toString());
         return SellToResellersheet(
           title: title,
           subtitle: subtitle,
-          supplierID: supplierID,
+          resellerID: resellerID,
         );
       },
     );
