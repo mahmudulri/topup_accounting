@@ -92,8 +92,8 @@ class SellTopUpController extends GetxController {
         'notes': notesController.text,
       };
 
-      print("SELL API URL: $url");
-      print("Request Body: $body");
+      // print("SELL API URL: $url");
+      // print("Request Body: $body");
 
       http.Response response = await http.post(
         url,

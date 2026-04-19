@@ -7,6 +7,7 @@ import '../global_controllers/languages_controller.dart';
 import '../global_controllers/scaffold_controller.dart';
 import '../utils/colors.dart';
 import '../widgets/add_resellershet.dart';
+import '../widgets/collect_sheet.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/resellercard.dart';
 import '../widgets/sell_to_resellersheet.dart';
@@ -233,7 +234,19 @@ class _ResellersScreenState extends State<ResellersScreen> {
                               });
                             },
                             onUpdatePercent: () {},
-                            onPay: () {},
+                            onPay: () {
+                              collectsheet(
+                                context: context,
+                                title: languagesController.tr("COLLECT_DUE"),
+
+                                subtitle:
+                                    data.name.toString() +
+                                    " - " +
+                                    data.city.toString(),
+
+                                resellerID: data.id.toString(),
+                              );
+                            },
                             onDisable: () {},
                             onDelete: () {
                               showDialog(
@@ -340,6 +353,30 @@ class _ResellersScreenState extends State<ResellersScreen> {
       builder: (context) {
         print(resellerID.toString());
         return SellToResellersheet(
+          title: title,
+          subtitle: subtitle,
+          resellerID: resellerID,
+        );
+      },
+    );
+  }
+
+  void collectsheet({
+    required BuildContext context,
+    required String title,
+    required String subtitle,
+    required String resellerID,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        print(resellerID.toString());
+        return CollectSheet(
           title: title,
           subtitle: subtitle,
           resellerID: resellerID,
