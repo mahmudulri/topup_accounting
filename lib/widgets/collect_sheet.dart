@@ -13,12 +13,14 @@ class CollectSheet extends StatefulWidget {
   final String title;
   final String subtitle;
   final String resellerID;
+  final String totalDue;
 
   CollectSheet({
     super.key,
     required this.title,
     required this.subtitle,
     required this.resellerID,
+    required this.totalDue,
   });
 
   @override
@@ -92,13 +94,13 @@ class _CollectSheetState extends State<CollectSheet> {
                 SizedBox(height: 8),
 
                 KText(
-                  text: languagesController.tr("BASE_AMOUNT"),
+                  text: languagesController.tr("COLLECTION_AMOUNT"),
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
                 SizedBox(height: 8),
                 TextField(
-                  controller: collectController.baseAmountController,
+                  controller: collectController.collectionAmountController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: '0.00',
@@ -122,48 +124,18 @@ class _CollectSheetState extends State<CollectSheet> {
                     ),
                   ),
                 ),
+
                 SizedBox(height: 4),
                 KText(
-                  text: languagesController.tr(
-                    "THIS_IS_THE_AMOUNT_YOU_PAY_TO_SUPPLIER",
-                  ),
+                  text:
+                      languagesController.tr("MAX_AMOUNT") +
+                      " : " +
+                      "${widget.totalDue}",
                   fontSize: 12,
                   color: Colors.grey.shade600,
                 ),
-
                 SizedBox(height: 16),
 
-                KText(
-                  text: languagesController.tr("PAID_AMOUNT"),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                ),
-                SizedBox(height: 8),
-                TextField(
-                  controller: collectController.paidAmountController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    hintText: '0.00',
-                    prefixIcon: Icon(Icons.attach_money, color: Colors.grey),
-                    filled: true,
-                    fillColor: Colors.white,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18),
-                      borderSide: BorderSide(
-                        color: AppColors.borderColor,
-                        width: 1,
-                      ),
-                    ),
-
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18),
-                      borderSide: BorderSide(
-                        color: AppColors.primaryColor,
-                        width: 1,
-                      ),
-                    ),
-                  ),
-                ),
                 SizedBox(height: 4),
                 KText(
                   text:
@@ -278,7 +250,7 @@ class _CollectSheetState extends State<CollectSheet> {
 
                           /// ❌ Base amount validation (must be valid number > 0)
                           final baseText = collectController
-                              .baseAmountController
+                              .collectionAmountController
                               .text
                               .trim();
 
@@ -293,27 +265,8 @@ class _CollectSheetState extends State<CollectSheet> {
                             return;
                           }
 
-                          /// 🔶 Paid amount (optional but must be valid if entered)
-                          final paidText = collectController
-                              .paidAmountController
-                              .text
-                              .trim();
-
-                          if (paidText.isNotEmpty) {
-                            final paid = double.tryParse(paidText);
-
-                            if (paid == null || paid < 0) {
-                              Fluttertoast.showToast(
-                                msg: "Invalid paid amount",
-                                backgroundColor: Colors.red,
-                                textColor: Colors.white,
-                              );
-                              return;
-                            }
-                          }
-
                           /// ✅ All good → controller handles remaining rules
-                          collectController.sellNow();
+                          collectController.collectnow();
                         },
                         icon: Icon(
                           Icons.shopping_cart_outlined,

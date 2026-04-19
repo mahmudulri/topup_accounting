@@ -6,6 +6,7 @@ import 'package:topup_accounting/screens/signin_screen.dart';
 import '../global_controllers/languages_controller.dart';
 import '../global_controllers/scaffold_controller.dart';
 import '../screens/myipdetails_screen.dart';
+import '../screens/update_translationscreen.dart';
 import '../utils/colors.dart';
 import 'custom_text.dart';
 import 'languagepicker.dart';
@@ -125,6 +126,7 @@ class _AppTopBarState extends State<AppTopBar> {
               GestureDetector(
                 onTap: () {
                   // print(box.read("currencyCode"));
+                  Get.to(() => TranslationEditPage());
                 },
                 child: KText(
                   text: lang.tr("DASHBOARD"),

@@ -160,7 +160,8 @@
 "RECEIVED": "Alındı",
 "TOTAL_RECEIVED": "Toplam Alınan",
 "TOTAL_SALES": "Toplam Satış",
-"CURRENT_BONUS": "Mevcut Bonus"
+"CURRENT_BONUS": "Mevcut Bonus",
+"COLLECT_DUE": "Alacağı Tahsil Et"
 
 
 }

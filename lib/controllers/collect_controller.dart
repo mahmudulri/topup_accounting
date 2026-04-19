@@ -9,24 +9,27 @@ import 'package:topup_accounting/utils/colors.dart';
 
 import '../global_controllers/languages_controller.dart';
 import '../utils/api_endpoints.dart';
+import 'reseller_list_controller.dart';
 
 final languagesController = Get.find<LanguagesController>();
 
+ResellerListController resellerListController = Get.put(
+  ResellerListController(),
+);
+
 class CollectController extends GetxController {
-  RxString supplierID = ''.obs;
   RxString resellerID = ''.obs;
 
-  RxDouble bonus = 0.0.obs;
+  final TextEditingController collectionAmountController =
+      TextEditingController();
 
-  final TextEditingController baseAmountController = TextEditingController();
-  final TextEditingController paidAmountController = TextEditingController();
   final TextEditingController referenceController = TextEditingController();
   final TextEditingController notesController = TextEditingController();
 
   RxBool isLoading = false.obs;
   final box = GetStorage();
 
-  Future<void> sellNow() async {
+  Future<void> collectnow() async {
     try {
       isLoading.value = true;
 
@@ -34,7 +37,7 @@ class CollectController extends GetxController {
 
       Map body = {
         'reseller_id': resellerID.value,
-        'amount': baseAmountController.text,
+        'amount': collectionAmountController.text,
         'reference_no': referenceController.text,
         'notes': notesController.text,
       };
@@ -57,8 +60,9 @@ class CollectController extends GetxController {
       // print("Response Body: ${response.body}");
 
       if (response.statusCode == 200) {
-        baseAmountController.clear();
-        paidAmountController.clear();
+        resellerListController.fetchReseller();
+        collectionAmountController.clear();
+
         referenceController.clear();
         notesController.clear();
 

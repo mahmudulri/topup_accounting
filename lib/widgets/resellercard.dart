@@ -55,6 +55,7 @@ class ResellerCardActions {
   final VoidCallback? onPay;
   final VoidCallback? onDisable;
   final VoidCallback? onDelete;
+  final String? currentDue;
 
   const ResellerCardActions({
     this.onSell,
@@ -64,6 +65,7 @@ class ResellerCardActions {
     this.onPay,
     this.onDisable,
     this.onDelete,
+    this.currentDue,
   });
 }
 
@@ -548,20 +550,15 @@ class _QuickActionButton extends StatelessWidget {
           label: 'Edit',
           onTap: actions.onEdit,
         ),
-        // _menuItem(
-        //   context: context,
-        //   value: 'pct',
-        //   icon: Icons.percent,
-        //   label: 'Update %',
-        //   onTap: actions.onUpdatePercent,
-        // ),
-        _menuItem(
-          context: context,
-          value: 'collect',
-          icon: Icons.credit_card_outlined,
-          label: 'Collect',
-          onTap: actions.onPay,
-        ),
+
+        if ((double.tryParse(actions.currentDue ?? "0") ?? 0) > 0)
+          _menuItem(
+            context: context,
+            value: 'collect',
+            icon: Icons.credit_card_outlined,
+            label: 'Collect',
+            onTap: actions.onPay,
+          ),
       ],
     );
   }

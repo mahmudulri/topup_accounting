@@ -121,15 +121,15 @@ class _ResellersScreenState extends State<ResellersScreen> {
                         onTap: () {
                           Get.to(
                             () => ResellerViewScreen(
-                              resellerID: data.id.toString(),
-                              name: data.name,
-                              status: data.status.toString(),
-                              phone: data.phone,
-                              city: data.city,
-                              totalSales: data.totalSellAmount,
-                              totalDue: data.totalDueAmount,
-                              totalReceived: data.totalReceivedAmount,
-                              totalWithBonus: data.totalSellTopupWithBonus,
+                              // resellerID: data.id.toString(),
+                              // name: data.name,
+                              // status: data.status.toString(),
+                              // phone: data.phone,
+                              // city: data.city,
+                              // totalSales: data.totalSellAmount,
+                              // totalDue: data.totalDueAmount,
+                              // totalReceived: data.totalReceivedAmount,
+                              // totalWithBonus: data.totalSellTopupWithBonus,
                             ),
                           );
                         },
@@ -188,6 +188,7 @@ class _ResellersScreenState extends State<ResellersScreen> {
                             })(),
                           ),
                           actions: ResellerCardActions(
+                            currentDue: data.totalDueAmount.toString(),
                             onSell: () {
                               sellTopUpController.baseAmount.value == 0.0;
                               sellTopUpController.paidAmount.value == 0.0;
@@ -238,7 +239,7 @@ class _ResellersScreenState extends State<ResellersScreen> {
                               collectsheet(
                                 context: context,
                                 title: languagesController.tr("COLLECT_DUE"),
-
+                                totalDue: data.totalDueAmount.toString(),
                                 subtitle:
                                     data.name.toString() +
                                     " - " +
@@ -366,6 +367,7 @@ class _ResellersScreenState extends State<ResellersScreen> {
     required String title,
     required String subtitle,
     required String resellerID,
+    required String totalDue,
   }) {
     showModalBottomSheet(
       context: context,
@@ -380,6 +382,7 @@ class _ResellersScreenState extends State<ResellersScreen> {
           title: title,
           subtitle: subtitle,
           resellerID: resellerID,
+          totalDue: totalDue.toString(),
         );
       },
     );
