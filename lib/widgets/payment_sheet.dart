@@ -4,18 +4,19 @@ import 'package:get/get.dart';
 import 'package:topup_accounting/utils/colors.dart';
 import 'package:topup_accounting/widgets/custom_text.dart';
 import '../controllers/collect_controller.dart';
+import '../controllers/paydue_controller.dart';
 import '../controllers/selltop_up_controller.dart';
 import '../global_controllers/languages_controller.dart';
 
-CollectController collectController = Get.put(CollectController());
+PaydueController paydueController = Get.put(PaydueController());
 
-class CollectSheet extends StatefulWidget {
+class PaymentSheet extends StatefulWidget {
   final String title;
   final String subtitle;
   final String resellerID;
   final String totalDue;
 
-  CollectSheet({
+  PaymentSheet({
     super.key,
     required this.title,
     required this.subtitle,
@@ -24,10 +25,10 @@ class CollectSheet extends StatefulWidget {
   });
 
   @override
-  State<CollectSheet> createState() => _CollectSheetState();
+  State<PaymentSheet> createState() => _PaymentSheetState();
 }
 
-class _CollectSheetState extends State<CollectSheet> {
+class _PaymentSheetState extends State<PaymentSheet> {
   final languagesController = Get.find<LanguagesController>();
 
   @override
@@ -90,17 +91,47 @@ class _CollectSheetState extends State<CollectSheet> {
                 ),
 
                 Divider(height: 24),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.red.withAlpha(20),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        KText(
+                          text: languagesController.tr("TOTAL_DUE"),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.red,
+                        ),
+                        Text(
+                          widget.totalDue.toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
 
-                SizedBox(height: 8),
+                SizedBox(height: 16),
 
                 KText(
-                  text: languagesController.tr("COLLECTION_AMOUNT"),
+                  text: languagesController.tr("PAYMENT_AMOUNT"),
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
                 SizedBox(height: 8),
                 TextField(
-                  controller: collectController.collectionAmountController,
+                  controller: paydueController.amountController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: '0.00',
@@ -136,17 +167,6 @@ class _CollectSheetState extends State<CollectSheet> {
                 ),
                 SizedBox(height: 16),
 
-                SizedBox(height: 4),
-                KText(
-                  text:
-                      languagesController.tr("AMOUNT_PAID_NOW") +
-                      "(${languagesController.tr("OPTIONAL")})",
-                  fontSize: 12,
-                  color: Colors.grey.shade600,
-                ),
-
-                SizedBox(height: 16),
-
                 KText(
                   text:
                       languagesController.tr("REFERENCE_NUMBER") +
@@ -156,7 +176,7 @@ class _CollectSheetState extends State<CollectSheet> {
                 ),
                 SizedBox(height: 8),
                 TextField(
-                  controller: collectController.referenceController,
+                  controller: paydueController.referenceController,
                   decoration: InputDecoration(
                     hintText: languagesController.tr("ENTER_REFERENCE_NUMBER"),
                     prefixIcon: Icon(
@@ -192,7 +212,7 @@ class _CollectSheetState extends State<CollectSheet> {
                 ),
                 SizedBox(height: 8),
                 TextField(
-                  controller: collectController.notesController,
+                  controller: paydueController.notesController,
                   maxLines: 3,
                   decoration: InputDecoration(
                     hintText:
@@ -243,14 +263,13 @@ class _CollectSheetState extends State<CollectSheet> {
                     Expanded(
                       child: ElevatedButton.icon(
                         onPressed: () {
-                          collectController.resellerID.value =
-                              widget.resellerID;
+                          paydueController.supplierID.value = widget.resellerID;
 
                           /// ❌ Supplier not selected
 
                           /// ❌ Base amount validation (must be valid number > 0)
-                          final baseText = collectController
-                              .collectionAmountController
+                          final baseText = paydueController
+                              .amountController
                               .text
                               .trim();
 
@@ -266,7 +285,7 @@ class _CollectSheetState extends State<CollectSheet> {
                           }
 
                           /// ✅ All good → controller handles remaining rules
-                          collectController.collectnow();
+                          paydueController.paynow();
                         },
                         icon: Icon(
                           Icons.shopping_cart_outlined,
@@ -275,8 +294,8 @@ class _CollectSheetState extends State<CollectSheet> {
                         ),
                         label: Obx(
                           () => Text(
-                            collectController.isLoading.value == false
-                                ? languagesController.tr("CONFIRM_COLLECTION")
+                            paydueController.isLoading.value == false
+                                ? languagesController.tr("CONFIRM_PAYMENT")
                                 : languagesController.tr("PLEASE_WAIT"),
                             style: TextStyle(color: Colors.white, fontSize: 12),
                           ),

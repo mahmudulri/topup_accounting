@@ -128,7 +128,7 @@ class ResellerCard extends StatelessWidget {
                 currentRatio: data.currentRatio,
               ),
 
-              _ActionsBar(actions: actions),
+              _ActionsBar(actions: actions, data: data),
             ],
           ),
         ),
@@ -430,7 +430,8 @@ class _StatCell extends StatelessWidget {
 // ───────────────────────────────────────────────────────────────
 class _ActionsBar extends StatelessWidget {
   final ResellerCardActions actions;
-  const _ActionsBar({required this.actions});
+  final ResellerCardData data;
+  const _ActionsBar({required this.actions, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -452,13 +453,18 @@ class _ActionsBar extends StatelessWidget {
 
           // ── Disable ───────────────────────────────────────
           _OutlineIconButton(
-            label: 'Disable',
-            icon: Icons.block,
-            foreground: _kAmberText,
-            borderColor: _kAmberBar.withOpacity(0.6),
-            hoverColor: _kAmberBg,
+            label: data.status == "1" ? 'Inactive' : 'Active',
+            icon: data.status == "1" ? Icons.block : Icons.check_circle,
+            foreground: data.status == "1" ? _kAmberText : Colors.green,
+            borderColor: data.status == "1"
+                ? _kAmberBar.withOpacity(0.6)
+                : Colors.green.withOpacity(0.6),
+            hoverColor: data.status == "1"
+                ? _kAmberBg
+                : Colors.green.withOpacity(0.1),
             onTap: actions.onDisable,
           ),
+
           const SizedBox(width: 8),
 
           // ── Delete ────────────────────────────────────────

@@ -161,7 +161,11 @@
 "TOTAL_RECEIVED": "Toplam Alınan",
 "TOTAL_SALES": "Toplam Satış",
 "CURRENT_BONUS": "Mevcut Bonus",
-"COLLECT_DUE": "Alacağı Tahsil Et"
+"COLLECT_DUE": "Alacağı Tahsil Et",
+"PAYMENT_AMOUNT": "Ödeme Tutarı",
+"CONFIRM_PAYMENT": "Ödemeyi Onayla",
+"CONFIRM_COLLECTION": "Tahsilatı Onayla",
+"COLLECTION_AMOUNT": "Tahsilat Tutarı"
 
 
 }

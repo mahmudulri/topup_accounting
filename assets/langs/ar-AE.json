@@ -161,7 +161,11 @@
 "TOTAL_RECEIVED": "إجمالي المستلم",
 "TOTAL_SALES": "إجمالي المبيعات",
 "CURRENT_BONUS": "المكافأة الحالية",
-"COLLECT_DUE": "تحصيل المستحق"
+"COLLECT_DUE": "تحصيل المستحق",
+"PAYMENT_AMOUNT": "مبلغ الدفع",
+"CONFIRM_PAYMENT": "تأكيد الدفع",
+"CONFIRM_COLLECTION": "تأكيد التحصيل",
+"COLLECTION_AMOUNT": "مبلغ التحصيل"
 
 
 

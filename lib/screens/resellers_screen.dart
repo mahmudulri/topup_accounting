@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:topup_accounting/controllers/status_controller.dart';
 import 'package:topup_accounting/helpers/localtime_helper.dart';
 import '../controllers/delete_reseller_controller.dart';
 import '../controllers/reseller_list_controller.dart';
@@ -33,6 +34,8 @@ class _ResellersScreenState extends State<ResellersScreen> {
   DeleteResellerController deleteResellerController = Get.put(
     DeleteResellerController(),
   );
+
+  StatusController statusController = Get.put(StatusController());
 
   @override
   void initState() {
@@ -121,15 +124,15 @@ class _ResellersScreenState extends State<ResellersScreen> {
                         onTap: () {
                           Get.to(
                             () => ResellerViewScreen(
-                              // resellerID: data.id.toString(),
-                              // name: data.name,
-                              // status: data.status.toString(),
-                              // phone: data.phone,
-                              // city: data.city,
-                              // totalSales: data.totalSellAmount,
-                              // totalDue: data.totalDueAmount,
-                              // totalReceived: data.totalReceivedAmount,
-                              // totalWithBonus: data.totalSellTopupWithBonus,
+                              resellerID: data.id.toString(),
+                              name: data.name,
+                              status: data.status.toString(),
+                              phone: data.phone,
+                              city: data.city,
+                              totalSales: data.totalSellAmount,
+                              totalDue: data.totalDueAmount,
+                              totalReceived: data.totalReceivedAmount,
+                              totalWithBonus: data.totalSellTopupWithBonus,
                             ),
                           );
                         },
@@ -248,7 +251,12 @@ class _ResellersScreenState extends State<ResellersScreen> {
                                 resellerID: data.id.toString(),
                               );
                             },
-                            onDisable: () {},
+                            onDisable: () {
+                              statusController.changeStatus(
+                                type: "resellers",
+                                id: data.id.toString(),
+                              );
+                            },
                             onDelete: () {
                               showDialog(
                                 context: context,

@@ -160,7 +160,11 @@
 "TOTAL_RECEIVED": "Total Received",
 "TOTAL_SALES": "Total Sales",
 "CURRENT_BONUS": "Current Bonus",
-"COLLECT_DUE": "Collect Due"
+"COLLECT_DUE": "Collect Due",
+"PAYMENT_AMOUNT": "Payment Amount",
+"CONFIRM_PAYMENT": "Confirm Payment",
+"CONFIRM_COLLECTION": "Confirm Collection",
+"COLLECTION_AMOUNT": "Collection Amount"
 
 
 

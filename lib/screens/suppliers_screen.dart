@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:topup_accounting/helpers/compactnumber_helpder.dart';
 import 'package:topup_accounting/helpers/localtime_helper.dart';
+import 'package:topup_accounting/widgets/payment_sheet.dart';
 import '../controllers/buytop_up_controller.dart';
 import '../controllers/delete_supplier_controller.dart';
+import '../controllers/status_controller.dart';
 import '../controllers/supplierlist_controller.dart';
 import '../global_controllers/languages_controller.dart';
 import '../utils/colors.dart';
@@ -25,7 +27,7 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
   SupplierlistController supplierlistController = Get.put(
     SupplierlistController(),
   );
-
+  StatusController statusController = Get.put(StatusController());
   DeleteSupplierController deleteSupplierController = Get.put(
     DeleteSupplierController(),
   );
@@ -134,6 +136,7 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                         child: SupplierCard(
                           data: SupplierCardData(
                             name: data!.name.toString(),
+                            status: data.status.toString(),
                             company: data.company.toString(),
                             phone: data.phone.toString(),
                             lastContact: convertToDate(
@@ -206,8 +209,25 @@ class _SuppliersScreenState extends State<SuppliersScreen> {
                               });
                             },
                             onUpdatePercent: () {},
-                            onPay: () {},
-                            onDisable: () {},
+                            onPay: () {
+                              paymentsheet(
+                                context: context,
+                                title: languagesController.tr("PAY_DUE"),
+                                totalDue: data.totalDueAmount.toString(),
+                                subtitle:
+                                    data.name.toString() +
+                                    " - " +
+                                    data.name.toString(),
+
+                                resellerID: data.id.toString(),
+                              );
+                            },
+                            onDisable: () {
+                              statusController.changeStatus(
+                                type: "suppliers",
+                                id: data.id.toString(),
+                              );
+                            },
                             onDelete: () {
                               showDialog(
                                 context: context,
@@ -316,6 +336,32 @@ void showBuyTopupSheet({
         title: title,
         subtitle: subtitle,
         supplierID: supplierID,
+      );
+    },
+  );
+}
+
+void paymentsheet({
+  required BuildContext context,
+  required String title,
+  required String subtitle,
+  required String resellerID,
+  required String totalDue,
+}) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.white,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (context) {
+      print(resellerID.toString());
+      return PaymentSheet(
+        title: title,
+        subtitle: subtitle,
+        resellerID: resellerID,
+        totalDue: totalDue.toString(),
       );
     },
   );

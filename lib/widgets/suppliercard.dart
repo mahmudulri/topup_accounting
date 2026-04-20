@@ -33,6 +33,7 @@ const _kRedBorder = Color(0xFFF09595);
 class SupplierCardData {
   final String name;
   final String company;
+  final String status;
   final String phone;
   final String lastContact;
   final double bonusPercentage;
@@ -46,6 +47,7 @@ class SupplierCardData {
   const SupplierCardData({
     required this.name,
     required this.company,
+    required this.status,
     required this.phone,
     required this.lastContact,
     required this.bonusPercentage,
@@ -112,7 +114,7 @@ class SupplierCard extends StatelessWidget {
             _StatsRow(data: data),
             _InfoRows(data: data),
 
-            _ActionsBar(actions: actions),
+            _ActionsBar(actions: actions, data: data),
           ],
         ),
       ),
@@ -501,7 +503,8 @@ class _InfoRow extends StatelessWidget {
 // ───────────────────────────────────────────────────────────────
 class _ActionsBar extends StatelessWidget {
   final SupplierCardActions actions;
-  const _ActionsBar({required this.actions});
+  final SupplierCardData data;
+  const _ActionsBar({required this.actions, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -523,11 +526,15 @@ class _ActionsBar extends StatelessWidget {
 
           // ── Disable ───────────────────────────────────────
           _OutlineIconButton(
-            label: languagesController.tr("DISABLE"),
-            icon: Icons.block,
-            foreground: _kAmberText,
-            borderColor: _kAmberBar.withOpacity(0.6),
-            hoverColor: _kAmberBg,
+            label: data.status == "1" ? 'Inactive' : 'Active',
+            icon: data.status == "1" ? Icons.block : Icons.check_circle,
+            foreground: data.status == "1" ? _kAmberText : Colors.green,
+            borderColor: data.status == "1"
+                ? _kAmberBar.withOpacity(0.6)
+                : Colors.green.withOpacity(0.6),
+            hoverColor: data.status == "1"
+                ? _kAmberBg
+                : Colors.green.withOpacity(0.1),
             onTap: actions.onDisable,
           ),
           const SizedBox(width: 8),

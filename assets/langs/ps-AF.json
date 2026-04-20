@@ -161,7 +161,11 @@
 "TOTAL_RECEIVED": "ټول ترلاسه شوي",
 "TOTAL_SALES": "ټول خرڅلاو",
 "CURRENT_BONUS": "اوسنی بونس",
-"COLLECT_DUE": "پور راټولول"
+"COLLECT_DUE": "پور راټولول",
+"PAYMENT_AMOUNT": "د تادیې اندازه",
+"CONFIRM_PAYMENT": "تادیه تایید کړئ",
+"CONFIRM_COLLECTION": "راټولونه تایید کړئ",
+"COLLECTION_AMOUNT": "د راټولولو اندازه"
 
 
 
