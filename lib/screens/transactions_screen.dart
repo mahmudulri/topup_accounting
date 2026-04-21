@@ -29,19 +29,31 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   @override
   void initState() {
     super.initState();
-    box.write("startdate", "");
-    box.write("enddate", "");
+    box.write("transaction_type", "");
+    box.write("start_date", "");
+    box.write("end_date", "");
+    box.write("min_amount", "");
+    box.write("max_amount", "");
 
-    transactionListController.fetchtransactions();
+    transactionListController.fetchtransactions(20);
   }
 
-  final List<String> items = [
-    "All",
-    "Purchase",
-    "Sales",
-    "Supplier Payment",
-    "Reseller Payment",
+  final List<Map<String, dynamic>> items = [
+    {"key": "all", "value": "All", "parm": ""},
+    {"key": "purchase", "value": "Purchase", "parm": "purchase"},
+    {"key": "sales", "value": "Sales", "parm": "sale"},
+    {
+      "key": "supplier_payment",
+      "value": "Supplier Payment",
+      "parm": "supplier_payment",
+    },
+    {
+      "key": "reseller_payment",
+      "value": "Reseller Payment",
+      "parm": "reseller_payment",
+    },
   ];
+
   int selectedIndex = 0;
 
   bool _isGridView = true;
@@ -65,7 +77,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       startDate.value = picked;
       String formattedDate = DateFormat('yyyy-MM-dd').format(picked);
       print("Selected Start Date: $formattedDate");
-      box.write("startdate", "&filter_startdate=$formattedDate");
+      box.write("start_date", "$formattedDate");
+      transactionListController.fetchtransactions(20);
 
       // Reset end date if it's before start date
       if (endDate.value != null && endDate.value!.isBefore(picked)) {
@@ -94,7 +107,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       endDate.value = picked;
       String formattedDate = DateFormat('yyyy-MM-dd').format(picked);
       print("Selected Start Date: $formattedDate");
-      box.write("enddate", "&filter_enddate=$formattedDate");
+      box.write("end_date", "$formattedDate");
+      transactionListController.fetchtransactions(20);
     }
   }
 
@@ -263,7 +277,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                       Visibility(
                         visible: isVisible,
                         child: Container(
-                          height: 200,
+                          height: 120,
                           width: screenWidth,
                           decoration: BoxDecoration(
                             border: Border.all(
@@ -294,6 +308,16 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                         setState(() {
                                           isVisible = !isVisible;
                                         });
+                                        box.write("transaction_type", "");
+                                        box.write("start_date", "");
+                                        box.write("end_date", "");
+                                        box.write("min_amount", "");
+                                        box.write("max_amount", "");
+                                        startDate.value = null;
+                                        endDate.value = null;
+
+                                        transactionListController
+                                            .fetchtransactions(20);
                                       },
                                       child: Icon(
                                         Icons.close_sharp,
@@ -339,134 +363,136 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                   ],
                                 ),
                                 SizedBox(height: 8),
-                                Container(
-                                  height: 75,
-                                  width: screenWidth,
 
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          // color: Colors.cyan,
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  KText(
-                                                    text: languagesController
-                                                        .tr("MIN_AMOUNT"),
-                                                    color: AppColors.mutedText,
-                                                    fontSize: 12,
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(height: 5),
-                                              Expanded(
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      width: 1,
-                                                      color:
-                                                          AppColors.borderColor,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          20,
-                                                        ),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                          horizontal: 12,
-                                                        ),
-                                                    child: TextField(
-                                                      keyboardType:
-                                                          TextInputType.phone,
-                                                      decoration:
-                                                          InputDecoration(
-                                                            border: InputBorder
-                                                                .none,
-                                                            hintText: "0.00",
-                                                            hintStyle: TextStyle(
-                                                              color: AppColors
-                                                                  .hintText,
-                                                            ),
-                                                          ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(width: 8),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          // color: Colors.cyan,
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  KText(
-                                                    text: languagesController
-                                                        .tr("MAX_AMOUNT"),
-                                                    color: AppColors.mutedText,
-                                                    fontSize: 12,
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(height: 5),
-                                              Expanded(
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      width: 1,
-                                                      color:
-                                                          AppColors.borderColor,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          20,
-                                                        ),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                          horizontal: 12,
-                                                        ),
-                                                    child: TextField(
-                                                      keyboardType:
-                                                          TextInputType.phone,
-                                                      decoration:
-                                                          InputDecoration(
-                                                            border: InputBorder
-                                                                .none,
-                                                            hintText: "0.00",
-                                                            hintStyle: TextStyle(
-                                                              color: AppColors
-                                                                  .hintText,
-                                                            ),
-                                                          ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                // Container(
+                                //   height: 75,
+                                //   width: screenWidth,
+
+                                //   child: Row(
+                                //     children: [
+                                //       Expanded(
+                                //         flex: 1,
+                                //         child: Container(
+                                //           // color: Colors.cyan,
+                                //           child: Column(
+                                //             children: [
+                                //               Row(
+                                //                 children: [
+                                //                   KText(
+                                //                     text: languagesController
+                                //                         .tr("MIN_AMOUNT"),
+                                //                     color: AppColors.mutedText,
+                                //                     fontSize: 12,
+                                //                   ),
+                                //                 ],
+                                //               ),
+                                //               SizedBox(height: 5),
+                                //               Expanded(
+                                //                 child: Container(
+                                //                   decoration: BoxDecoration(
+                                //                     border: Border.all(
+                                //                       width: 1,
+                                //                       color:
+                                //                           AppColors.borderColor,
+                                //                     ),
+                                //                     borderRadius:
+                                //                         BorderRadius.circular(
+                                //                           20,
+                                //                         ),
+                                //                   ),
+                                //                   child: Padding(
+                                //                     padding:
+                                //                         EdgeInsets.symmetric(
+                                //                           horizontal: 12,
+                                //                         ),
+                                //                     child: TextField(
+                                //                       keyboardType:
+                                //                           TextInputType.phone,
+                                //                       decoration:
+                                //                           InputDecoration(
+                                //                             border: InputBorder
+                                //                                 .none,
+                                //                             hintText: "0.00",
+                                //                             hintStyle: TextStyle(
+                                //                               color: AppColors
+                                //                                   .hintText,
+                                //                             ),
+                                //                           ),
+                                //                     ),
+                                //                   ),
+                                //                 ),
+                                //               ),
+                                //             ],
+                                //           ),
+                                //         ),
+                                //       ),
+                                //       SizedBox(width: 8),
+                                //       Expanded(
+                                //         flex: 1,
+                                //         child: Container(
+                                //           // color: Colors.cyan,
+                                //           child: Column(
+                                //             children: [
+                                //               Row(
+                                //                 children: [
+                                //                   KText(
+                                //                     text: languagesController
+                                //                         .tr("MAX_AMOUNT"),
+                                //                     color: AppColors.mutedText,
+                                //                     fontSize: 12,
+                                //                   ),
+                                //                 ],
+                                //               ),
+                                //               SizedBox(height: 5),
+                                //               Expanded(
+                                //                 child: Container(
+                                //                   decoration: BoxDecoration(
+                                //                     border: Border.all(
+                                //                       width: 1,
+                                //                       color:
+                                //                           AppColors.borderColor,
+                                //                     ),
+                                //                     borderRadius:
+                                //                         BorderRadius.circular(
+                                //                           20,
+                                //                         ),
+                                //                   ),
+                                //                   child: Padding(
+                                //                     padding:
+                                //                         EdgeInsets.symmetric(
+                                //                           horizontal: 12,
+                                //                         ),
+                                //                     child: TextField(
+                                //                       keyboardType:
+                                //                           TextInputType.phone,
+                                //                       decoration:
+                                //                           InputDecoration(
+                                //                             border: InputBorder
+                                //                                 .none,
+                                //                             hintText: "0.00",
+                                //                             hintStyle: TextStyle(
+                                //                               color: AppColors
+                                //                                   .hintText,
+                                //                             ),
+                                //                           ),
+                                //                     ),
+                                //                   ),
+                                //                 ),
+                                //               ),
+                                //             ],
+                                //           ),
+                                //         ),
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),
                         ),
                       ),
                       SizedBox(height: 8),
+
                       Wrap(
                         spacing: 8,
                         runSpacing: 8,
@@ -477,9 +503,15 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                             onTap: () {
                               setState(() {
                                 selectedIndex = index;
+                                box.write(
+                                  "transaction_type",
+                                  items[index]["parm"],
+                                );
+                                // print(box.read("transaction_type"));
+                                transactionListController.fetchtransactions(20);
                               });
 
-                              print(items[index]); // selected value
+                              // print(items[index]["parm"]); // 👉 value
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -500,7 +532,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                   vertical: 7,
                                 ),
                                 child: KText(
-                                  text: items[index],
+                                  text:
+                                      items[index]["value"], // 👉 UI তে value দেখাবে
                                   color: isSelected
                                       ? Colors.white
                                       : Colors.black,
@@ -511,259 +544,253 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                           );
                         }),
                       ),
-
                       SizedBox(height: 8),
                       Container(
                         height: 400,
                         width: screenWidth,
 
-                        child: Obx(
-                          () =>
-                              transactionListController.isLoading.value == false
-                              ? ListView.builder(
-                                  itemCount: transactionListController
-                                      .alltransactions
-                                      .value
-                                      .transactions!
-                                      .length,
-                                  itemBuilder: (context, index) {
-                                    final data = transactionListController
-                                        .alltransactions
-                                        .value
-                                        .transactions![index];
+                        child: Obx(() {
+                          if (transactionListController.isLoading.value) {
+                            return Center(child: CircularProgressIndicator());
+                          }
+                          final list = transactionListController
+                              .alltransactions
+                              .value
+                              .transactions;
 
-                                    // ── helpers ──────────────────────────────────────────────
-                                    String partyName =
-                                        data.supplier?.name ??
-                                        data.reseller?.name ??
-                                        "—";
+                          if (list == null || list.isEmpty) {
+                            return Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.inbox_rounded,
+                                    size: 60,
+                                    color: Colors.grey.shade400,
+                                  ),
+                                  SizedBox(height: 10),
+                                  Text(
+                                    "No Transactions Found",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                          return ListView.builder(
+                            itemCount: transactionListController
+                                .alltransactions
+                                .value
+                                .transactions!
+                                .length,
+                            itemBuilder: (context, index) {
+                              final data = transactionListController
+                                  .alltransactions
+                                  .value
+                                  .transactions![index];
 
-                                    String txType;
-                                    Color txColor;
-                                    IconData txIcon;
+                              // ── helpers ──────────────────────────────────────────────
+                              String partyName =
+                                  data.supplier?.name ??
+                                  data.reseller?.name ??
+                                  "—";
 
-                                    switch (data.transactionType.toString()) {
-                                      case "purchase":
-                                        txType = languagesController.tr(
-                                          "PURCHASE",
-                                        );
-                                        txColor = Color(0xFF6366F1); // indigo
-                                        txIcon = Icons.shopping_bag_outlined;
-                                        break;
-                                      case "reseller_payment":
-                                        txType = languagesController.tr(
-                                          "RESELLER_PAYMENT",
-                                        );
-                                        txColor = Color(0xFF0EA5E9); // sky-blue
-                                        txIcon = Icons.swap_horiz_rounded;
-                                        break;
-                                      case "sale":
-                                        txType = languagesController.tr("SALE");
-                                        txColor = Color(0xFF10B981); // emerald
-                                        txIcon = Icons.point_of_sale_rounded;
-                                        break;
-                                      default:
-                                        txType = languagesController.tr(
-                                          "SUPPLIER_PAYMENT",
-                                        );
-                                        txColor = Color(0xFFF59E0B); // amber
-                                        txIcon = Icons
-                                            .account_balance_wallet_outlined;
-                                    }
+                              String txType;
+                              Color txColor;
+                              IconData txIcon;
 
-                                    final double baseAmount =
-                                        double.tryParse(
-                                          data.baseAmount ?? "0",
-                                        ) ??
-                                        0;
+                              switch (data.transactionType.toString()) {
+                                case "purchase":
+                                  txType = languagesController.tr("PURCHASE");
+                                  txColor = Color(0xFF6366F1); // indigo
+                                  txIcon = Icons.shopping_bag_outlined;
+                                  break;
+                                case "reseller_payment":
+                                  txType = languagesController.tr(
+                                    "RESELLER_PAYMENT",
+                                  );
+                                  txColor = Color(0xFF0EA5E9); // sky-blue
+                                  txIcon = Icons.swap_horiz_rounded;
+                                  break;
+                                case "sale":
+                                  txType = languagesController.tr("SALE");
+                                  txColor = Color(0xFF10B981); // emerald
+                                  txIcon = Icons.point_of_sale_rounded;
+                                  break;
+                                default:
+                                  txType = languagesController.tr(
+                                    "SUPPLIER_PAYMENT",
+                                  );
+                                  txColor = Color(0xFFF59E0B); // amber
+                                  txIcon =
+                                      Icons.account_balance_wallet_outlined;
+                              }
 
-                                    final double paidAmount =
-                                        double.tryParse(
-                                          data.paidAmount ?? "0",
-                                        ) ??
-                                        0;
+                              final double baseAmount =
+                                  double.tryParse(data.baseAmount ?? "0") ?? 0;
 
-                                    final double dueAmount =
-                                        double.tryParse(
-                                          data.dueAmount ?? "0",
-                                        ) ??
-                                        0;
+                              final double paidAmount =
+                                  double.tryParse(data.paidAmount ?? "0") ?? 0;
 
-                                    final double previousDue =
-                                        double.tryParse(
-                                          data.previousDue ?? "0",
-                                        ) ??
-                                        0;
+                              final double dueAmount =
+                                  double.tryParse(data.dueAmount ?? "0") ?? 0;
 
-                                    final double partialAmount =
-                                        dueAmount - previousDue;
+                              final double previousDue =
+                                  double.tryParse(data.previousDue ?? "0") ?? 0;
 
-                                    // ── card ─────────────────────────────────────────────────
-                                    return Container(
-                                      margin: EdgeInsets.symmetric(vertical: 6),
+                              final double partialAmount =
+                                  dueAmount - previousDue;
+
+                              // ── card ─────────────────────────────────────────────────
+                              return Container(
+                                margin: EdgeInsets.symmetric(vertical: 6),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: txColor.withOpacity(0.08),
+                                      blurRadius: 16,
+                                      offset: Offset(0, 4),
+                                    ),
+                                  ],
+                                  border: Border.all(
+                                    color: txColor.withOpacity(0.15),
+                                  ),
+                                ),
+                                child: Column(
+                                  children: [
+                                    // ── header strip ──────────────────────────────────
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 16,
+                                        vertical: 10,
+                                      ),
                                       decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(16),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: txColor.withOpacity(0.08),
-                                            blurRadius: 16,
-                                            offset: Offset(0, 4),
-                                          ),
-                                        ],
-                                        border: Border.all(
-                                          color: txColor.withOpacity(0.15),
+                                        color: txColor.withOpacity(0.06),
+                                        borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(16),
                                         ),
                                       ),
-                                      child: Column(
+                                      child: Row(
                                         children: [
-                                          // ── header strip ──────────────────────────────────
                                           Container(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 16,
-                                              vertical: 10,
-                                            ),
+                                            padding: EdgeInsets.all(7),
                                             decoration: BoxDecoration(
-                                              color: txColor.withOpacity(0.06),
+                                              color: txColor.withOpacity(0.12),
                                               borderRadius:
-                                                  BorderRadius.vertical(
-                                                    top: Radius.circular(16),
-                                                  ),
+                                                  BorderRadius.circular(10),
                                             ),
-                                            child: Row(
+                                            child: Icon(
+                                              txIcon,
+                                              size: 18,
+                                              color: txColor,
+                                            ),
+                                          ),
+                                          SizedBox(width: 10),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
-                                                Container(
-                                                  padding: EdgeInsets.all(7),
-                                                  decoration: BoxDecoration(
-                                                    color: txColor.withOpacity(
-                                                      0.12,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          10,
-                                                        ),
+                                                Text(
+                                                  partyName,
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: Color(0xFF1E293B),
                                                   ),
-                                                  child: Icon(
-                                                    txIcon,
-                                                    size: 18,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                SizedBox(height: 1),
+                                                Text(
+                                                  txType,
+                                                  style: TextStyle(
+                                                    fontSize: 11,
+                                                    fontWeight: FontWeight.w500,
                                                     color: txColor,
+                                                    letterSpacing: 0.3,
                                                   ),
                                                 ),
-                                                SizedBox(width: 10),
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        partyName,
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color: Color(
-                                                            0xFF1E293B,
-                                                          ),
-                                                        ),
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
-                                                      SizedBox(height: 1),
-                                                      Text(
-                                                        txType,
-                                                        style: TextStyle(
-                                                          fontSize: 11,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: txColor,
-                                                          letterSpacing: 0.3,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                // due-amount badge (red when > 0)
-                                                if (dueAmount > 0)
-                                                  Container(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                          horizontal: 10,
-                                                          vertical: 4,
-                                                        ),
-                                                    decoration: BoxDecoration(
-                                                      color: Color(0xFFFEF2F2),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            20,
-                                                          ),
-                                                      border: Border.all(
-                                                        color: Color(
-                                                          0xFFFCA5A5,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    child: Text(
-                                                      "${languagesController.tr("DUE")} ${dueAmount.toStringAsFixed(2)}",
-                                                      style: TextStyle(
-                                                        fontSize: 11,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: Color(
-                                                          0xFFDC2626,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
                                               ],
                                             ),
                                           ),
-
-                                          // ── amounts row ───────────────────────────────────
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 16,
-                                              vertical: 12,
+                                          // due-amount badge (red when > 0)
+                                          if (dueAmount > 0)
+                                            Container(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 10,
+                                                vertical: 4,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: Color(0xFFFEF2F2),
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                border: Border.all(
+                                                  color: Color(0xFFFCA5A5),
+                                                ),
+                                              ),
+                                              child: Text(
+                                                "${languagesController.tr("DUE")} ${dueAmount.toStringAsFixed(2)}",
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Color(0xFFDC2626),
+                                                ),
+                                              ),
                                             ),
-                                            child: Row(
-                                              children: [
-                                                _AmountTile(
-                                                  label: languagesController.tr(
-                                                    "BASE_AMOUNT",
-                                                  ),
-                                                  value: baseAmount.toString(),
-                                                  color: Color(0xFF64748B),
-                                                ),
-                                                _divider(),
-                                                _AmountTile(
-                                                  label: languagesController.tr(
-                                                    "PAID_AMOUNT",
-                                                  ),
-                                                  value: paidAmount.toString(),
-                                                  color: Color(0xFF10B981),
-                                                ),
-                                                _divider(),
-                                                _AmountTile(
-                                                  label: languagesController.tr(
-                                                    "PARTIAL",
-                                                  ),
-                                                  value: partialAmount
-                                                      .toString(),
+                                        ],
+                                      ),
+                                    ),
 
-                                                  color: partialAmount > 0
-                                                      ? const Color(0xFFDC2626)
-                                                      : const Color(0xFF64748B),
-                                                ),
-                                              ],
+                                    // ── amounts row ───────────────────────────────────
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 16,
+                                        vertical: 12,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          _AmountTile(
+                                            label: languagesController.tr(
+                                              "BASE_AMOUNT",
                                             ),
+                                            value: baseAmount.toString(),
+                                            color: Color(0xFF64748B),
+                                          ),
+                                          _divider(),
+                                          _AmountTile(
+                                            label: languagesController.tr(
+                                              "PAID_AMOUNT",
+                                            ),
+                                            value: paidAmount.toString(),
+                                            color: Color(0xFF10B981),
+                                          ),
+                                          _divider(),
+                                          _AmountTile(
+                                            label: languagesController.tr(
+                                              "PARTIAL",
+                                            ),
+                                            value: partialAmount.toString(),
+
+                                            color: partialAmount > 0
+                                                ? const Color(0xFFDC2626)
+                                                : const Color(0xFF64748B),
                                           ),
                                         ],
                                       ),
-                                    );
-                                  },
-                                )
-                              : Center(child: CircularProgressIndicator()),
-                        ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        }),
                       ),
                       SizedBox(height: 8),
                     ],
