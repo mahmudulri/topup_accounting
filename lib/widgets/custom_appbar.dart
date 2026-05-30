@@ -6,6 +6,7 @@ import 'package:topup_accounting/screens/signin_screen.dart';
 import '../global_controllers/languages_controller.dart';
 import '../global_controllers/scaffold_controller.dart';
 import '../screens/myipdetails_screen.dart';
+import '../screens/rechargescreen.dart';
 import '../screens/update_translationscreen.dart';
 import '../utils/colors.dart';
 import 'custom_text.dart';
@@ -127,6 +128,7 @@ class _AppTopBarState extends State<AppTopBar> {
                 onTap: () {
                   // print(box.read("currencyCode"));
                   Get.to(() => TranslationEditPage());
+                  // Get.to(() => RechargeScreen());
                 },
                 child: KText(
                   text: lang.tr("DASHBOARD"),
